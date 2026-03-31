@@ -30,23 +30,19 @@ class Client:
 
     def from_dict(data):
 
+        # list to store all clients data as class object
         clients_objects = []    
+
+        # sort and map and add to list
         for client_ID, client_info in data.items():
-            map_user = Client(client_ID=client_ID, **client_info) #*--> here the conversion from dict to class happens!
+            map_user = Client(client_ID=client_ID, **client_info) #*--> here the conversion from dict [json] to class type happens!
             clients_objects.append(map_user)
-        return clients_objects
-    
-    
-# TestClient = Client("100", "guy_peres", "1234", "2000", "False", "[]")    
-    
+        return clients_objects #* returns all clients data (if we have time add encryption)
 
-    def find_account(which_acc, filename="data.json"):
-            #read the data.json and store client data in data var 
-            with open(filename, "r") as file:
-                data = json.load(file)
+    def find_account(which_acc):
 
-            #making list full of clients (as class object)
-            all_clients = Client.from_dict(data)
+            get_clients = None
+            get_clients = all_clients()
             
             counter = (len(all_clients) - 1)
 
@@ -69,7 +65,7 @@ class Client:
                     #cycle counter iteration
                     counter -= 1
 
-    def update_client(clients, )
+    # def update_client(clients)
             
     
     def check_pin(client, pin_input):
