@@ -11,12 +11,14 @@ def load_clients(filename="data.json"):
     """
 
     try:
+        #read the data.json and store client data in data var 
         with open(filename, "r") as file:
             data = json.load(file)
 
+        # return data in class type from dict in which its stored in json file.
         return [
             for item in data:
-            Client.from_dict(item)
+                Client.from_dict(item)
         ]
 
     except FileNotFoundError:
