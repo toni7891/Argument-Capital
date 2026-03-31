@@ -1,4 +1,5 @@
 from storage import *
+import json
 
 class Client:
     def __init__(self, client_ID, username, pin, balance, blocked_or_not, transaction_list):
@@ -37,10 +38,11 @@ class Client:
 # TestClient = Client("100", "guy_peres", "1234", "2000", "False", "[]")    
     
 
-    def find_account():
-        with open(filename, "r") as file:
-            data = json.load(file)
-        
+    def find_account(filename="data.json"):
+            #read the data.json and store client data in data var 
+            with open(filename, "r") as file:
+              data = json.load(file)
+
     
     def check_pin(client, pin_input):
         if(client.pin == pin_input):
@@ -50,4 +52,9 @@ class Client:
             #! WARNING MESSAGE NEEDED HERE
             
     def deposit(client):
-        
+        pass
+    
+    def withdraw():
+        pass
+    
+    def
