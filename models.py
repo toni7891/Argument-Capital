@@ -37,7 +37,6 @@ class Client:
         return clients_objects
     
     
-# TestClient = Client("100", "guy_peres", "1234", "2000", "False", "[]")    
     
 
     def find_account(which_acc, filename="data.json"):
@@ -68,8 +67,43 @@ class Client:
 
                     #cycle counter iteration
                     counter -= 1
+                    
 
-    def update_client(clients, )
+    def deposit(amount, client_id_input, filename="data.json"):
+                    #read the data.json and store client data in data var 
+            with open(filename, "r") as file:
+                data = json.load(file)
+
+            #making list full of clients (as class object)
+            all_clients = Client.from_dict(data) #--> returns list toa all_clients
+            
+            counter = (len(all_clients) - 1)
+
+            #cycling thourgh every client to find the nedded one
+            for client in all_clients:
+                # cycling until last client in the list
+                if counter > -1:
+
+                    #checking each client
+                    if all_clients[counter]:
+                        
+                        if amount > 0:
+                            #if the amount is bigger then zero
+                            
+                        #if account is found and the if is true
+                            if Client.find_account(client_id_input):
+                                client.balance += amount
+                                print("money should've been deposited")
+                                return (f"the amount of {amount} has been deposited to your account")
+                                
+                               #להעביר את הרשימה חזרה לקובץ JSON
+
+                            #if not then error
+                            elif counter == 0:
+                                return False
+
+                        #cycle counter iteration
+                        counter -= 1
             
     
     def check_pin(client, pin_input):
@@ -79,13 +113,14 @@ class Client:
             return None
             #! WARNING MESSAGE NEEDED HERE
             
-    def deposit(client):
+    def deposit_old(client):
         pass
     
     def withdraw():
         pass
     
 Client.find_account("100")
+
 
 
 
