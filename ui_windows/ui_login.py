@@ -13,25 +13,23 @@ class LoginScreen(ctk.CTk):
         self.main_frame = ctk.CTkFrame(self, fg_color="transparent")
         self.main_frame.pack(expand=True, fill="both", padx=40)
 
-        # * logo
+        # logo
         # TODO REPLACE "A" LOGO
         self.logo_label = ctk.CTkLabel(
-            self.main_frame, 
-            text="A", 
-            font=("Inter", 60, "bold"), 
-            text_color="#3B82F6"
-        )
+            self.main_frame, text="A", font=("Inter", 60, "bold"), text_color="#3B82F6")
         self.logo_label.pack(pady=(60, 0))
         
+        # bank name
         self.bank_name = ctk.CTkLabel(
-            self.main_frame, 
-            text="ARGUMENT\nCAPITAL", 
-            font=("Inter", 24, "bold"), 
-            text_color="white"
-        )
-        self.bank_name.pack(pady=(0, 40))
+            self.main_frame, text="ARGUMENT\nCAPITAL", font=("Inter", 24, "bold"), text_color="white")
+        self.bank_name.pack(pady=(0, 0))
+        
+        # ATM APP as the assignment dictates
+        self.app_name = ctk.CTkLabel(
+            self.main_frame, text="----------------\nATM APP", font=("Inter", 24, "bold"), text_color="#3B82F6")
+        self.app_name.pack(pady=(0, 40))
 
-        # * input fields
+        # account ID input field
         self.username_entry = ctk.CTkEntry(
             self.main_frame,
             placeholder_text="Account ID",
@@ -42,11 +40,12 @@ class LoginScreen(ctk.CTk):
             corner_radius=12
         )
         self.username_entry.pack(fill="x", pady=10)
-
+        
+        # password input field
         self.password_entry = ctk.CTkEntry(
             self.main_frame,
             placeholder_text="PIN",
-            show="*",
+            show="*", # hides input
             height=55,
             fg_color="#161C30",
             border_color="#90d5ff",
@@ -56,10 +55,10 @@ class LoginScreen(ctk.CTk):
         self.password_entry.pack(fill="x", pady=10)
 
         # password reset button
-        # TODO connect pin forgot logic
+        # TODO logic
         self.forgot_btn = ctk.CTkButton(
             self.main_frame,
-            text="Forgot PIN?",
+            text="Change PIN",
             fg_color="transparent",
             hover=False,
             text_color="#555E70",
@@ -77,17 +76,14 @@ class LoginScreen(ctk.CTk):
             fg_color="#3B82F6",
             hover_color="#2563EB",
             font=("Inter", 16, "bold"),
-            corner_radius=12
+            corner_radius=12,
+            # command= TBA
         )
         self.login_btn.pack(fill="x", pady=10)
 
-        # # OR text seperating login or admin login
+        # OR text seperating login or admin login
         self.or_label = ctk.CTkLabel(
-            self.main_frame, 
-            text="────────  OR  ────────", 
-            text_color="#2B344B",
-            font=("Inter", 12)
-        )
+            self.main_frame, text="────────  OR  ────────", text_color="#2B344B", font=("Inter", 12))
         self.or_label.pack(pady=20)
 
         # Admin Login Link
@@ -99,11 +95,10 @@ class LoginScreen(ctk.CTk):
             text_color="#555E70",
             font=("Inter", 13),
             height=40,
-            #command=self.admin_login_event
+            # command= TBA
         )
-        self.admin_btn.pack(pady=(10, 0))
-        
-
+        self.admin_btn.pack(pady=(10, 0))   
+ 
 if __name__ == "__main__":
     app = LoginScreen()
     app.mainloop()
