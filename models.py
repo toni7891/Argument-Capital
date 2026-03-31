@@ -26,7 +26,7 @@ class Client:
     def from_dict(data):
         clients_objects = []    
         for client_ID, client_info in data.items():
-            map_user = Client(client_ID=client_ID, **client_info)
+            map_user = Client(client_ID=client_ID, **client_info) #*--> here the conversion from dict to class happens!
             clients_objects.append(map_user)
         return clients_objects
     
