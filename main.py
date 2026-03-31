@@ -16,10 +16,13 @@ def load_clients(filename="data.json"):
             data = json.load(file)
 
         # return data in class type from dict in which its stored in json file.
-        return [
-            for item in data:
-                Client.from_dict(item)
-        ]
+        clients = []
+        for item in data:
+            client_object = Client.from_dict(item)
+            clients.append(client_object)
+
+        return clients
+        
 
     except FileNotFoundError:
         return []
