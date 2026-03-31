@@ -16,3 +16,17 @@ def save_clients(clients, filename="data.json"):
     with open(filename, "w") as file:
         json.dump(client_data, file, indent=4)
 
+    """
+    output into file:
+    [
+        {
+            "username": "tony",
+            "password": "1234",
+            "balance": 1000
+        }
+    ]
+    """
+
+    
+
+

@@ -1,3 +1,6 @@
+from storage import *
+from models import *
+
 
 # ! THIS IS THE MAIN.PY FILE
 
@@ -9,4 +12,3 @@ def main():
 if __name__ == "__main__":
     main()
     
-print("Hello nigga")
