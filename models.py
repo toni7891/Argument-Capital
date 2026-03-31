@@ -22,28 +22,47 @@ class Client:
             "transaction_list": self.transaction_list
         }
         
-        
     @staticmethod
     def from_dict(data):
-        return Client(
-            data["client_ID"],
-            data["username"],
-            data["pin"],
-            data["balance"],
-            data["blocked_or_not"],
-            data["transaction_list"]
-        )
+        clients_objects = []    
+        for client_ID, client_info in data.items():
+            map_user = Client(client_ID=client_ID, **client_info)
+            clients_objects.append(map_user)
+        return clients_objects
     
     
 # TestClient = Client("100", "guy_peres", "1234", "2000", "False", "[]")    
     
 
-    def find_account(filename="data.json"):
+    def find_account(which_acc, filename="data.json"):
             #read the data.json and store client data in data var 
             with open(filename, "r") as file:
                 data = json.load(file)
-                print(data)
 
+            #making list full of clients (as class object)
+            all_clients = Client.from_dict(data)
+            
+            counter = len(all_clients)
+
+            #cycling thourgh every client to find the nedded one
+            for client in all_clients:
+                counter -= 1
+                # cycling until last client in the list
+                if counter > -1:
+                    #checking each client
+                    if all_clients[counter]:
+                        #if needed clientID exist then good
+                        if client.client_ID == which_acc:
+                            print(client.client_ID)
+                            break
+                        #if not then error
+                        elif counter == 0:
+                            print("There is no such acc with this acc number!")
+
+            # print(user100.client_ID)
+            # client1 = all_clients[""]
+
+            
     
     def check_pin(client, pin_input):
         if(client.pin == pin_input):
@@ -58,4 +77,32 @@ class Client:
     def withdraw():
         pass
     
-Client.find_account()
+Client.find_account("100")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
