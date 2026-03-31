@@ -1,5 +1,5 @@
 import json
-from models import *
+import models
 
 def all_clients(filename="data.json"):
     
@@ -8,7 +8,7 @@ def all_clients(filename="data.json"):
         data = json.load(file)
 
     #making list full of clients (as class object)
-    all_clients = Client.from_dict(data)
+    all_clients = models.Client.from_dict(data)
     return all_clients
 
 

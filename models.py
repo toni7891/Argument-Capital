@@ -1,4 +1,4 @@
-from storage import *
+import storage
 import json
 
 class Client:
@@ -42,20 +42,21 @@ class Client:
     def find_account(which_acc):
 
             get_clients = None
-            get_clients = all_clients()
+            get_clients = storage.all_clients()
             
-            counter = (len(all_clients) - 1)
+            counter = (len(get_clients) - 1)
 
             #cycling thourgh every client to find the nedded one
-            for client in all_clients:
+            for client in get_clients:
                 # cycling until last client in the list
                 if counter > -1:
 
                     #checking each client
-                    if all_clients[counter]:
+                    if get_clients[counter]:
 
                         #if needed clientID exist then good
                         if client.client_ID == which_acc:
+                            print(client.client_ID)
                             return True
 
                         #if not then error
@@ -116,9 +117,13 @@ class Client:
     def withdraw():
         pass
     
-Client.find_account("100")
+def main():
+    Client.find_account("100")
 
+    
 
+if __name__ == "__main__":
+    main()
 
 
 
