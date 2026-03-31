@@ -6,21 +6,32 @@ class AdminLoginScreen(ctk.CTk):
         
         #setup
         self.title("Admin secure login")
-        self.geometry("400x400")
+        self.geometry("400x700")
         self.configure(fg_color = "#0A0E27")
         
         # main frame
         self.main_frame = ctk.CTkFrame(self, fg_color="transparent")
         self.main_frame.pack(expand=True, fill="both", padx=40)
         
+         # logo
+        # TODO REPLACE "A" LOGO
+        self.logo_label = ctk.CTkLabel(
+            self.main_frame, text="A", font=("Inter", 60, "bold"), text_color="#3B82F6")
+        self.logo_label.pack(pady=(60, 0))
+        
+        # bank name
+        self.bank_name = ctk.CTkLabel(
+            self.main_frame, text="ARGUMENT\nCAPITAL", font=("Inter", 24, "bold"), text_color="white")
+        self.bank_name.pack(pady=(0, 0))
+        
         # admin login header
         self.main_header = ctk.CTkLabel(
             self.main_frame, 
             text="Admin Login",
-            text_color="white", 
+            text_color="#EE2626", 
             font=("Inter", 30, "bold"))
-        self.main_header.pack(pady=(60, 10))
-        
+        self.main_header.pack(pady=(40, 40))
+
         # admin ID input field
         self.admin_id_entry = ctk.CTkEntry(
             self.main_frame,
@@ -59,6 +70,24 @@ class AdminLoginScreen(ctk.CTk):
             # command= TBA
         )
         self.admin_login_btn.pack(fill="x", pady=10)
+        
+        # OR text seperating login or admin login
+        self.or_label = ctk.CTkLabel(
+            self.main_frame, text="────────  OR  ────────", text_color="#2B344B", font=("Inter", 12))
+        self.or_label.pack(pady=20)
+
+        # back to regular Login Link
+        self.normal_btn = ctk.CTkButton(
+            self.main_frame,
+            text="Customer Login",
+            fg_color="transparent",
+            hover_color="#161C30",
+            text_color="#555E70",
+            font=("Inter", 13),
+            height=40,
+            # command= TBA
+        )
+        self.normal_btn.pack(pady=(10, 0))   
 
 if __name__ == "__main__":
     app = AdminLoginScreen()
