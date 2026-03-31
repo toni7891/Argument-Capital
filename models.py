@@ -11,7 +11,7 @@ class Client:
         self.transaction_list = transaction_list
         
         
-
+    # writing data to json file
     def to_dict(self):
         return {
             "client_ID": self.client_ID,
@@ -22,8 +22,14 @@ class Client:
             "transaction_list": self.transaction_list
         }
         
-    @staticmethod
+    # used to define function under a class but not needing to use the class ex -> 
+    # from:  Client().func()
+    # to: Client.func()
+    # [not in use now]
+    # @staticmethod
+
     def from_dict(data):
+
         clients_objects = []    
         for client_ID, client_info in data.items():
             map_user = Client(client_ID=client_ID, **client_info) #*--> here the conversion from dict to class happens!
@@ -48,16 +54,18 @@ class Client:
             for client in all_clients:
                 # cycling until last client in the list
                 if counter > -1:
+
                     #checking each client
                     if all_clients[counter]:
+
                         #if needed clientID exist then good
                         if client.client_ID == which_acc:
-                            #print(client.client_ID)
                             return True
-                            break
+
                         #if not then error
                         elif counter == 0:
                             return False
+
                     #cycle counter iteration
                     counter -= 1
 

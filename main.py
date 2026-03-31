@@ -1,6 +1,7 @@
 from storage import *
 from models import *
-from ui import *
+from ui_windows.ui_login import *
+from ui_windows.ui_admin_login import *
 import json
 
 
