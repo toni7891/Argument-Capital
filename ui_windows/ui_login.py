@@ -1,4 +1,5 @@
 import customtkinter as ctk
+from ui_windows.ui_dashboard import *
 
 class LoginScreen(ctk.CTk):
     def __init__(self):
@@ -107,8 +108,8 @@ class LoginScreen(ctk.CTk):
         # if id and pin correct -> close window and open new dashboard window
         if authenticate:
 
-            self.destroy()  #close windwow
-            user_dashboard = dashboard_screen() 
+            self.destroy()  #close window
+            user_dashboard = Dashboard() 
             user_dashboard.mainloop()
 
 if __name__ == "__main__":
