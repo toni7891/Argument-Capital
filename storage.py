@@ -20,13 +20,13 @@ def save_clients(clients, filename="data.json"):
     output into file:
     [
         {
-            "username": "tony",
-            "password": "1234",
+            "client_ID": "1234567",
+            "pin": "1234",
             "balance": 1000
         }
     ]
     """
 
-    
+
 
 
