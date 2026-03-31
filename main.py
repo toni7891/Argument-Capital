@@ -2,7 +2,7 @@
 # ! THIS IS THE MAIN.PY FILE
 
 def main():
-    var  = None    
+    var = None
 
 
 
