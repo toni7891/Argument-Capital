@@ -17,10 +17,9 @@ def load_clients(filename="data.json"):
             data = json.load(file)
 
         # return data in class type from dict in which its stored in json file.
-        clients = []
-        for item in data:
-            client_object = Client.from_dict(item)
-            clients.append(client_object)
+        clients = {}
+        for client_ID, client_data in data.items():
+            clients[client_ID] = Client.from_dict(client_ID, client_data)
 
         return clients
         
