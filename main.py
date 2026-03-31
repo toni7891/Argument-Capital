@@ -32,7 +32,8 @@ def load_clients(filename="data.json"):
 
 
 def main():
-    
+    app_login_screen = LoginScreen()
+    app_login_screen.mainloop()
 
 
 
