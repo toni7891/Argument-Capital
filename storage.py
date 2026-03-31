@@ -10,7 +10,7 @@ def save_clients(clients, filename="data.json"):
     # than adds to list with all accounts created for further addition to json file
     client_data = []
     for client in clients:
-        data.append(client.to_dict())
+        client_data.append(client.to_dict())
 
     # opens the data.json and writes the new data
     with open(filename, "w") as file:
