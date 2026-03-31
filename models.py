@@ -76,7 +76,7 @@ class Client:
 
             #making list full of clients (as class object)
             all_clients = Client.from_dict(data) #--> returns list toa all_clients
-            
+            client_list_to_giveback = []
             counter = (len(all_clients) - 1)
 
             #cycling thourgh every client to find the nedded one
@@ -90,20 +90,20 @@ class Client:
                         if amount > 0:
                             #if the amount is bigger then zero
                             
-                        #if account is found and the if is true
+                        #if account is found and the if is true, work on the client that is found
                             if Client.find_account(client_id_input):
                                 client.balance += amount
                                 print("money should've been deposited")
-                                return (f"the amount of {amount} has been deposited to your account")
                                 
-                               #להעביר את הרשימה חזרה לקובץ JSON
-
-                            #if not then error
+                                # return (f"the amount of {amount} has been deposited to your account")
+                                
+                             #if not then error
                             elif counter == 0:
-                                return False
+                                pass             
+                    client_list_to_giveback.append(client.to_dict())
+            save_clients(client_list_to_giveback)
 
-                        #cycle counter iteration
-                        counter -= 1
+                    counter -= 1
             
     
     def check_pin(client, pin_input):
