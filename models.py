@@ -52,14 +52,14 @@ class Client:
                     if all_clients[counter]:
                         #if needed clientID exist then good
                         if client.client_ID == which_acc:
-                            print(client.client_ID)
+                            #print(client.client_ID)
+                            return True
                             break
                         #if not then error
                         elif counter == 0:
-                            print("There is no such acc with this acc number!")
-
-            # print(user100.client_ID)
-            # client1 = all_clients[""]
+                            return False
+                    #cycle counter iteration
+                    counter -= 1
 
             
     
