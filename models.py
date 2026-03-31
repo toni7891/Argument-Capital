@@ -41,7 +41,8 @@ class Client:
     def find_account(filename="data.json"):
             #read the data.json and store client data in data var 
             with open(filename, "r") as file:
-              data = json.load(file)
+                data = json.load(file)
+                print(data)
 
     
     def check_pin(client, pin_input):
@@ -57,4 +58,4 @@ class Client:
     def withdraw():
         pass
     
-    def
+Client.find_account()
