@@ -42,11 +42,10 @@ class Client:
             #making list full of clients (as class object)
             all_clients = Client.from_dict(data)
             
-            counter = len(all_clients)
+            counter = (len(all_clients) - 1)
 
             #cycling thourgh every client to find the nedded one
             for client in all_clients:
-                counter -= 1
                 # cycling until last client in the list
                 if counter > -1:
                     #checking each client
