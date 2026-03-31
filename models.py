@@ -1,4 +1,4 @@
-from storage import *
+import storage
 import json
 
 class Client:
@@ -30,35 +30,33 @@ class Client:
 
     def from_dict(data):
 
+        # list to store all clients data as class object
         clients_objects = []    
+
+        # sort and map and add to list
         for client_ID, client_info in data.items():
-            map_user = Client(client_ID=client_ID, **client_info) #*--> here the conversion from dict to class happens!
+            map_user = Client(client_ID=client_ID, **client_info) #*--> here the conversion from dict [json] to class type happens!
             clients_objects.append(map_user)
-        return clients_objects
-    
-    
-    
+        return clients_objects #* returns all clients data (if we have time add encryption)
 
-    def find_account(which_acc, filename="data.json"):
-            #read the data.json and store client data in data var 
-            with open(filename, "r") as file:
-                data = json.load(file)
+    def find_account(which_acc):
 
-            #making list full of clients (as class object)
-            all_clients = Client.from_dict(data)
+            get_clients = None
+            get_clients = storage.all_clients()
             
-            counter = (len(all_clients) - 1)
+            counter = (len(get_clients) - 1)
 
             #cycling thourgh every client to find the nedded one
-            for client in all_clients:
+            for client in get_clients:
                 # cycling until last client in the list
                 if counter > -1:
 
                     #checking each client
-                    if all_clients[counter]:
+                    if get_clients[counter]:
 
                         #if needed clientID exist then good
                         if client.client_ID == which_acc:
+                            print(client.client_ID)
                             return True
 
                         #if not then error
@@ -119,9 +117,13 @@ class Client:
     def withdraw():
         pass
     
-Client.find_account("100")
+def main():
+    Client.find_account("100")
 
+    
 
+if __name__ == "__main__":
+    main()
 
 
 
