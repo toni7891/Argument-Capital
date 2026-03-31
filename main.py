@@ -14,7 +14,10 @@ def load_clients(filename="data.json"):
         with open(filename, "r") as file:
             data = json.load(file)
 
-        return [Client.from_dict(item) for item in data]
+        return [
+            for item in data:
+            Client.from_dict(item)
+        ]
 
     except FileNotFoundError:
         return []
