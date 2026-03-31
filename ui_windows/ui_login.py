@@ -10,6 +10,7 @@ class LoginScreen(ctk.CTk):
         self.title("Argument capital Login")
         self.geometry("400x700")
         self.configure(fg_color="#0A0E27")  # Background
+        self.center_window()
 
         # Main frame
         self.main_frame = ctk.CTkFrame(self, fg_color="transparent")
@@ -86,7 +87,7 @@ class LoginScreen(ctk.CTk):
         # OR text seperating login or admin login
         self.or_label = ctk.CTkLabel(
             self.main_frame, text="────────  OR  ────────", text_color="#2B344B", font=("Inter", 12))
-        self.or_label.pack(pady=20)
+        self.or_label.pack(pady=10)
 
         #Admin Login Link
         self.admin_btn = ctk.CTkButton(
@@ -99,8 +100,26 @@ class LoginScreen(ctk.CTk):
             height=40,
             command=self.open_admin_login
         )
-        self.admin_btn.pack(pady=(10, 0))
+        self.admin_btn.pack(pady=(0))
 
+    def center_window(self):
+        self.update_idletasks()
+        
+        # Get window dimensions
+        width = self.winfo_width()
+        height = self.winfo_height()
+        
+        # Get screen dimensions
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+        
+        # Calculate coordinates
+        x = (screen_width // 2) - (width // 2)
+        y = (screen_height // 2) - (height // 2)
+        
+        # Set the geometry
+        self.geometry(f"{width}x{height}+{x}+{y}")
+        
     def open_admin_login(self):
         self.destroy()
         admin_login = AdminLoginScreen()

@@ -9,6 +9,7 @@ class AdminLoginScreen(ctk.CTk):
         self.title("Admin secure login")
         self.geometry("400x700")
         self.configure(fg_color = "#0A0E27")
+        self.center_window()
         
         # main frame
         self.main_frame = ctk.CTkFrame(self, fg_color="transparent")
@@ -95,6 +96,24 @@ class AdminLoginScreen(ctk.CTk):
         self.destroy()
         reg_login = LoginScreen()
         reg_login.mainloop()
+
+    def center_window(self):
+        self.update_idletasks()
+        
+        # Get window dimensions
+        width = self.winfo_width()
+        height = self.winfo_height()
+        
+        # Get screen dimensions
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+        
+        # Calculate coordinates
+        x = (screen_width // 2) - (width // 2)
+        y = (screen_height // 2) - (height // 2)
+        
+        # Set the geometry
+        self.geometry(f"{width}x{height}+{x}+{y}")
 
     # ! same as user but for admin
     def authenticate(self):

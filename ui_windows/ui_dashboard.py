@@ -8,6 +8,7 @@ class Dashboard(ctk.CTk):
         self.title("Dashboard")
         self.geometry("400x700")
         self.configure(fg_color = "#0A0E27")
+        self.center_window()
         
         #welcome frame
         self.welcome_frame = ctk.CTkFrame(
@@ -27,8 +28,6 @@ class Dashboard(ctk.CTk):
         )
         self.welcome.pack(side="left", padx=20)
 
-        
-        
         #top frame
         self.top_frame = ctk.CTkFrame(
             self, 
@@ -183,6 +182,24 @@ class Dashboard(ctk.CTk):
             # TODO add logic
         )
         self.logout_button.grid(row=2, column=1, padx=10, pady=10)
+        
+    def center_window(self):
+        self.update_idletasks()
+        
+        # Get window dimensions
+        width = self.winfo_width()
+        height = self.winfo_height()
+        
+        # Get screen dimensions
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+        
+        # Calculate coordinates
+        x = (screen_width // 2) - (width // 2)
+        y = (screen_height // 2) - (height // 2)
+        
+        # Set the geometry
+        self.geometry(f"{width}x{height}+{x}+{y}")
   
 if __name__ == "__main__":
     app = Dashboard()
