@@ -1,9 +1,10 @@
-{  
-    "100": {
+[
+    {
+        "client_ID": "100",
         "username": "tony",
         "pin": "1234",
         "balance": 2000.0,
-        "blocked_or_not": false, 
+        "blocked_or_not": false,
         "transaction_list": [
             {
                 "type": "transfer",
@@ -20,11 +21,12 @@
             }
         ]
     },
-    "102": {
+    {
+        "client_ID": "102",
         "username": "guy",
         "pin": "1122",
         "balance": 1000.0,
-        "blocked_or_not": false, 
+        "blocked_or_not": false,
         "transaction_list": [
             {
                 "type": "transfer",
@@ -41,4 +43,4 @@
             }
         ]
     }
-}
+]

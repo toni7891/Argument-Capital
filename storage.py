@@ -28,6 +28,7 @@ def save_clients(clients, filename="data.json"):
     with open(filename, "w") as file:
         json.dump(client_data, file, indent=4)
 
+    print(client_data)
 
 
 
