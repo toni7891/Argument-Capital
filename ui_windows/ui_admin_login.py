@@ -89,6 +89,16 @@ class AdminLoginScreen(ctk.CTk):
         )
         self.normal_btn.pack(pady=(10, 0))   
 
+    # ! same as user but for admin
+    def authenticate(self):
+    
+        # if id and pin correct -> close window and open new dashboard window
+        if authenticate:
+            
+            self.destroy()  #close windwow
+            admin_dashboard = admin_dashboard_screen() 
+            admin_dashboard.mainloop()
+
 if __name__ == "__main__":
     app = AdminLoginScreen()
     app.mainloop()
