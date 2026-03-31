@@ -1,8 +1,10 @@
 {
-    "tony": {
-        "password": "1234",
-        "balance": 800,
-        "transactions": [
+    "100": {
+        "username": "tony",
+        "pin": "1234",
+        "balance": 2000.0,
+        "blocked_or_not": false, 
+        "transaction_list": [
             {
                 "type": "transfer",
                 "from": "tony",
@@ -18,17 +20,24 @@
             }
         ]
     },
-    "alice": {
-        "password": "abcd",
-        "balance": 700,
-        "transactions": [
+    "102": {
+         "username": "guy",
+        "pin": "1122",
+        "balance": 1000.0,
+        "blocked_or_not": false, 
+        "transaction_list": [
             {
                 "type": "transfer",
                 "from": "tony",
-                "to": "alice",
+                "to": "guy",
                 "amount": 200,
                 "date": "2026-03-31 14:22:10",
                 "direction": "in"
+            },
+            {
+                "type": "deposit",
+                "amount": 1000,
+                "date": "2026-03-30 10:15:00"
             }
         ]
     }
