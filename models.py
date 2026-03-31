@@ -38,23 +38,24 @@ class Client:
 # TestClient = Client("100", "guy_peres", "1234", "2000", "False", "[]")    
     
 
+    def find_account(filename="data.json"):
+            #read the data.json and store client data in data var 
+            with open(filename, "r") as file:
+                data = json.load(file)
+                print(data)
 
     
-    # def check_pin(client, pin_input):
-    #     if(client.pin == pin_input):
-    #         return True
-    #     else:
-    #         return None
-    #         #! WARNING MESSAGE NEEDED HERE
+    def check_pin(client, pin_input):
+        if(client.pin == pin_input):
+            return True
+        else:
+            return None
+            #! WARNING MESSAGE NEEDED HERE
             
-    # def deposit(client):
-    #     pass
+    def deposit(client):
+        pass
     
-    # def withdraw():
-    #     pass
- 
-def find_account(filename="data.json"):
-    #read the data.json and store client data in data var 
-    with open(filename, "r") as file:
-        data = json.load(file)
-        print(data)
+    def withdraw():
+        pass
+    
+Client.find_account()
