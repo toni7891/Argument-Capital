@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from ui_windows.ui_dashboard import *
+from ui_windows.ui_admin_login import *
 
 class LoginScreen(ctk.CTk):
     def __init__(self):
@@ -87,7 +88,7 @@ class LoginScreen(ctk.CTk):
             self.main_frame, text="────────  OR  ────────", text_color="#2B344B", font=("Inter", 12))
         self.or_label.pack(pady=20)
 
-        # Admin Login Link
+        #Admin Login Link
         self.admin_btn = ctk.CTkButton(
             self.main_frame,
             text="🛡️ Admin Login",
@@ -96,13 +97,17 @@ class LoginScreen(ctk.CTk):
             text_color="#555E70",
             font=("Inter", 13),
             height=40,
-            # command= TBA
+            command=self.open_admin_login
         )
-        self.admin_btn.pack(pady=(10, 0))   
+        self.admin_btn.pack(pady=(10, 0))
 
-    # ! todo add authenticate functionality and connect user dashboard screen (like bank acc info)
-    # ! should work not sure need to test
+    def open_admin_login(self):
+        self.destroy()
+        admin_login = AdminLoginScreen()
+        admin_login.mainloop()
 
+# ! todo add authenticate functionality and connect user dashboard screen (like bank acc info)
+# ! should work not sure need to test
     def authenticate(self):
 
         # if id and pin correct -> close window and open new dashboard window
