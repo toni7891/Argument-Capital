@@ -69,6 +69,7 @@ class Client:
                     #cycle counter iteration
                     counter -= 1
 
+    def update_client(clients, )
             
     
     def check_pin(client, pin_input):
