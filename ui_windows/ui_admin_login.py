@@ -85,16 +85,22 @@ class AdminLoginScreen(ctk.CTk):
             text_color="#555E70",
             font=("Inter", 13),
             height=40,
-            # command= TBA
+            command=self.login_screen
         )
-        self.normal_btn.pack(pady=(10, 0))   
+        self.normal_btn.pack(pady=(10, 0))
+
+    def login_screen(self):
+        from ui_windows.ui_login import LoginScreen
+        self.destroy()
+        reg_login = LoginScreen()
+        reg_login.mainloop()
 
     # ! same as user but for admin
     def authenticate(self):
-    
-        # if id and pin correct -> close window and open new dashboard window
+
+# if id and pin correct -> close window and open new dashboard window
         if authenticate:
-            
+
             self.destroy()  #close windwow
             admin_dashboard = admin_dashboard_screen() 
             admin_dashboard.mainloop()

@@ -32,7 +32,7 @@ def load_clients(filename="data.json"):
 
 
 def main():
-    app_login_screen = LoginScreen()
+    app_login_screen = ui_windows.ui_login.LoginScreen()
     app_login_screen.mainloop()
 
 
