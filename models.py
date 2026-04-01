@@ -100,6 +100,10 @@ class Client:
                 trans_from_id = client_id1          
                 trans_from_info = client_info1
                 old_balance_from = all_clients_trans[trans_from_id]["balance"]
+                if all_clients_trans[trans_from_id]["balance"] < amount:
+                    #error insuffecient funds in account
+                    return False
+                    break
 
                 for client_id2, client_info2 in all_clients_trans.items():
                     if to_id == client_id2:
