@@ -86,7 +86,7 @@ class Client:
                     return True
 
 
-    def transaction_fromto(amount,from_id, to_id):
+    def transaction_fromto(amount, from_id, to_id):
         """
             function to transfer funds from one account to another
             gets amount[int] (of funds)
@@ -155,15 +155,19 @@ class Client:
             
             
     
-    def check_pin(client, pin_input):
-        if(client.pin == pin_input):
-            return True
-        else:
-            return None
-            #! WARNING MESSAGE NEEDED HERE
-            
+    def check_pin(pin_input, id_input): #*--> 
+        
+        all_clients_pin = storage.all_clients()
+        for client_id1, client_info1 in all_clients_pin.items():
+            if str(id_input) == client_id1:
+                if all_clients_pin[client_id1]["pin"] == str(pin_input):
+                    # print(f"the pin matchs! and its {all_clients_pin[client_id1]["pin"]}, for user - {all_clients_pin[client_id1]["username"]}")
+                    return True
+                else:
+                    return False
+        
+        
 
-    # def create new client
 
 
     
@@ -176,7 +180,8 @@ def main():
     # storage.save_clients()
     #Client.from_dict(storage.all_clients())
     # x = 0
-    Client.transaction_fromto(amount=500,from_id="100", to_id="102")
+    # Client.transaction_fromto(amount=500, from_id="100", to_id="102")
+    Client.check_pin(pin_input=1234, id_input=100)
 
 if __name__ == "__main__":
     main()
