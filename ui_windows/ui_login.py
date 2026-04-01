@@ -132,9 +132,8 @@ class LoginScreen(ctk.CTk):
         # if id and pin correct -> close window and open new dashboard window
         if authenticate:
 
-            self.destroy()  #close window
-            user_dashboard = Dashboard() 
-            user_dashboard.mainloop()
+            self.withdraw()  #hide window (don't destroy)
+            user_dashboard = Dashboard(parent_login=self)
 
 if __name__ == "__main__":
     app = LoginScreen()
