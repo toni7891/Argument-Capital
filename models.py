@@ -165,7 +165,7 @@ class Client:
                 old_balance = all_clients[client_id]["balance"]
                 print(old_balance)
                 
-                if float(amount) > old_balance:
+                if float(amount) < old_balance:
                     print("match id")
                     all_clients[client_id]["balance"] -= amount
                     new_balance = all_clients[client_id]["balance"]
@@ -195,7 +195,7 @@ def main():
 
     Client.withdraw(amount=100, client_id_input="100")
     # Client.check_pin(pin_input=1234, id_input=100)
-    Client.change_pin("1234", "100", "5678")
+    # Client.change_pin("1234", "100", "5678")
 
 if __name__ == "__main__":
     main()

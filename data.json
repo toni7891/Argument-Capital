@@ -2,7 +2,7 @@
     "100": {
         "username": "tony",
         "pin": "5678",
-        "balance": 3500.0,
+        "balance": 3400.0,
         "blocked_or_not": false,
         "transaction_list": [
             {
@@ -103,6 +103,16 @@
                 "direction": "in",
                 "old_Balance": 3000.0,
                 "new_balance": 3500.0
+            },
+            {
+                "type": "withdrawl",
+                "from": "tony",
+                "to": "tony",
+                "amount": 100,
+                "date": "2026-04-01 16:59:38",
+                "direction": "out",
+                "old_Balance": 3500.0,
+                "new_balance": 3400.0
             }
         ]
     },
