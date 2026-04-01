@@ -30,7 +30,9 @@ class Client:
     def create_client_account(username, pin, balance, blocked_or_not, is_admin):
         all_clients = storage.all_clients()
         new_client_id = random.randint(103, 999)
-        if 
+        # Check if client ID already exists
+        if new_client_id in all_clients:
+            new_client_id = random.randint(103, 999)
         #print(new_client_id)
         trans_history = []
 
