@@ -3,7 +3,6 @@ import json
 from datetime import *
 from time import *
 
-
 class Client:
     def __init__(self, client_ID, username, pin, balance, blocked_or_not, transaction_list):
         self.client_ID = client_ID
@@ -42,67 +41,50 @@ class Client:
             clients_objects.append(map_user)
         return clients_objects #* returns all clients data (if we have time add encryption)
 
-    def find_account(which_acc):
+    def find_account(acc_id):
+        #store all data
+        all_clients = storage.all_clients()
 
-            get_clients = None
-            get_clients = storage.all_clients()
-            
-            counter = (len(get_clients) - 1)
+        #search for nedded acc 
+        for client_id, info in all_clients.items():
+            if client_id == acc_id:
+                return client_id, info #* return tuple (id , info)
+                # print(client_id)
+                # print(info)
+            else:
+                return False
 
-            #cycling thourgh every client to find the nedded one
-            for client in get_clients:
-                # cycling until last client in the list
-                if counter > -1:
 
-                    #checking each client
-                    if get_clients[counter]:
+    def deposit(amount, client_id_input):
+        #* stores all data from json *VERY IMPORTANT*
+        all_clients = storage.all_clients()
 
-                        #if needed clientID exist then good
-                        if client.client_ID == which_acc:
-                            print(client.client_ID)
-                            return True
+        for client_id, client_info in all_clients.items():
+            if client_id == client_id_input:
+                if amount > 0:
 
-                        #if not then error
-                        elif counter == 0:
-                            return False
+                    client_info["balance"] += amount
 
-                    #cycle counter iteration
-                    counter -= 1
-                    
+                    new_transaction = {
+                        "type": "deposit",
+                        "from": all_clients[client_id]["username"],
+                        "to": all_clients[client_id]["username"],
+                        "amount": amount,
+                        "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                        "direction": "in"
+                    }
 
- #! NEEDS FIXING! 
-    def deposit(amount, client_id_input, filename="data.json"):
-                    #read the data.json and store client data in data var 
-        get_clients = None
-        get_clients = storage.all_clients()
-        client_list_to_giveback = []
-        counter = (len(get_clients) - 1)
-            #cycling thourgh every client to find the nedded one
-        for client in get_clients:
-                # cycling until last client in the list
-                if counter > -1:
+                    #* add new transaction to list of all transactions
+                    all_clients[client_id_input]["transaction_list"].append(new_transaction)
 
-                    #checking each client
-                    if get_clients[counter]:
-                        
-                        if amount > 0:
-                            #if the amount is bigger then zero
-                            
-                        #if account is found and the if is true, work on the client that is found
-                            if Client.find_account(client_id_input): #! problem might be here
-                                client.balance += amount
-                                # print("money should've been deposited")
-                                
-                                # return (f"the amount of {amount} has been deposited to your account")
-                                
-                             #if not then error
-                            elif counter == 0:
-                                pass             
-                    client_list_to_giveback.append(client) #! problem might be here
-                
-                counter -= 1
-        storage.save_clients(client_list_to_giveback) #! problem might be here
-            
+                    #* rewrite to json with new data 
+                    storage.save_clients(all_clients_save=all_clients)
+
+                    return True
+
+
+    def transaction_fromto(amount,from,to):
+        pass
     
     def check_pin(client, pin_input):
         if(client.pin == pin_input):
@@ -118,11 +100,11 @@ class Client:
         pass
     
 def main():
-    Client.find_account("100")
-    # Client.deposit(500, 100) #?--> אמור להכניס 500 לאיידי 100
+    # Client.find_account("100")
+    print(Client.deposit(amount=500, client_id_input="100")) #?--> אמור להכניס 500 לאיידי 100
     # storage.save_clients()
     #Client.from_dict(storage.all_clients())
-    x = 0
+    # x = 0
     
 
 if __name__ == "__main__":
