@@ -188,5 +188,50 @@
                 "new_balance": 1500.0
             }
         ]
+    },
+    "119": {
+        "client_ID": 119,
+        "username": "test",
+        "pin": "1234",
+        "balance": 999,
+        "blocked_or_not": false,
+        "is_admin": false,
+        "transaction_list": []
+    },
+    "731": {
+        "client_ID": 731,
+        "username": "test",
+        "pin": "1234",
+        "balance": 999,
+        "blocked_or_not": false,
+        "is_admin": false,
+        "transaction_list": []
+    },
+    "471": {
+        "client_ID": 471,
+        "username": "test",
+        "pin": "1234",
+        "balance": 999,
+        "blocked_or_not": false,
+        "is_admin": false,
+        "transaction_list": []
+    },
+    "418": {
+        "client_ID": 418,
+        "username": "test",
+        "pin": "1234",
+        "balance": 999,
+        "blocked_or_not": false,
+        "is_admin": false,
+        "transaction_list": []
+    },
+    "676": {
+        "client_ID": 676,
+        "username": "test",
+        "pin": "1234",
+        "balance": 999,
+        "blocked_or_not": false,
+        "is_admin": false,
+        "transaction_list": []
     }
 }
