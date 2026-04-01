@@ -8,7 +8,11 @@ class LoginScreen(ctk.CTk):
 
         # setup
         self.title("Argument capital Login")
-        self.geometry("400x700")
+        self.geometry("400x700")\
+        # Prevent the user from shrinking it manually
+        self.resizable(False, False)
+        # Force the window to update its "inner math" before showing
+        self.update_idletasks()
         self.configure(fg_color="#0A0E27")  # Background
         self.center_window()
 
