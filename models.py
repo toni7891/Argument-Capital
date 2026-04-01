@@ -87,6 +87,15 @@ class Client:
 
 
     def transaction_fromto(amount,from_id, to_id):
+        """
+            function to transfer funds from one account to another
+            gets amount[int] (of funds)
+                 from_id[str] (acc id of whos transfering)
+                 to_id][str] (acc id who gets the funds)
+
+            then changing and saving the transfer and the transaction hisrtory in the json file
+        """
+
 
         all_clients_trans = storage.all_clients()
 
