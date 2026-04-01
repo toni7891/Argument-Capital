@@ -58,6 +58,7 @@ class Client:
     def deposit(amount, client_id_input):
         #* stores all data from json *VERY IMPORTANT*
         all_clients = storage.all_clients()
+        
 
         for client_id, client_info in all_clients.items():
             if client_id == client_id_input:
@@ -98,6 +99,7 @@ class Client:
 
 
         all_clients_trans = storage.all_clients()
+        type_of_operation = "transfer"
 
         for client_id1, client_info1 in all_clients_trans.items():
             if from_id == client_id1:
@@ -122,29 +124,11 @@ class Client:
 
 
                         #* add transaction history
-                        new_from_transaction = {
-                            "type": "transfer",
-                            "from": all_clients_trans[trans_from_id]["username"],
-                            "to": all_clients_trans[trans_to_id]["username"],
-                            "amount": -amount,
-                            "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                            "direction": "out",
-                            "old_Balnce": old_balance_from,
-                            "new_balance": new_balance_from
-                        }
+                        new_from_transaction = storage.transaction_format(type_of_operation, all_clients_trans[trans_from_id]["username"], all_clients_trans[trans_to_id]["username"], -amount, "out", old_balance_from, new_balance_from)
+                        new_to_transaction = storage.transaction_format(type_of_operation, all_clients_trans[trans_from_id]["username"], all_clients_trans[trans_to_id]["username"], amount, "in", old_balance_to, new_balance_to)
 
-                        new_to_transaction = {
-                            "type": "transfer",
-                            "from": all_clients_trans[trans_from_id]["username"],
-                            "to": all_clients_trans[trans_to_id]["username"],
-                            "amount": amount,
-                            "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                            "direction": "in",
-                            "old_Balnce": old_balance_to,
-                            "new_balance": new_balance_to
-                        }
             
-                                #* add new transaction to list of all transactions
+                        #* add new transaction to list of all transactions
                         all_clients_trans[trans_from_id]["transaction_list"].append(new_from_transaction)
                         all_clients_trans[trans_to_id]["transaction_list"].append(new_to_transaction)
 
@@ -176,7 +160,7 @@ def main():
     # storage.save_clients()
     #Client.from_dict(storage.all_clients())
     # x = 0
-    Client.transaction_fromto(amount=500,from_id="100", to_id="102")
+    Client.transaction_fromto(amount=500,from_id="102", to_id="100")
 
 if __name__ == "__main__":
     main()

@@ -43,6 +43,46 @@
                 "direction": "out",
                 "old_Balnce": 3000.0,
                 "new_balance": 2500.0
+            },
+            {
+                "type": "transfer",
+                "from": "tony",
+                "to": "guy",
+                "amount": -500,
+                "date": "2026-04-01 16:13:46",
+                "direction": "out",
+                "old_Balnce": 2500.0,
+                "new_balance": 2000.0
+            },
+            {
+                "type": "transfer",
+                "from": "tony",
+                "to": "guy",
+                "amount": -500,
+                "date": "2026-04-01 16:15:57",
+                "direction": "out",
+                "old_Balnce": 2000.0,
+                "new_balance": 1500.0
+            },
+            {
+                "type": "transfer",
+                "from": "guy",
+                "to": "tony",
+                "amount": 500,
+                "date": "2026-04-01 16:19:08",
+                "direction": "in",
+                "old_Balnce": 1500.0,
+                "new_balance": 2000.0
+            },
+            {
+                "type": "transfer",
+                "from": "guy",
+                "to": "tony",
+                "amount": 500,
+                "date": "2026-04-01 16:20:09",
+                "direction": "in",
+                "old_Balnce": 2000.0,
+                "new_balance": 2500.0
             }
         ]
     },
@@ -73,6 +113,46 @@
                 "date": "2026-04-01 14:31:26",
                 "direction": "in",
                 "old_Balnce": 1000.0,
+                "new_balance": 1500.0
+            },
+            {
+                "type": "transfer",
+                "from": "tony",
+                "to": "guy",
+                "amount": 500,
+                "date": "2026-04-01 16:13:46",
+                "direction": "in",
+                "old_Balnce": 1500.0,
+                "new_balance": 2000.0
+            },
+            {
+                "type": "transfer",
+                "from": "tony",
+                "to": "guy",
+                "amount": 500,
+                "date": "2026-04-01 16:15:57",
+                "direction": "in",
+                "old_Balnce": 2000.0,
+                "new_balance": 2500.0
+            },
+            {
+                "type": "transfer",
+                "from": "guy",
+                "to": "tony",
+                "amount": -500,
+                "date": "2026-04-01 16:19:08",
+                "direction": "out",
+                "old_Balnce": 2500.0,
+                "new_balance": 2000.0
+            },
+            {
+                "type": "transfer",
+                "from": "guy",
+                "to": "tony",
+                "amount": -500,
+                "date": "2026-04-01 16:20:09",
+                "direction": "out",
+                "old_Balnce": 2000.0,
                 "new_balance": 1500.0
             }
         ]

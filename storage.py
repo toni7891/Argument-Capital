@@ -1,5 +1,6 @@
 import json
 import models
+from datetime import *
 
 def all_clients(filename="data.json"):
     
@@ -9,8 +10,19 @@ def all_clients(filename="data.json"):
         return data
         
 
-# def transaction_format(type, from, to, amount)
-
+def transaction_format(type_of_op, from_acc, to, amount, direction, old_balance,new_balance):
+    
+    new_format_transaction = {
+        "type": type_of_op,
+        "from": from_acc,
+        "to": to,
+        "amount": amount,
+        "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "direction": direction,
+        "old_Balnce": old_balance,
+        "new_balance": new_balance
+    }
+    return new_format_transaction
 
 
 #* write all clients again to json (overwrite all prev data)
@@ -25,11 +37,11 @@ def save_clients(all_clients_save, filename="data.json"):
 
     # print(client_data)
 
-def main():
-    print(all_clients())
+# def main():
+#     print(all_clients())
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
 
 
 
