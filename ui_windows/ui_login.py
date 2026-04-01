@@ -143,13 +143,13 @@ class LoginScreen(ctk.CTk):
 # ! todo add authenticate functionality and connect user dashboard screen (like bank acc info)
 # ! should work not sure need to test
 
-    def authenticate(self):
+    # def authenticate(self):
 
-        # if id and pin correct -> close window and open new dashboard window
-        if authenticate:
+    #     # if id and pin correct -> close window and open new dashboard window
+    #     if authenticate:
 
-            self.withdraw()  #hide window (don't destroy)
-            user_dashboard = Dashboard(parent_login=self)
+    #         self.withdraw()  #hide window (don't destroy)
+    #         user_dashboard = Dashboard(parent_login=self)
 
 if __name__ == "__main__":
     app = LoginScreen()
