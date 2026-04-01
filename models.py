@@ -149,6 +149,8 @@ class Client:
                     return True
                 else:
                     return False
+        print("pin doesnt match the user!")
+                    
         
         
 
@@ -165,7 +167,7 @@ def main():
     #Client.from_dict(storage.all_clients())
     # x = 0
     # Client.transaction_fromto(amount=500, from_id="100", to_id="102")
-    Client.check_pin(pin_input=1234, id_input=100)
+    Client.check_pin(pin_input=1234, id_input=109)
 
 if __name__ == "__main__":
     main()
