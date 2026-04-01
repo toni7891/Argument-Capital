@@ -4,25 +4,26 @@ from datetime import *
 from time import *
 
 class Client:
-    def __init__(self, client_ID, username, pin, balance, blocked_or_not, transaction_list):
+    def __init__(self, client_ID, username, pin, balance, blocked_or_not, transaction_list, is_admin):
         self.client_ID = client_ID
         self.username = username
         self.pin = pin
         self.balance = balance
         self.blocked_or_not = blocked_or_not
         self.transaction_list = transaction_list
-        
+        self.is_admin = is_admin
         
     # writing data to json file
-    # def to_dict(self):
-    #     return {
-    #         "client_ID": self.client_ID,
-    #         "username": self.username,
-    #         "pin": self.pin,
-    #         "balance": self.balance,
-    #         "blocked_or_not": self.blocked_or_not,
-    #         "transaction_list": self.transaction_list
-    #     }
+    def to_dict(self):
+         return {
+            "client_ID": self.client_ID,
+            "username": self.username,
+            "pin": self.pin,
+            "balance": self.balance,
+            "blocked_or_not": self.blocked_or_not,
+            "transaction_list": self.transaction_list
+            "is_admin": self.is_admin
+        }
         
     # used to define function under a class but not needing to use the class ex -> 
     # from:  Client().func()
