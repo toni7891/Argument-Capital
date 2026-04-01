@@ -143,6 +143,18 @@ class Client:
                 else:
                     return False
         # print("pin doesnt match the user!")
+        
+    def change_pin(func_old_pin_input, func_id_input, new_pin):
+        all_clients_change_pin = storage.all_clients()
+        if Client.check_pin(func_old_pin_input, func_id_input):
+            for client_id, client_info in all_clients_change_pin.items():
+                if str(func_id_input) == client_id:
+                    all_clients_change_pin[func_id_input]["pin"] = new_pin
+                    print(f"new pin is: {new_pin}")
+                    storage.save_clients(all_clients_change_pin)
+        else:
+            print("that is not the old password!")
+            
                     
         
         
@@ -155,12 +167,13 @@ class Client:
     
 def main():
     # Client.find_account("100")
-    Client.deposit(amount=500, client_id_input="100") #?--> אמור להכניס 500 לאיידי 100
+    # Client.deposit(amount=500, client_id_input="100") #?--> אמור להכניס 500 לאיידי 100
     # storage.save_clients()
     #Client.from_dict(storage.all_clients())
     # x = 0
     # Client.transaction_fromto(amount=500, from_id="100", to_id="102")
-    Client.check_pin(pin_input=1234, id_input=100)
+    # Client.check_pin(pin_input=1234, id_input=100)
+    Client.change_pin("1234", "100", "5678")
 
 if __name__ == "__main__":
     main()
