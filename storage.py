@@ -7,6 +7,10 @@ def all_clients(filename="data.json"):
     with open(filename, "r") as file:
         data = json.load(file)
         return data
+        
+
+# def transaction_format(type, from, to, amount)
+
 
 
 #* write all clients again to json (overwrite all prev data)
@@ -21,12 +25,11 @@ def save_clients(all_clients_save, filename="data.json"):
 
     # print(client_data)
 
+def main():
+    print(all_clients())
 
-# def main():
-#     #all_clients()
-
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
 
 
 

@@ -14,15 +14,15 @@ class Client:
         
         
     # writing data to json file
-    def to_dict(self):
-        return {
-            "client_ID": self.client_ID,
-            "username": self.username,
-            "pin": self.pin,
-            "balance": self.balance,
-            "blocked_or_not": self.blocked_or_not,
-            "transaction_list": self.transaction_list
-        }
+    # def to_dict(self):
+    #     return {
+    #         "client_ID": self.client_ID,
+    #         "username": self.username,
+    #         "pin": self.pin,
+    #         "balance": self.balance,
+    #         "blocked_or_not": self.blocked_or_not,
+    #         "transaction_list": self.transaction_list
+    #     }
         
     # used to define function under a class but not needing to use the class ex -> 
     # from:  Client().func()
@@ -73,7 +73,7 @@ class Client:
                         "amount": amount,
                         "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                         "direction": "in",
-                        "old_Balnce": old_balance,
+                        "old_Balance": old_balance,
                         "new_balance": new_balance
                     }
 
@@ -108,7 +108,7 @@ class Client:
 
                 for client_id2, client_info2 in all_clients_trans.items():
                     if to_id == client_id2:
-
+                        
                         trans_to_id = client_id2       #data from who recive transfer
                         trans_to_info = client_info2
                         old_balance_to = all_clients_trans[trans_to_id]["balance"]
@@ -162,9 +162,13 @@ class Client:
             return None
             #! WARNING MESSAGE NEEDED HERE
             
+
+    # def create new client
+
+
     
-    def withdraw():
-        pass
+    # def withdraw():
+        # pass
     
 def main():
     # Client.find_account("100")
