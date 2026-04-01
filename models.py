@@ -181,7 +181,24 @@ class Client:
                     storage.save_clients(all_clients_save=all_clients)
                     print("successse")
                     return True
-    
+
+
+
+
+    # TODO --> need to make this function!
+    def Create_Client_Account(client_ID, username, pin, balance, blocked_or_not, transaction_list):
+        pass
+        self.client_ID = client_ID
+        self.username = username
+        self.pin = pin
+        self.balance = balance
+        self.blocked_or_not = blocked_or_not
+        self.transaction_list = transaction_list
+        
+        
+
+
+
 def main():
     # Client.find_account("100")
     # # Client.deposit(amount=500, client_id_input="100") #?--> אמור להכניס 500 לאיידי 100
