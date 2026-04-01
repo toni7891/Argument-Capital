@@ -184,7 +184,7 @@ class Client:
     
 def main():
     # Client.find_account("100")
-    # Client.deposit(amount=500, client_id_input="100") #?--> אמור להכניס 500 לאיידי 100
+    # # Client.deposit(amount=500, client_id_input="100") #?--> אמור להכניס 500 לאיידי 100
     # storage.save_clients()
     #Client.from_dict(storage.all_clients())
     # x = 0
@@ -194,6 +194,8 @@ def main():
 
 
     Client.withdraw(amount=100, client_id_input="100")
+    # Client.check_pin(pin_input=1234, id_input=100)
+    Client.change_pin("1234", "100", "5678")
 
 if __name__ == "__main__":
     main()
