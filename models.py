@@ -29,13 +29,13 @@ class Client:
     # from:  Client().func()
     # to: Client.func()
     # [not in use now]
-    # @staticmethod
+    @staticmethod
 
     def from_dict(data):
 
         # list to store all clients data as class object
         clients_objects = []    
-
+        # print(data)
         # sort and map and add to list
         for client_ID, client_info in data.items():
             map_user = Client(client_ID=client_ID, **client_info) #*--> here the conversion from dict [json] to class type happens!
@@ -91,7 +91,7 @@ class Client:
                         #if account is found and the if is true, work on the client that is found
                             if Client.find_account(client_id_input): #! problem might be here
                                 client.balance += amount
-                                print("money should've been deposited")
+                                # print("money should've been deposited")
                                 
                                 # return (f"the amount of {amount} has been deposited to your account")
                                 
@@ -121,8 +121,8 @@ def main():
     Client.find_account("100")
     # Client.deposit(500, 100) #?--> אמור להכניס 500 לאיידי 100
     # storage.save_clients()
-    
-
+    #Client.from_dict(storage.all_clients())
+    x = 0
     
 
 if __name__ == "__main__":

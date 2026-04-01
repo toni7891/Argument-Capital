@@ -7,9 +7,10 @@ def all_clients(filename="data.json"):
     with open(filename, "r") as file:
         data = json.load(file)
 
+    #print(data)
     #making list full of clients (as class object)
     all_clients = models.Client.from_dict(data)
-    print(all_clients)
+    # print(all_clients)
     return all_clients
 
 
@@ -29,15 +30,19 @@ def save_clients(clients, filename="data.json"):
     with open(filename, "w") as file:
         json.dump(client_data, file, indent=4)
 
-    print(client_data)
+    # print(client_data)
+
+
+# def main():
+#     #all_clients()
+
+# if __name__ == "__main__":
+#     main()
 
 
 
 
-
-
-
-    """
+"""
     output into file:
     [
         {
@@ -46,7 +51,7 @@ def save_clients(clients, filename="data.json"):
             "balance": 1000
         }
     ]
-    """
+"""
 
 
 
