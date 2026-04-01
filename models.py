@@ -70,7 +70,7 @@ class Client:
                     counter -= 1
                     
 
-#! NEEDS FIXING! 
+ #! NEEDS FIXING! 
     def deposit(amount, client_id_input, filename="data.json"):
                     #read the data.json and store client data in data var 
         get_clients = None
@@ -118,8 +118,8 @@ class Client:
         pass
     
 def main():
-    # Client.find_account("100")
-    Client.deposit(500, 100) #?--> אמור להכניס 500 לאיידי 100
+    Client.find_account("100")
+    # Client.deposit(500, 100) #?--> אמור להכניס 500 לאיידי 100
     # storage.save_clients()
     
 

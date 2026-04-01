@@ -9,6 +9,7 @@ def all_clients(filename="data.json"):
 
     #making list full of clients (as class object)
     all_clients = models.Client.from_dict(data)
+    print(all_clients)
     return all_clients
 
 
