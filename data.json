@@ -2,7 +2,7 @@
     "100": {
         "username": "tony",
         "pin": "1234",
-        "balance": 2500.0,
+        "balance": 3000.0,
         "blocked_or_not": false,
         "transaction_list": [
             {
@@ -83,6 +83,16 @@
                 "direction": "in",
                 "old_Balnce": 2000.0,
                 "new_balance": 2500.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 500,
+                "date": "2026-04-01 16:30:55",
+                "direction": "in",
+                "old_Balance": 2500.0,
+                "new_balance": 3000.0
             }
         ]
     },

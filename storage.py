@@ -19,7 +19,7 @@ def transaction_format(type_of_op, from_acc, to, amount, direction, old_balance,
         "amount": amount,
         "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "direction": direction,
-        "old_Balnce": old_balance,
+        "old_Balance": old_balance,
         "new_balance": new_balance
     }
     return new_format_transaction

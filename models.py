@@ -66,17 +66,10 @@ class Client:
                     old_balance = client_info["balance"]
                     client_info["balance"] += amount
                     new_balance = client_info["balance"]
+                    type_of_operation = "deposit"
+                    direction = "in"
 
-                    new_transaction = {
-                        "type": "deposit",
-                        "from": all_clients[client_id]["username"],
-                        "to": all_clients[client_id]["username"],
-                        "amount": amount,
-                        "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                        "direction": "in",
-                        "old_Balance": old_balance,
-                        "new_balance": new_balance
-                    }
+                    new_transaction = (storage.transaction_format(type_of_operation, all_clients[client_id]["username"], all_clients[client_id]["username"], amount, direction, old_balance, new_balance))
 
                     #* add new transaction to list of all transactions
                     all_clients[client_id_input]["transaction_list"].append(new_transaction)
@@ -162,12 +155,12 @@ class Client:
     
 def main():
     # Client.find_account("100")
-    #print(Client.deposit(amount=500, client_id_input="100")) #?--> אמור להכניס 500 לאיידי 100
+    Client.deposit(amount=500, client_id_input="100") #?--> אמור להכניס 500 לאיידי 100
     # storage.save_clients()
     #Client.from_dict(storage.all_clients())
     # x = 0
     # Client.transaction_fromto(amount=500, from_id="100", to_id="102")
-    Client.check_pin(pin_input=1234, id_input=109)
+    Client.check_pin(pin_input=1234, id_input=100)
 
 if __name__ == "__main__":
     main()
