@@ -2,16 +2,17 @@ import storage
 import json
 from datetime import *
 from time import *
+import random
 
 class Client:
-    def __init__(self, client_ID, username, pin, balance, blocked_or_not, transaction_list, is_admin):
+    def __init__(self, client_ID, username, pin, balance, blocked_or_not, is_admin, transaction_list):
         self.client_ID = client_ID
         self.username = username
         self.pin = pin
         self.balance = balance
         self.blocked_or_not = blocked_or_not
-        self.transaction_list = transaction_list
         self.is_admin = is_admin
+        self.transaction_list = transaction_list
         
     # writing data to json file
     def to_dict(self):
@@ -21,10 +22,30 @@ class Client:
             "pin": self.pin,
             "balance": self.balance,
             "blocked_or_not": self.blocked_or_not,
-            "transaction_list": self.transaction_list
-            "is_admin": self.is_admin
+            "is_admin": self.is_admin,
+            "transaction_list": self.transaction_list,
         }
         
+    # TODO --> need to make this function!
+    def create_client_account(username, pin, balance, blocked_or_not, is_admin):
+        all_clients = storage.all_clients()
+        new_client_id = random.randint(103, 999)
+        if 
+        #print(new_client_id)
+        trans_history = []
+
+        new_client = Client(new_client_id, username, pin, balance, blocked_or_not, is_admin, trans_history)
+        #print(new_client)
+        
+        dict_client = Client.to_dict(new_client)
+        #print(dict_client)
+        all_clients[new_client.client_ID] = dict_client
+        #write to json
+        storage.save_clients(all_clients)
+
+
+# thats how the function is called -> Client.create_client_account(username="test", pin="1234", balance=999, blocked_or_not=False, is_admin=False)
+
     # used to define function under a class but not needing to use the class ex -> 
     # from:  Client().func()
     # to: Client.func()
@@ -32,7 +53,7 @@ class Client:
     @staticmethod
 
     def from_dict(data):
-
+    
         # list to store all clients data as class object
         clients_objects = []    
         # print(data)
@@ -186,15 +207,6 @@ class Client:
 
 
 
-    # TODO --> need to make this function!
-    def Create_Client_Account(client_ID, username, pin, balance, blocked_or_not, transaction_list):
-        pass
-        self.client_ID = client_ID
-        self.username = username
-        self.pin = pin
-        self.balance = balance
-        self.blocked_or_not = blocked_or_not
-        self.transaction_list = transaction_list
         
         
 
@@ -208,12 +220,15 @@ def main():
     # x = 0
     # Client.transaction_fromto(amount=500, from_id="100", to_id="102")
     #Client.check_pin(pin_input=1234, id_input=100)
+    Client.create_client_account(username="test", pin="1234", balance=999, blocked_or_not=False, is_admin=False)
 
 
-
-    Client.withdraw(amount=100, client_id_input="100")
+    #Client.withdraw(amount=100, client_id_input="100")
     # Client.check_pin(pin_input=1234, id_input=100)
     # Client.change_pin("1234", "100", "5678")
+
+
+
 
 if __name__ == "__main__":
     main()

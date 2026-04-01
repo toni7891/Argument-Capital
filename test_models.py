@@ -22,6 +22,7 @@ class Client:
             "pin": self.pin,
             "balance": self.balance,
             "blocked_or_not": self.blocked_or_not,
+            "is_admin": self.is_admin,
             "transaction_list": self.transaction_list
         }
         
@@ -31,16 +32,16 @@ class Client:
     # [not in use now]
     @staticmethod
 
-    def from_dict(data):
+    # def from_dict(data):
 
-        # list to store all clients data as class object
-        clients_objects = []    
-        # print(data)
-        # sort and map and add to list
-        for client_ID, client_info in data.items():
-            map_user = Client(client_ID=client_ID, **client_info) #*--> here the conversion from dict [json] to class type happens!
-            clients_objects.append(map_user)
-        return clients_objects #* returns all clients data (if we have time add encryption)
+    #     # list to store all clients data as class object
+    #     clients_objects = []    
+    #     # print(data)
+    #     # sort and map and add to list
+    #     for client_ID, client_info in data.items():
+    #         map_user = Client(client_ID=client_ID, **client_info) #*--> here the conversion from dict [json] to class type happens!
+    #         clients_objects.append(map_user)
+    #     return clients_objects #* returns all clients data (if we have time add encryption)
 
     def find_account(which_acc):
 
@@ -77,8 +78,7 @@ class Client:
                 print(client_id)
                 print(info)
 
-
- #! NEEDS FIXING! 
+# ! need fixing
     def deposit(amount, client_id_input, filename="data.json"):
                     #read the data.json and store client data in data var 
         get_clients = None

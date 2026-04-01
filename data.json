@@ -4,6 +4,7 @@
         "pin": "5678",
         "balance": 3400.0,
         "blocked_or_not": false,
+        "is_admin": false,
         "transaction_list": [
             {
                 "type": "transfer",
@@ -121,6 +122,7 @@
         "pin": "1122",
         "balance": 1500.0,
         "blocked_or_not": false,
+        "is_admin": false,
         "transaction_list": [
             {
                 "type": "transfer",
