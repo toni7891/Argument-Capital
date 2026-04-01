@@ -62,8 +62,9 @@ class Client:
         for client_id, client_info in all_clients.items():
             if client_id == client_id_input:
                 if amount > 0:
-
+                    old_balance = client_info["balance"]
                     client_info["balance"] += amount
+                    new_balance = client_info["balance"]
 
                     new_transaction = {
                         "type": "deposit",
@@ -71,7 +72,9 @@ class Client:
                         "to": all_clients[client_id]["username"],
                         "amount": amount,
                         "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                        "direction": "in"
+                        "direction": "in",
+                        "old_Balnce": old_balance,
+                        "new_balance": new_balance
                     }
 
                     #* add new transaction to list of all transactions
@@ -83,8 +86,65 @@ class Client:
                     return True
 
 
-    def transaction_fromto(amount,from,to):
-        pass
+    def transaction_fromto(amount,from_id, to_id):
+
+        all_clients_trans = storage.all_clients()
+
+        for client_id1, client_info1 in all_clients_trans.items():
+            if from_id == client_id1:
+                #* save from acc data
+                trans_from_id = client_id1          
+                trans_from_info = client_info1
+                old_balance_from = all_clients_trans[trans_from_id]["balance"]
+
+                for client_id2, client_info2 in all_clients_trans.items():
+                    if to_id == client_id2:
+
+                        trans_to_id = client_id2       #data from who recive transfer
+                        trans_to_info = client_info2
+                        old_balance_to = all_clients_trans[trans_to_id]["balance"]
+    
+                        #* changing balance and saving before after balance
+                        all_clients_trans[trans_from_id]["balance"] -= amount
+                        all_clients_trans[trans_to_id]["balance"] += amount
+
+                        new_balance_from = all_clients_trans[trans_from_id]["balance"]
+                        new_balance_to = all_clients_trans[trans_to_id]["balance"]
+
+
+                        #* add transaction history
+                        new_from_transaction = {
+                            "type": "transfer",
+                            "from": all_clients_trans[trans_from_id]["username"],
+                            "to": all_clients_trans[trans_to_id]["username"],
+                            "amount": -amount,
+                            "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                            "direction": "out",
+                            "old_Balnce": old_balance_from,
+                            "new_balance": new_balance_from
+                        }
+
+                        new_to_transaction = {
+                            "type": "transfer",
+                            "from": all_clients_trans[trans_from_id]["username"],
+                            "to": all_clients_trans[trans_to_id]["username"],
+                            "amount": amount,
+                            "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                            "direction": "in",
+                            "old_Balnce": old_balance_to,
+                            "new_balance": new_balance_to
+                        }
+            
+                                #* add new transaction to list of all transactions
+                        all_clients_trans[trans_from_id]["transaction_list"].append(new_from_transaction)
+                        all_clients_trans[trans_to_id]["transaction_list"].append(new_to_transaction)
+
+                        #* rewrite to json with new data 
+                        storage.save_clients(all_clients_save=all_clients_trans)
+                        return True
+
+            
+            
     
     def check_pin(client, pin_input):
         if(client.pin == pin_input):
@@ -93,19 +153,17 @@ class Client:
             return None
             #! WARNING MESSAGE NEEDED HERE
             
-    def deposit_old(client):
-        pass
     
     def withdraw():
         pass
     
 def main():
     # Client.find_account("100")
-    print(Client.deposit(amount=500, client_id_input="100")) #?--> אמור להכניס 500 לאיידי 100
+    #print(Client.deposit(amount=500, client_id_input="100")) #?--> אמור להכניס 500 לאיידי 100
     # storage.save_clients()
     #Client.from_dict(storage.all_clients())
     # x = 0
-    
+    Client.transaction_fromto(amount=500,from_id="100", to_id="102")
 
 if __name__ == "__main__":
     main()
