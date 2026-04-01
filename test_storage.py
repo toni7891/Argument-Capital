@@ -26,7 +26,7 @@ def print_format():
 
 
 
-    print (new_from_transaction = storage.transaction_format(type_of_operation, all_clients_trans[trans_from_id]["username"], all_clients_trans[trans_to_id]["username"], -amount, old_balance_from, new_balance_from))
+    
 
 if __name__ == "__main__":
     main()

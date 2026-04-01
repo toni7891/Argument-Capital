@@ -63,9 +63,9 @@ class Client:
         for client_id, client_info in all_clients.items():
             if client_id == client_id_input:
                 if amount > 0:
-                    old_balance = client_info["balance"]
-                    client_info["balance"] += amount
-                    new_balance = client_info["balance"]
+                    old_balance = all_clients[client_id]["balance"]
+                    all_clients[client_id]["balance"] += amount
+                    new_balance = all_clients[client_id]["balance"]
                     type_of_operation = "deposit"
                     direction = "in"
 
@@ -154,17 +154,46 @@ class Client:
 
 
     
-    # def withdraw():
-        # pass
+    def withdraw(amount, client_id_input):
+        #* stores all data from json *VERY IMPORTANT*
+        all_clients = storage.all_clients()
+        print(all_clients)
+
+        for client_id, client_info in all_clients.items():
+            if client_id == client_id_input:
+                print("match id")
+                old_balance = all_clients[client_id]["balance"]
+                print(old_balance)
+                
+                if float(amount) > old_balance:
+                    print("match id")
+                    all_clients[client_id]["balance"] -= amount
+                    new_balance = all_clients[client_id]["balance"]
+                    type_of_operation = "withdrawl"
+                    direction = "out"
+                    print("match id")
+                    new_transaction = (storage.transaction_format(type_of_operation, all_clients[client_id]["username"], all_clients[client_id]["username"], amount, direction, old_balance, new_balance))
+                    print("match id")
+                    #* add new transaction to list of all transactions
+                    all_clients[client_id_input]["transaction_list"].append(new_transaction)
+                    print("match id")
+                    #* rewrite to json with new data 
+                    storage.save_clients(all_clients_save=all_clients)
+                    print("successse")
+                    return True
     
 def main():
     # Client.find_account("100")
-    Client.deposit(amount=500, client_id_input="100") #?--> אמור להכניס 500 לאיידי 100
+    # Client.deposit(amount=500, client_id_input="100") #?--> אמור להכניס 500 לאיידי 100
     # storage.save_clients()
     #Client.from_dict(storage.all_clients())
     # x = 0
     # Client.transaction_fromto(amount=500, from_id="100", to_id="102")
-    Client.check_pin(pin_input=1234, id_input=100)
+    #Client.check_pin(pin_input=1234, id_input=100)
+
+
+
+    Client.withdraw(amount=100, client_id_input="100")
 
 if __name__ == "__main__":
     main()
