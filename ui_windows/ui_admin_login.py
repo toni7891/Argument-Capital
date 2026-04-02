@@ -1,5 +1,5 @@
 import customtkinter as ctk
-from .. import models
+from ..models import * #! this doesnt work for some reason
 
 class AdminLoginScreen(ctk.CTk):
     def __init__(self):
@@ -117,14 +117,21 @@ class AdminLoginScreen(ctk.CTk):
 
     # ! same as user but for admin
     def authenticate(self):
+        pass
 
 # if id and pin correct -> close window and open new dashboard window
         if authenticate:
+        
 
-            self.destroy()  #close windwow
-            admin_dashboard = admin_dashboard_screen() 
-            admin_dashboard.mainloop()
-
-if __name__ == "__main__":
+            # self.destroy()  #close windwow
+            # admin_dashboard = admin_dashboard_screen() 
+            # admin_dashboard.mainloop()
+            
+def main():
     app = AdminLoginScreen()
     app.mainloop()
+    
+            
+
+if __name__ == "__main__":
+    main()
