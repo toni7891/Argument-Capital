@@ -625,6 +625,8 @@ class Dashboard(ctk.CTk):
             command=lambda: self.close_window(statements_win)
         )
         close_btn.pack(pady=10)
+        self.center_window(statements_win)
+        
   
     def close_window(self, window):
         window.destroy()
