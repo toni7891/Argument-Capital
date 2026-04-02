@@ -1,4 +1,5 @@
 import customtkinter as ctk
+from tkinter import ttk
 
 class Dashboard(ctk.CTk):
     def __init__(self, parent_login=None):
@@ -164,8 +165,8 @@ class Dashboard(ctk.CTk):
             border_color="white",
             text_color="white",     
             font=("Inter", 14),   
-            hover_color="#1F1F1F", 
-            # TODO add logic
+            hover_color="#1F1F1F",
+            command=self.statements_window
         )
         self.statements_button.grid(row=2, column=0, padx=10, pady=10)
         
@@ -418,11 +419,11 @@ class Dashboard(ctk.CTk):
         )
         trans_win.cancel_btn.pack(pady=0)
         self.center_window(trans_win)
-    #logs out and returns to login window
+    #logsout
     def logout(self):
-        self.destroy()
         if self.parent_login:
-            self.parent_login.deiconify()   
+            self.parent_login.deiconify() # show login window again
+        self.destroy() # close dashboard window
     #open change pin window
     def change_pin_window(self):
         change_pin_win = ctk.CTkToplevel(self)
@@ -514,8 +515,106 @@ class Dashboard(ctk.CTk):
         )
         change_pin_win.cancel_btn.pack(pady=0)
         self.center_window(change_pin_win)
+    #open statements window
+    def statements_window(self):
+        statements_win = ctk.CTkToplevel(self)
+        statements_win.title("Statements")
+        statements_win.geometry("800x500")
+        statements_win.configure(fg_color="#0A0E27")
+        statements_win.resizable(True, True)
         
-    #TODO add confirm logic for deposit and other actions, also add logic for pin change and transfer funds, view statements, and logout
+        #frame
+        statements_win.frame = ctk.CTkFrame(
+            statements_win, 
+            corner_radius=20, 
+            fg_color="#0A0E27")
+        statements_win.frame.pack(expand=True, fill="both", padx=20, pady=20)
+        
+        #label
+        statements_win.label = ctk.CTkLabel(
+            statements_win.frame,
+            text="Transaction Statements",
+            font=("Inter", 16, "bold"),
+            text_color="white"
+        )
+        statements_win.label.pack(pady=10)
+        
+        # Configure style for treeview
+        style = ttk.Style()
+        style.theme_use('clam')
+        style.configure(
+            "Treeview",
+            background="#1F1F1F",
+            foreground="white",
+            fieldbackground="#1F1F1F",
+            borderwidth=0
+        )
+        style.configure(
+            "Treeview.Heading",
+            background="#3B82F6",
+            foreground="white",
+            borderwidth=0
+        )
+        style.map('Treeview', background=[('selected', '#3B82F6')])
+        
+        # Create treeview (table)
+        columns = ("Type", "Date", "Amount", "From", "To", "Status")
+        statements_win.tree = ttk.Treeview(
+            statements_win.frame,
+            columns=columns,
+            show="headings",
+            height=15
+        )
+        
+        # Define column headings and widths
+        statements_win.tree.column("Type", width=80, anchor="w")
+        statements_win.tree.column("Date", width=150, anchor="w")
+        statements_win.tree.column("Amount", width=100, anchor="e")
+        statements_win.tree.column("From", width=100, anchor="w")
+        statements_win.tree.column("To", width=100, anchor="w")
+        statements_win.tree.column("Status", width=80, anchor="w")
+        
+        # Set headings
+        for col in columns:
+            statements_win.tree.heading(col, text=col)
+        
+        # TODO this is sample data, populate with actual transaction data from models
+        sample_data = [
+            ("Transfer", "2026-04-01 16:20:09", "-500.00", "tony", "guy", "Success"),
+            ("Transfer", "2026-04-01 16:19:08", "+500.00", "guy", "tony", "Success"),
+            ("Deposit", "2026-04-01 16:30:55", "+500.00", "System", "tony", "Success"),
+            ("Transfer", "2026-04-01 16:15:57", "-500.00", "tony", "guy", "Success"),
+        ]
+        
+        # Insert sample data
+        for item in sample_data:
+            statements_win.tree.insert("", "end", values=item)
+        
+        # Add scrollbar
+        scrollbar = ttk.Scrollbar(
+            statements_win.frame,
+            orient="vertical",
+            command=statements_win.tree.yview
+        )
+        statements_win.tree.configure(yscroll=scrollbar.set)
+        
+        # Pack treeview and scrollbar
+        statements_win.tree.pack(side="left", fill="both", expand=True, pady=10)
+        scrollbar.pack(side="right", fill="y")
+        
+        # Close button
+        close_btn = ctk.CTkButton(
+            statements_win.frame,
+            text="Close",
+            width=300,
+            height=40,
+            corner_radius=10,
+            fg_color="#1F1F1F",
+            hover_color="#3B3B3B",
+            font=("Inter", 14, "bold"),
+            command=lambda: self.close_window(statements_win)
+        )
+        close_btn.pack(pady=10)
   
     def close_window(self, window):
         window.destroy()
