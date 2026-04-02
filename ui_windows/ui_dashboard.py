@@ -282,6 +282,8 @@ class Dashboard(ctk.CTk):
             with_win.geometry("400x400")
             with_win.configure(fg_color="#0A0E27")
             with_win.resizable(False, False)
+            with_win.grab_set() # prevents interaction with main dashboard until closed
+            with_win.attributes('-topmost', True)  # Keep on top
             
             #frame
             with_win.frame = ctk.CTkFrame(
@@ -348,6 +350,8 @@ class Dashboard(ctk.CTk):
         trans_win.geometry("400x400")
         trans_win.configure(fg_color="#0A0E27")
         trans_win.resizable(False, False)
+        trans_win.grab_set() # prevents interaction with main dashboard until closed
+        trans_win.attributes('-topmost', True)  # Keep on top
         
         #frame
         trans_win.frame = ctk.CTkFrame(
@@ -433,6 +437,8 @@ class Dashboard(ctk.CTk):
         change_pin_win.geometry("400x500")
         change_pin_win.configure(fg_color="#0A0E27")
         change_pin_win.resizable(False, False)
+        change_pin_win.grab_set() # prevents interaction with main dashboard until closed
+        change_pin_win.attributes('-topmost', True)  # Keep on top
         
         #frame
         change_pin_win.frame = ctk.CTkFrame(
@@ -524,6 +530,8 @@ class Dashboard(ctk.CTk):
         statements_win.geometry("800x500")
         statements_win.configure(fg_color="#0A0E27")
         statements_win.resizable(True, True)
+        statements_win.grab_set() # prevents interaction with main dashboard until closed
+        statements_win.attributes('-topmost', True)  # Keep on top
         
         #frame
         statements_win.frame = ctk.CTkFrame(
