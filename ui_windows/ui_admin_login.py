@@ -1,5 +1,5 @@
 import customtkinter as ctk
-import models #!--> הוספתי לך וולפיש
+from .. import models
 
 class AdminLoginScreen(ctk.CTk):
     def __init__(self):
