@@ -228,7 +228,7 @@
     "676": {
         "client_ID": 676,
         "username": "test",
-        "pin": "1234",
+        "pin": "4321",
         "balance": 999,
         "blocked_or_not": false,
         "is_admin": false,

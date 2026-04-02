@@ -79,6 +79,9 @@ class Client:
                     storage.save_clients(all_clients_save=all_clients)
 
                     return True
+            
+        error = "The amount You want to deposit is less or equal to zero!"
+        return error
 
 
     def transaction_fromto(amount, from_id, to_id):
@@ -102,9 +105,8 @@ class Client:
                 trans_from_id = client_id1          
                 trans_from_info = client_info1
                 old_balance_from = all_clients_trans[trans_from_id]["balance"]
-                if all_clients_trans[trans_from_id]["balance"] < amount:
-                    #error insuffecient funds in account
-                    return False
+                if all_clients_trans[trans_from_id]["balance"] < amount: 
+                    return "insuffecient funds in account"
                 
                 #* find client who will get the payment
                 for client_id2, client_info2 in all_clients_trans.items():
@@ -136,7 +138,11 @@ class Client:
                         storage.save_clients(all_clients_save=all_clients_trans)
                         return True
 
-            
+                
+                return "destenation account does not exist!"
+                
+                
+        return "account from where to transfer does not exist!"
             
     
     def check_pin(pin_input, id_input): #*--> checks the pin that was given to it for the id that was given to it.
@@ -151,10 +157,20 @@ class Client:
                     return False
         # print("pin doesnt match the user!")
                     
+    
+    def change_pin(client_id, old_pin, new_pin):
+        all_clients = storage.all_clients()
         
         
+        for client_num, client_info in all_clients.items():
+            if client_num == client_id and client_info["pin"] == old_pin:
+                all_clients[client_id]["pin"] = new_pin
+                storage.save_clients(all_clients)
 
+                return True
 
+        return "Error! one or more credentials is incorrect try again"
+            
 
     
     def withdraw(amount, client_id_input):
@@ -164,26 +180,26 @@ class Client:
 
         for client_id, client_info in all_clients.items():
             if client_id == client_id_input:
-                print("match id")
                 old_balance = all_clients[client_id]["balance"]
-                print(old_balance)
-                
+
                 if float(amount) < old_balance:
-                    print("match id")
                     all_clients[client_id]["balance"] -= amount
                     new_balance = all_clients[client_id]["balance"]
                     type_of_operation = "withdrawl"
                     direction = "out"
-                    print("match id")
+
                     new_transaction = (storage.transaction_format(type_of_operation, all_clients[client_id]["username"], all_clients[client_id]["username"], amount, direction, old_balance, new_balance))
-                    print("match id")
+
                     #* add new transaction to list of all transactions
                     all_clients[client_id_input]["transaction_list"].append(new_transaction)
-                    print("match id")
+
                     #* rewrite to json with new data 
                     storage.save_clients(all_clients_save=all_clients)
-                    print("successse")
+
                     return True
+                
+        return "Insuffiecnt funds!"
+                
 
 
 class Admin(Client):
@@ -247,8 +263,8 @@ def main():
     # x = 0
     # Client.transaction_fromto(amount=500, from_id="100", to_id="102")
     #Client.check_pin(pin_input=1234, id_input=100)
-    Admin.create_client_account(username="test123", pin="1234", balance=999, blocked_or_not=False, is_admin=False)
-
+    #Admin.create_client_account(username="test123", pin="1234", balance=999, blocked_or_not=False, is_admin=False)
+    Client.change_pin("676", "1234", "4321")
 
     #Client.withdraw(amount=100, client_id_input="100")
     # Client.check_pin(pin_input=1234, id_input=100)
