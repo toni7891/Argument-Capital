@@ -1,6 +1,7 @@
 import customtkinter as ctk
-from ui_windows.ui_dashboard import *
-from ui_windows.ui_admin_login import *
+import ui_dashboard
+import ui_admin_login
+from PIL import Image
 
 class LoginScreen(ctk.CTk):
     def __init__(self):
@@ -15,10 +16,19 @@ class LoginScreen(ctk.CTk):
         self.center_window() # Center the window on the screen
 
         # Main frame
-        self.main_frame = ctk.CTkFrame(
-            self, 
-            fg_color="transparent")
-        self.main_frame.pack(expand=True, fill="both", padx=40) # Padding on the sides of the main frame, so the content doesn't touch the edges of the window
+
+        #image for background
+        bg_image_data = Image.open("ArguCapiLogo.jpg")
+        self.bg_image = ctk.CTkImage(
+            light_image=bg_image_data, 
+            dark_image=bg_image_data, 
+            size=(400, 700))
+        self.bg_label = ctk.CTkLabel(self, image=self.bg_image, text="")
+        self.bg_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+        #main frame on top of bg image
+        self.main_frame = ctk.CTkFrame(self,width=400,height=400,corner_radius=15,fg_color="transparent") # fg_color="transparent"
+        self.main_frame.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.8, relheight=0.7) # Padding on the sides of the main frame, so the content doesn't touch the edges of the window
 
         # logo
         self.logo_label = ctk.CTkLabel(

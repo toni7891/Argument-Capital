@@ -247,7 +247,7 @@ class Dashboard(ctk.CTk):
             print("Please enter a valid number")
 
         pass
-    
+
     #open deposit window
     def open_window(self):
             dep_win = ctk.CTkToplevel(self)
