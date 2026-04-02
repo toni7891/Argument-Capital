@@ -46,17 +46,5 @@ def save_clients(all_clients_save, filename="data.json"):
 
 
 
-"""
-    output into file:
-    [
-        {
-            "client_ID": "1234567",
-            "pin": "1234",
-            "balance": 1000
-        }
-    ]
-"""
-
-
 
 

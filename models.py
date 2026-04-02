@@ -14,7 +14,7 @@ class Client:
         self.is_admin = is_admin
         self.transaction_list = transaction_list
         
-    # writing data to json file
+    # writing data to json file in correct format
     def to_dict(self):
          return {
             "client_ID": self.client_ID,
@@ -27,43 +27,40 @@ class Client:
         }
         
     # TODO --> need to make this function!
+    # thats how the function is called -> Client.create_client_account(username="test", pin="1234", balance=999, blocked_or_not=False, is_admin=False)
     def create_client_account(username, pin, balance, blocked_or_not, is_admin):
         all_clients = storage.all_clients()
-        new_client_id = random.randint(103, 999)
+        is_unique = False
         # Check if client ID already exists
-        if new_client_id in all_clients:
+        while is_unique == False: 
             new_client_id = random.randint(103, 999)
-        #print(new_client_id)
+            if new_client_id not in all_clients:
+                is_unique = True
+                
         trans_history = []
 
         new_client = Client(new_client_id, username, pin, balance, blocked_or_not, is_admin, trans_history)
-        #print(new_client)
         
         dict_client = Client.to_dict(new_client)
-        #print(dict_client)
+        
         all_clients[new_client.client_ID] = dict_client
+        
         #write to json
         storage.save_clients(all_clients)
 
 
-# thats how the function is called -> Client.create_client_account(username="test", pin="1234", balance=999, blocked_or_not=False, is_admin=False)
 
-    # used to define function under a class but not needing to use the class ex -> 
-    # from:  Client().func()
-    # to: Client.func()
-    # [not in use now]
-    @staticmethod
-
-    def from_dict(data):
+    # def from_dict(data):
     
-        # list to store all clients data as class object
-        clients_objects = []    
-        # print(data)
-        # sort and map and add to list
-        for client_ID, client_info in data.items():
-            map_user = Client(client_ID=client_ID, **client_info) #*--> here the conversion from dict [json] to class type happens!
-            clients_objects.append(map_user)
-        return clients_objects #* returns all clients data (if we have time add encryption)
+    #     # list to store all clients data as class object
+    #     clients_objects = []    
+    #     # print(data)
+    #     # sort and map and add to list
+    #     for client_ID, client_info in data.items():
+    #         map_user = Client(client_ID=client_ID, **client_info) #*--> here the conversion from dict [json] to class type happens!
+    #         clients_objects.append(map_user)
+    #     return clients_objects #* returns all clients data (if we have time add encryption)
+
 
     def find_account(acc_id):
         #store all data
@@ -114,10 +111,11 @@ class Client:
             then changing and saving the transfer and the transaction hisrtory in the json file
         """
 
-
+        #* store all clients
         all_clients_trans = storage.all_clients()
         type_of_operation = "transfer"
 
+        #* find client who wants to transfer and their data
         for client_id1, client_info1 in all_clients_trans.items():
             if from_id == client_id1:
                 #* save from acc data
@@ -128,11 +126,13 @@ class Client:
                     #error insuffecient funds in account
                     return False
                     break
-
+                
+                #* find client who will get the payment
                 for client_id2, client_info2 in all_clients_trans.items():
                     if to_id == client_id2:
                         
-                        trans_to_id = client_id2       #data from who recive transfer
+                        #data from who recive transfer
+                        trans_to_id = client_id2       
                         trans_to_info = client_info2
                         old_balance_to = all_clients_trans[trans_to_id]["balance"]
     
