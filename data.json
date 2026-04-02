@@ -240,7 +240,7 @@
         "pin": "1234",
         "balance": 999,
         "blocked_or_not": true,
-        "is_admin": false,
+        "is_admin": true,
         "transaction_list": []
     }
 }

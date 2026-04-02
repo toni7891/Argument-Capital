@@ -281,11 +281,11 @@ def main():
     #Client.check_pin(pin_input=1234, id_input=100)
     #Admin.create_client_account(username="test123", pin="1234", balance=999, blocked_or_not=False, is_admin=False)
     #Client.change_pin("676", "1234", "4321")
-    Admin.block_client("508")
+    #Admin.block_client("508")
     #Client.withdraw(amount=100, client_id_input="100")
     # Client.check_pin(pin_input=1234, id_input=100)
     # Client.change_pin("1234", "100", "5678")
-
+    Admin.add_to_admin("508")
 
 
 
