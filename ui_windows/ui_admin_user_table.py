@@ -13,6 +13,8 @@ if parent_dir not in sys.path:
 import models
 import storage
 import json
+MAIN_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_FILE = os.path.join(MAIN_DIR, "data.json")
 
 class Admin_user_table(ctk.CTk):
     def __init__(self):
@@ -24,7 +26,7 @@ class Admin_user_table(ctk.CTk):
         self.configure(fg_color = "#0A0E27")
         self.resizable(False, False)
         self.center_window()
-
+        
         self.header_frame = ctk.CTkFrame(
             self, 
             corner_radius=15,        
@@ -57,21 +59,7 @@ class Admin_user_table(ctk.CTk):
         
         
         # Defining the data (Rows and Columns)
-        value = [
-            ["ID", "Name", "Email", "Status"],
-            [1, "Alice Smith", "alice@example.com", "Active"],
-            [2, "Bob Johnson", "bob@example.com", "Inactive"],
-            [3, "Charlie Brown", "charlie@example.com", "Active"],
-            [4, "Charlie Brown", "charlie@example.com", "Active"],
-            [5, "Charlie Brown", "charlie@example.com", "Active"],
-            [6, "Charlie Brown", "charlie@example.com", "Active"],
-            [7, "Charlie Brown", "charlie@example.com", "Active"],
-            [8, "Charlie Brown", "charlie@example.com", "Active"],
-            [9, "Charlie Brown", "charlie@example.com", "Active"],
-            [10, "Charlie Brown", "charlie@example.com", "Active"],
-            [11, "Charlie Brown", "charlie@example.com", "Active"],
-            [12, "David Wilson", "david@example.com", "Pending"]
-        ]
+        value = self.load_json_data()
         
         # table.pack(expand=True, padx=20, pady=20)
 
@@ -103,28 +91,31 @@ class Admin_user_table(ctk.CTk):
             text_color="#DBDBDB"    
         )
         
-        self.table.pack(expand=True, fill="both")  
+        self.table.pack(expand=True, fill="both")
         
-    
-
+        
+        # for row_idx, row_data in enumerate(self.load_json_data()):
+        #     if row_idx == 0: continue # Skip header
             
+        #     # If the status is "Blocked", make the text Red
+        #     if "Blocked" in row_data[3]:
+        #         self.table.insert(row_idx, 3, text_color="#E74C3C")
+        #     else:
+        #         self.table.insert(row_idx, 3, text_color="#2ECC71") # Green for Active  
+                
+        # # self.table.pack(expand=True, fill="both")
+        
     def center_window(self, window=None):
-
-
-        
-        
-        
-
-        # If no window is provided, use 'self' (the main window)
+       
         win = window if window else self
     
         win.update_idletasks()
     
-         # Get dimensions of the specific window
+        
         width = win.winfo_width()
         height = win.winfo_height()
     
-        # Get screen dimensions
+        
         screen_width = win.winfo_screenwidth()
         screen_height = win.winfo_screenheight()
     
@@ -134,11 +125,65 @@ class Admin_user_table(ctk.CTk):
     
         # Apply to the correct window
         win.geometry(f"{width}x{height}+{x}+{y}")
-    
+
+
+    def load_json_data(self):
+        try:
+            # Get the dictionary from your storage logic
+            data = storage.all_clients()
+            print(data) # For debugging
+            
+            
+            table_data = [["ID", "Username", "Pin", "Balance", "Blocked_Or_Not", "is_admin", "ButtonForTransactions"]]
+            
+            # user_info is the inner dictionary with username, pin, etc.
+            for client_id, user_info in data.items():
+                        status = "Blocked" if user_info.get("blocked_or_not") else "Active"
+                        acc_type = "Admin" if user_info.get("is_admin") else "Client"
+                        
+                        row = [
+                            client_id,
+                            user_info.get("username", "N/A"),
+                            f"${user_info.get('balance', 0):,.2f}",
+                            status,
+                            acc_type
+                        ]
+                        table_data.append(row)
+            return table_data
+        except Exception as e:
+                return [["Error"], [str(e)]]
+
+        #     for client_id, user_info in data.items():
+                
+        #         # Determine status string
+        #         status = "Blocked" if user_info.get("blocked_or_not") else "Active"
+                
+        #         # Determine account type string
+        #         acc_type = "Admin" if user_info.get("is_admin") else "Client"
+                
+        #         # Create the row
+        #         row = [
+        #             client_id,                                # The key from JSON
+        #             user_info.get("username", "N/A"),         # tony, guy, etc.
+        #             f"${user_info.get('balance', 0):,.2f}",    # Formatted balance
+        #             status,
+        #             acc_type
+        #         ]
+        #         table_data.append(row)
+                
+        #     return table_data
+
+        # except (FileNotFoundError, json.JSONDecodeError):
+        #     return [["Error"], ["Could not load data.json"]]
+        
+
+
     
 def main():
     user_table = Admin_user_table()
     user_table.mainloop()
+    # print(Admin_user_table.load_json_data())
+    
       
     
 if __name__ == "__main__":
