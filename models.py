@@ -26,27 +26,7 @@ class Client:
             "transaction_list": self.transaction_list,
         }
         
-    # TODO --> need to make this function!
-    # thats how the function is called -> Client.create_client_account(username="test", pin="1234", balance=999, blocked_or_not=False, is_admin=False)
-    def create_client_account(username, pin, balance, blocked_or_not, is_admin):
-        all_clients = storage.all_clients()
-        is_unique = False
-        # Check if client ID already exists
-        while is_unique == False: 
-            new_client_id = random.randint(103, 999)
-            if new_client_id not in all_clients:
-                is_unique = True
-                
-        trans_history = []
 
-        new_client = Client(new_client_id, username, pin, balance, blocked_or_not, is_admin, trans_history)
-        
-        dict_client = Client.to_dict(new_client)
-        
-        all_clients[new_client.client_ID] = dict_client
-        
-        #write to json
-        storage.save_clients(all_clients)
 
 
 
@@ -125,7 +105,6 @@ class Client:
                 if all_clients_trans[trans_from_id]["balance"] < amount:
                     #error insuffecient funds in account
                     return False
-                    break
                 
                 #* find client who will get the payment
                 for client_id2, client_info2 in all_clients_trans.items():
@@ -207,9 +186,55 @@ class Client:
                     return True
 
 
-
-
+class Admin(Client):
+    def __init__(self, client_ID, username, pin):
+        super().__init__(client_ID=client_ID, username=username, pin=pin, balance=0.0, blocked_or_not=False, is_admin=True, transaction_list=[])
         
+        
+        # TODO --> need to make this function!
+    # thats how the function is called -> Client.create_client_account(username="test", pin="1234", balance=999, blocked_or_not=False, is_admin=False)
+    def create_client_account(username, pin, balance, blocked_or_not, is_admin):
+        all_clients = storage.all_clients()
+        is_unique = False
+        # Check if client ID already exists
+        while is_unique == False: 
+            new_client_id = random.randint(103, 999)
+            if new_client_id not in all_clients:
+                is_unique = True
+                
+        trans_history = []
+
+        new_client = Client(new_client_id, username, pin, balance, blocked_or_not, is_admin, trans_history)
+        
+        dict_client = Client.to_dict(new_client)
+        
+        all_clients[new_client.client_ID] = dict_client
+        
+        #write to json
+        storage.save_clients(all_clients)
+        
+        
+        
+    def show_all_client_data():
+        all_clients = storage.all_clients()
+        all_clients_formatted = []
+        for client_id , client_data in all_clients.items():
+            if client_data["is_admin"] == False:
+                all_clients_formatted.append({
+                    "client_ID": client_id["client_ID"],
+                    "username": client_data["username"],
+                    "pin": client_data["pin"],
+                    "balance": client_data["balance"],
+                    "blocked_or_not": client_data["blocked_or_not"],
+                    "is_admin": client_data["is_admin"],
+                    "transaction_list": client_data["transaction_list"]
+                    })
+                
+        return all_clients_formatted   
+        
+    
+    def block_client():
+        pass
         
 
 
@@ -222,7 +247,7 @@ def main():
     # x = 0
     # Client.transaction_fromto(amount=500, from_id="100", to_id="102")
     #Client.check_pin(pin_input=1234, id_input=100)
-    Client.create_client_account(username="test", pin="1234", balance=999, blocked_or_not=False, is_admin=False)
+    Admin.create_client_account(username="test123", pin="1234", balance=999, blocked_or_not=False, is_admin=False)
 
 
     #Client.withdraw(amount=100, client_id_input="100")

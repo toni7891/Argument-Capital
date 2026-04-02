@@ -233,5 +233,14 @@
         "blocked_or_not": false,
         "is_admin": false,
         "transaction_list": []
+    },
+    "508": {
+        "client_ID": 508,
+        "username": "test123",
+        "pin": "1234",
+        "balance": 999,
+        "blocked_or_not": false,
+        "is_admin": false,
+        "transaction_list": []
     }
 }
