@@ -25,22 +25,6 @@ class Client:
             "is_admin": self.is_admin,
             "transaction_list": self.transaction_list,
         }
-        
-
-
-
-
-    # def from_dict(data):
-    
-    #     # list to store all clients data as class object
-    #     clients_objects = []    
-    #     # print(data)
-    #     # sort and map and add to list
-    #     for client_ID, client_info in data.items():
-    #         map_user = Client(client_ID=client_ID, **client_info) #*--> here the conversion from dict [json] to class type happens!
-    #         clients_objects.append(map_user)
-    #     return clients_objects #* returns all clients data (if we have time add encryption)
-
 
     def find_account(acc_id):
         #store all data
@@ -57,31 +41,30 @@ class Client:
 
 
     def deposit(amount, client_id_input):
+        if amount < 0:
+            return "The amount You want to deposit is less or equal to zero!"
+        
         #* stores all data from json *VERY IMPORTANT*
         all_clients = storage.all_clients()
         
-
+        
+        # finding client and info
         for client_id, client_info in all_clients.items():
             if client_id == client_id_input:
-                if amount > 0:
-                    old_balance = all_clients[client_id]["balance"]
-                    all_clients[client_id]["balance"] += amount
-                    new_balance = all_clients[client_id]["balance"]
-                    type_of_operation = "deposit"
-                    direction = "in"
+                
+                old_balance = all_clients[client_id]["balance"]
+                all_clients[client_id]["balance"] += amount
+                new_balance = all_clients[client_id]["balance"]
+                type_of_operation = "deposit"
+                direction = "in"
+                new_transaction = (storage.transaction_format(type_of_operation, all_clients[client_id]["username"], all_clients[client_id]["username"], amount, direction, old_balance, new_balance))
 
-                    new_transaction = (storage.transaction_format(type_of_operation, all_clients[client_id]["username"], all_clients[client_id]["username"], amount, direction, old_balance, new_balance))
+                #* add new transaction to list of all transactions
+                all_clients[client_id_input]["transaction_list"].append(new_transaction)
 
-                    #* add new transaction to list of all transactions
-                    all_clients[client_id_input]["transaction_list"].append(new_transaction)
-
-                    #* rewrite to json with new data 
-                    storage.save_clients(all_clients_save=all_clients)
-
-                    return True
-            
-        error = "The amount You want to deposit is less or equal to zero!"
-        return error
+                #* rewrite to json with new data 
+                storage.save_clients(all_clients_save=all_clients)
+                return True
 
 
     def transaction_fromto(amount, from_id, to_id):
@@ -93,6 +76,9 @@ class Client:
 
             then changing and saving the transfer and the transaction hisrtory in the json file
         """
+        
+        if all_clients_trans[trans_from_id]["balance"] < amount: 
+            return "insuffecient funds in account"
 
         #* store all clients
         all_clients_trans = storage.all_clients()
@@ -105,8 +91,6 @@ class Client:
                 trans_from_id = client_id1          
                 trans_from_info = client_info1
                 old_balance_from = all_clients_trans[trans_from_id]["balance"]
-                if all_clients_trans[trans_from_id]["balance"] < amount: 
-                    return "insuffecient funds in account"
                 
                 #* find client who will get the payment
                 for client_id2, client_info2 in all_clients_trans.items():
