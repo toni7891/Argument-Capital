@@ -130,6 +130,10 @@ class LoginScreen(ctk.CTk):
     
     #open dashboard and close login screen
     def open_dashboard(self):
+        client_id = self.username_entry.get()
+        #add Client.check_pin 
+        
+
         self.destroy()
         dashboard = Dashboard()
         dashboard.mainloop()

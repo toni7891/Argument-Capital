@@ -207,6 +207,17 @@ class Dashboard(ctk.CTk):
     
         # Apply to the correct window
         win.geometry(f"{width}x{height}+{x}+{y}")
+    
+    def deposit_handling(self, dep_win):
+        amount = float(dep_win.amount_entry.get())
+        
+        try:
+            if amount <= 0:
+                print("invalid amount")
+                return
+
+        pass
+    
     #open deposit window
     def open_window(self):
             dep_win = ctk.CTkToplevel(self)
@@ -259,6 +270,7 @@ class Dashboard(ctk.CTk):
                 hover_color="#2563EB",
                 font=("Inter", 14, "bold"),
                 # TODO add logic
+                #command=print(dep_win.amount_entry)
             )
             dep_win.confirm_btn.pack(pady=(30, 10))
             
