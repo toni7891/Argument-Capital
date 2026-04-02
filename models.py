@@ -176,7 +176,7 @@ class Admin(Client):
         super().__init__(client_ID=client_ID, username=username, pin=pin, balance=0.0, blocked_or_not=False, is_admin=True, transaction_list=[])
         
         
-        # TODO --> need to make this function!
+        
     # thats how the function is called -> Client.create_client_account(username="test", pin="1234", balance=999, blocked_or_not=False, is_admin=False)
     def create_client_account(username, pin, balance, blocked_or_not, is_admin):
         all_clients = storage.all_clients()
