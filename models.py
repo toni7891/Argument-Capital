@@ -177,7 +177,7 @@ class Admin(Client):
         
         
         
-    # thats how the function is called -> Client.create_client_account(username="test", pin="1234", balance=999, blocked_or_not=False, is_admin=False)
+    # thats how the function is called -> Admin.create_client_account(username="test", pin="1234", balance=999, blocked_or_not=False, is_admin=False)
     def create_client_account(username, pin, balance, blocked_or_not, is_admin):
         all_clients = storage.all_clients()
         is_unique = False
