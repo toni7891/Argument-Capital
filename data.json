@@ -239,7 +239,7 @@
         "username": "test123",
         "pin": "1234",
         "balance": 999,
-        "blocked_or_not": false,
+        "blocked_or_not": true,
         "is_admin": false,
         "transaction_list": []
     }

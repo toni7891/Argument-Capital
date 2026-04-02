@@ -255,6 +255,18 @@ class Admin(Client):
         for client_id, client_info in all_clients.items():
             if client_id == client_toblock:
                 all_clients[client_id]["blocked_or_not"] = True
+                storage.save_clients(all_clients)
+                return True
+        return "error! client not found!"
+
+    
+    def add_to_admin(client_toadmin):
+        all_clients = storage.all_clients()
+        
+        for client_id , client_info in all_clients.items():
+            if client_id == client_toadmin:
+                all_clients[client_id]["is_admin"] = True
+                storage.save_clients(all_clients)
                 return True
         return "error! client not found!"
 
@@ -268,8 +280,8 @@ def main():
     # Client.transaction_fromto(amount=500, from_id="100", to_id="102")
     #Client.check_pin(pin_input=1234, id_input=100)
     #Admin.create_client_account(username="test123", pin="1234", balance=999, blocked_or_not=False, is_admin=False)
-    Client.change_pin("676", "1234", "4321")
-
+    #Client.change_pin("676", "1234", "4321")
+    Admin.block_client("508")
     #Client.withdraw(amount=100, client_id_input="100")
     # Client.check_pin(pin_input=1234, id_input=100)
     # Client.change_pin("1234", "100", "5678")
