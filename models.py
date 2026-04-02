@@ -218,15 +218,7 @@ class Admin(Client):
         all_clients_formatted = []
         for client_id , client_data in all_clients.items():
             if client_data["is_admin"] == False:
-                all_clients_formatted.append({
-                    "client_ID": client_id["client_ID"],
-                    "username": client_data["username"],
-                    "pin": client_data["pin"],
-                    "balance": client_data["balance"],
-                    "blocked_or_not": client_data["blocked_or_not"],
-                    "is_admin": client_data["is_admin"],
-                    "transaction_list": client_data["transaction_list"]
-                    })
+                all_clients_formatted.append(client_data)
                 
         return all_clients_formatted   
         
@@ -267,8 +259,9 @@ def main():
     #Client.withdraw(amount=100, client_id_input="100")
     # Client.check_pin(pin_input=1234, id_input=100)
     # Client.change_pin("1234", "100", "5678")
-    Admin.add_to_admin("508")
-
+    # Admin.add_to_admin("508")
+    print(Admin.show_all_client_data())
+    
 
 
 if __name__ == "__main__":
