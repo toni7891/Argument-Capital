@@ -272,8 +272,8 @@ def main():
     # Client.check_pin(pin_input=1234, id_input=100)
     # Client.change_pin("1234", "100", "5678")
     # Admin.add_to_admin("508")
-    print(Admin.show_all_client_data())
-    
+    # print(Admin.show_all_client_data())
+    print(Admin.check_admin_login("508","1234"))
 
 
 if __name__ == "__main__":
