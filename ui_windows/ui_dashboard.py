@@ -115,7 +115,7 @@ class Dashboard(ctk.CTk):
             text_color="white",               
             font=("Inter", 14),           
             hover_color="#1F1F1F", 
-            # TODO add pin change logic
+            command=self.change_pin_window
         )
         self.change_pin_button.grid(row=0, column=1, padx=10, pady=10)
         
@@ -418,15 +418,102 @@ class Dashboard(ctk.CTk):
         )
         trans_win.cancel_btn.pack(pady=0)
         self.center_window(trans_win)
-        
     #logs out and returns to login window
     def logout(self):
         self.destroy()
         if self.parent_login:
-            self.parent_login.deiconify()
+            self.parent_login.deiconify()   
     #open change pin window
     def change_pin_window(self):
-        with_win = ctk.CTkToplevel(self)
+        change_pin_win = ctk.CTkToplevel(self)
+        change_pin_win.title("Change PIN")
+        change_pin_win.geometry("400x500")
+        change_pin_win.configure(fg_color="#0A0E27")
+        change_pin_win.resizable(False, False)
+        
+        #frame
+        change_pin_win.frame = ctk.CTkFrame(
+            change_pin_win, 
+            corner_radius=20, 
+            fg_color="#0A0E27")
+        change_pin_win.frame.pack(expand=True, fill="both", padx=20, pady=20)
+        
+        #label
+        change_pin_win.label = ctk.CTkLabel(
+            change_pin_win.frame,
+            text="Change PIN",
+            font=("Inter", 16, "bold"),
+            text_color="white"
+        )
+        change_pin_win.label.pack(pady=20)
+        
+        #current pin entry  
+        change_pin_win.current_pin_entry = ctk.CTkEntry(
+            change_pin_win.frame,
+            placeholder_text="Current PIN",
+            show="*", # hides input
+            height=55,
+            fg_color="#161C30",
+            border_color="#90d5ff",
+            text_color="white",
+            corner_radius=12
+        )
+        change_pin_win.current_pin_entry.pack(fill="x", pady=10)
+        
+        #new pin entry
+        change_pin_win.new_pin_entry = ctk.CTkEntry(
+            change_pin_win.frame,
+            placeholder_text="New PIN",
+            show="*", # hides input
+            height=55,
+            fg_color="#161C30",
+            border_color="#90d5ff",
+            text_color="white",
+            corner_radius=12
+        )
+        change_pin_win.new_pin_entry.pack(fill="x", pady=10)
+        
+        #confirm new pin entry
+        change_pin_win.confirm_new_pin_entry = ctk.CTkEntry(
+            change_pin_win.frame,
+            placeholder_text="Confirm New PIN",
+            show="*", # hides input
+            height=55,
+            fg_color="#161C30",
+            border_color="#90d5ff",
+            text_color="white",
+            corner_radius=12
+        )
+        change_pin_win.confirm_new_pin_entry.pack(fill="x", pady=10)
+        
+        #confirm button
+        change_pin_win.confirm_btn = ctk.CTkButton(
+            change_pin_win.frame,
+            text="Confirm PIN Change",
+            width=300,
+            height=40,
+            corner_radius=10,
+            fg_color="#3B82F6",
+            hover_color="#2563EB",
+            font=("Inter", 14, "bold"),
+            # TODO add logic
+        )
+        change_pin_win.confirm_btn.pack(pady=(30, 10))
+        
+        #cancel button
+        change_pin_win.cancel_btn = ctk.CTkButton(
+            change_pin_win.frame,
+            text="Cancel",
+            width=300,
+            height=40,
+            corner_radius=10,
+            fg_color="#1F1F1F",
+            hover_color="#3B3B3B",
+            font=("Inter", 14, "bold"),
+            command=lambda: self.close_window(change_pin_win)
+        )
+        change_pin_win.cancel_btn.pack(pady=0)
+        self.center_window(change_pin_win)
         
     #TODO add confirm logic for deposit and other actions, also add logic for pin change and transfer funds, view statements, and logout
   
