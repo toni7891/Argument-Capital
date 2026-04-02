@@ -1,5 +1,5 @@
 import customtkinter as ctk
-from models import * #! this doesnt work for some reason
+# from models import * #! this doesnt work for some reason
 
 class AdminLoginScreen(ctk.CTk):
     def __init__(self):
@@ -127,9 +127,9 @@ class AdminLoginScreen(ctk.CTk):
             # admin_dashboard = admin_dashboard_screen() 
             # admin_dashboard.mainloop()
             
-    def main():
-        app = AdminLoginScreen()
-        app.mainloop()
+def main():
+    app = AdminLoginScreen()
+    app.mainloop()
     
             
 
