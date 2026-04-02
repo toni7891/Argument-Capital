@@ -99,7 +99,7 @@ class Dashboard(ctk.CTk):
             text_color="white",     
             font=("Inter", 14),   
             hover_color="#1F1F1F", 
-            # TODO add logic
+            command=self.open_transfer_window
         )
         self.transfer_button.grid(row=0, column=0, padx=10, pady=10)
         
@@ -338,6 +338,87 @@ class Dashboard(ctk.CTk):
             )
             with_win.cancel_btn.pack(pady=0)
             self.center_window(with_win)
+    #open transfer window
+    def open_transfer_window(self):
+        trans_win = ctk.CTkToplevel(self)
+        trans_win.title("Transfer Funds")
+        trans_win.geometry("400x400")
+        trans_win.configure(fg_color="#0A0E27")
+        trans_win.resizable(False, False)
+        
+        #frame
+        trans_win.frame = ctk.CTkFrame(
+            trans_win, 
+            corner_radius=20, 
+            fg_color="#0A0E27")
+        trans_win.frame.pack(expand=True, fill="both", padx=20, pady=20)
+        
+        #label
+        trans_win.with_label = ctk.CTkLabel(
+            trans_win.frame,
+            text="Transfer Funds",
+            font=("Inter", 16, "bold"),
+            text_color="white"
+        )
+        trans_win.with_label.pack(pady=20)
+        
+        #recipient ID entry
+        trans_win.recipient_entry = ctk.CTkEntry(
+            trans_win.frame,
+            placeholder_text="Recipient ID",
+            font=("Inter", 14),
+            width=300,
+            height=40,
+            corner_radius=10,
+            fg_color="#1F1F1F",
+            text_color="white",
+            border_width=0
+        )
+        trans_win.recipient_entry.pack(pady=10)
+        
+        #amount entry
+        trans_win.amount_entry = ctk.CTkEntry(
+            trans_win.frame,
+            placeholder_text="Amount to transfer",
+            font=("Inter", 14),
+            width=300,
+            height=40,
+            corner_radius=10,
+            fg_color="#1F1F1F",
+            text_color="white",
+            border_width=0
+        )
+        trans_win.amount_entry.pack(pady=10)
+        
+        #confirm button
+        trans_win.confirm_btn = ctk.CTkButton(
+            trans_win.frame,
+            text="Confirm Transfer",
+            width=300,
+            height=40,
+            corner_radius=10,
+            fg_color="#3B82F6",
+            hover_color="#2563EB",
+            font=("Inter", 14, "bold"),
+            # TODO add logic
+        )
+        trans_win.confirm_btn.pack(pady=(30, 10))
+        
+        #cancel button
+        trans_win.cancel_btn = ctk.CTkButton(
+            trans_win.frame,
+            text="Cancel",
+            width=300,
+            height=40,
+            corner_radius=10,
+            fg_color="#1F1F1F",
+            hover_color="#3B3B3B",
+            font=("Inter", 14, "bold"),
+            command=lambda: self.close_window(trans_win)
+        )
+        trans_win.cancel_btn.pack(pady=0)
+        self.center_window(trans_win)
+        
     #logs out and returns to login window
     def logout(self):
         self.destroy()
@@ -345,7 +426,7 @@ class Dashboard(ctk.CTk):
             self.parent_login.deiconify()
     #open change pin window
     def change_pin_window(self):
-        pass 
+        with_win = ctk.CTkToplevel(self)
         
     #TODO add confirm logic for deposit and other actions, also add logic for pin change and transfer funds, view statements, and logout
   
