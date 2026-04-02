@@ -1,8 +1,21 @@
 import customtkinter as ctk
 from tkinter import ttk
+import sys
+import os
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+if parent_dir not in sys.path:
+    sys.path.append(parent_dir)
+
+import models
+import storage
+import json
+
+
 
 class Dashboard(ctk.CTk):
-    def __init__(self, current_client_id, parent_login=None):
+    def __init__(self, current_client_id="100", parent_login=None):
         super().__init__()
         self.current_client_id = current_client_id
         self.parent_login = parent_login
@@ -216,8 +229,19 @@ class Dashboard(ctk.CTk):
             if amount <= 0:
                 print("invalid amount")
                 return
-        except ValueError:
 
+            success = models.Client.deposit(amount, self.current_client_id)
+
+            if success == True:
+                client_info = models.Admin.find_account(self.current_client_id)
+                self.balance_label.configure(text=f"₪{client_info["balance"]:,}")
+                self.close_window(dep_win)
+                print(f"Successfully deposited ₪{amount}")
+            else:
+                print("deposit failed.")
+
+        except ValueError:
+            print("Please enter a valid number")
 
         pass
     
@@ -273,7 +297,7 @@ class Dashboard(ctk.CTk):
                 hover_color="#2563EB",
                 font=("Inter", 14, "bold"),
                 # TODO add logic
-                #command=print(dep_win.amount_entry)
+                command=lambda: self.deposit_handling(dep_win)
             )
             dep_win.confirm_btn.pack(pady=(30, 10))
             
