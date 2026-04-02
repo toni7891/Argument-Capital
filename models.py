@@ -26,19 +26,6 @@ class Client:
             "transaction_list": self.transaction_list,
         }
 
-    def find_account(acc_id):
-        #store all data
-        all_clients = storage.all_clients()
-
-        #search for nedded acc 
-        for client_id, info in all_clients.items():
-            if client_id == acc_id:
-                return client_id, info #* return tuple (id , info)
-                # print(client_id)
-                # print(info)
-            else:
-                return False
-
 
     def deposit(amount, client_id_input):
         if amount < 0:
@@ -255,7 +242,15 @@ class Admin(Client):
                 
         return False   
     
-    
+    def find_account(acc_id):
+        #store all data
+        all_clients = storage.all_clients()
+
+        #search for nedded acc 
+        for client_id, info in all_clients.items():
+            if client_id == acc_id:
+                return client_id, info #* return tuple (id , info)
+        return False
     
 def main():
     # Client.find_account("100")
