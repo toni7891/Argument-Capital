@@ -42,7 +42,7 @@ class Client:
 
     def deposit(amount, client_id_input):
         if amount < 0:
-            return "The amount You want to deposit is less or equal to zero!"
+            return False
         
         #* stores all data from json *VERY IMPORTANT*
         all_clients = storage.all_clients()
@@ -78,7 +78,7 @@ class Client:
         """
         
         if all_clients_trans[trans_from_id]["balance"] < amount: 
-            return "insuffecient funds in account"
+            return False
 
         #* store all clients
         all_clients_trans = storage.all_clients()
@@ -123,10 +123,10 @@ class Client:
                         return True
 
                 
-                return "destenation account does not exist!"
+                return False
                 
                 
-        return "account from where to transfer does not exist!"
+        return False
             
     
     def check_pin(client_id, client_pin): #*--> checks the pin that was given to it for the id that was given to it.
@@ -151,7 +151,7 @@ class Client:
 
                 return True
 
-        return "Error! one or more credentials is incorrect try again"
+        return False
             
 
     
@@ -180,7 +180,7 @@ class Client:
 
                     return True
                 
-        return "Insuffiecnt funds!"
+        return False
                 
 
 
@@ -231,7 +231,7 @@ class Admin(Client):
                 all_clients[client_id]["blocked_or_not"] = True
                 storage.save_clients(all_clients)
                 return True
-        return "error! client not found!"
+        return False
 
     
     def add_to_admin(client_toadmin):
@@ -242,9 +242,21 @@ class Admin(Client):
                 all_clients[client_id]["is_admin"] = True
                 storage.save_clients(all_clients)
                 return True
-        return "error! client not found!"
+        return False
 
-
+    def check_admin_login(admin_id, admin_pin): #*--> checks the pin that was given to it for the id that was given to it.
+        
+        all_clients = storage.all_clients()
+        
+        for client_id , client_info in all_clients.items():
+            if client_info["is_admin"] == True:
+                if client_id == admin_id and client_info["pin"] == admin_pin:
+                    return True
+                
+        return False   
+    
+    
+    
 def main():
     # Client.find_account("100")
     # # Client.deposit(amount=500, client_id_input="100") #?--> אמור להכניס 500 לאיידי 100
