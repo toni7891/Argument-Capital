@@ -63,10 +63,13 @@ class Dashboard(ctk.CTk):
         )
         self.balance_title.pack(side="top", anchor="w", padx=20, pady=(10, 0))
         
+        client_info = models.Admin.find_account(self.current_client_id)
+        balance_for_real = client_info["balance"]
+        
         #balance itself
         self.balance_label = ctk.CTkLabel(
             self.top_frame,
-            text="'₪25,000'", # TODO balance amount variable here <-
+            text=(f"₪{balance_for_real}"), # TODO balance amount variable here <-
             font=("Inter", 40),
             text_color="white"
         )
