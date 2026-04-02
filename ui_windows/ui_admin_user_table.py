@@ -19,28 +19,29 @@ class Admin_user_table(ctk.CTk):
             height=120,              
             fg_color=("#2B2B2B", "#1A1A1A"),
             border_width=2,
-            border_color="#3B8ED0"   
+            border_color="#3B82F6"   
         )
         self.header_frame.pack_propagate(False)
         self.header_frame.pack(fill="x", padx=20, pady=(20)) 
         
+        title_font = ctk.CTkFont(family="Verdana", size=60, weight="bold")
+        
         self.header = ctk.CTkLabel(
             master=self.header_frame,
             text="Admin User LookUp",
-            # Using 'bold' makes the Segoe UI font look premium
-            font=("Segoe UI", 50, "bold"), 
+            font=title_font, 
             text_color="#FFFFFF"
-        
         )
         self.header.pack(side="top", padx=10, pady=5)
         
         self.subtitle = ctk.CTkLabel(
             self.header_frame,
             text="● Full User Database List ●",
-            font=("Segoe UI", 14),
-            text_color="#FFFFFF" # Matching blue
+            font=("Verdana", 14),
+            text_color="#FFFFFF" 
         )
         self.subtitle.pack(side="top", padx=5, pady=(0, 0))
+        
         
         
         # Defining the data (Rows and Columns)
@@ -66,7 +67,7 @@ class Admin_user_table(ctk.CTk):
             master=self,
             width=1000,
             height=500,
-            fg_color="#0A0E27"
+            fg_color="#000000"
             )
         
         self.scroll_frame.pack(pady=20, padx=20)
@@ -74,18 +75,20 @@ class Admin_user_table(ctk.CTk):
         
         self.table = CTkTable(
             master=self.scroll_frame,
-            corner_radius=10, 
+            corner_radius=10,
+            font=("Verdana", 12, "bold"), 
             # row=5, 
             # column=4,
             padx=1,              
             pady=1,               
-            fg_color="#000000",   
+            fg_color="#C9C9C9",   
             values=value,
-            header_color="#3B8ED0", 
+            header_color="#3B82F6", 
             hover_color="#2A2D2E",   
             colors=["#3A6C7D", "#3A6C7D"],
             width=140,  
-            height=40    
+            height=40,
+            text_color="#DBDBDB"    
         )
         
         self.table.pack(expand=True, fill="both")  
