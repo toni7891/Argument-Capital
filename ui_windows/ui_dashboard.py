@@ -214,6 +214,8 @@ class Dashboard(ctk.CTk):
             dep_win.geometry("400x400")
             dep_win.configure(fg_color="#0A0E27")
             dep_win.resizable(False, False)
+            dep_win.grab_set() # prevents interaction with main dashboard until closed
+            dep_win.attributes('-topmost', True)  # Keep on top
             
             #frame
             dep_win.frame = ctk.CTkFrame(
