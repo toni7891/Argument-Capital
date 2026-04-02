@@ -249,7 +249,7 @@ class Admin(Client):
         #search for nedded acc 
         for client_id, info in all_clients.items():
             if client_id == acc_id:
-                return client_id, info #* return tuple (id , info)
+                return info #* return tuple (id , info)
         return False
     
 def main():
