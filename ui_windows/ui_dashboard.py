@@ -66,7 +66,8 @@ class Dashboard(ctk.CTk):
         #balance itself
         self.balance_label = ctk.CTkLabel(
             self.top_frame,
-            text="'₪25,000'", # TODO balance amount variable here <-
+            client_info = models.Admin.find_account(self.current_client_id),
+            text=f"₪{client_info["balance"]:,}", # TODO balance amount variable here <-
             font=("Inter", 40),
             text_color="white"
         )
@@ -244,7 +245,7 @@ class Dashboard(ctk.CTk):
             print("Please enter a valid number")
 
         pass
-    
+
     #open deposit window
     def open_window(self):
             dep_win = ctk.CTkToplevel(self)
