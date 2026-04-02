@@ -63,12 +63,12 @@ class Client:
 
             then changing and saving the transfer and the transaction hisrtory in the json file
         """
+        all_clients_trans = storage.all_clients()
         
         if all_clients_trans[trans_from_id]["balance"] < amount: 
             return False
 
         #* store all clients
-        all_clients_trans = storage.all_clients()
         type_of_operation = "transfer"
 
         #* find client who wants to transfer and their data
@@ -249,7 +249,7 @@ class Admin(Client):
         #search for nedded acc 
         for client_id, info in all_clients.items():
             if client_id == acc_id:
-                return client_id, info #* return tuple (id , info)
+                return info
         return False
     
 def main():

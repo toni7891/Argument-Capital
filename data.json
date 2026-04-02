@@ -2,7 +2,7 @@
     "100": {
         "username": "tony",
         "pin": "5678",
-        "balance": 3400.0,
+        "balance": 3769.0,
         "blocked_or_not": false,
         "is_admin": false,
         "transaction_list": [
@@ -114,6 +114,36 @@
                 "direction": "out",
                 "old_Balance": 3500.0,
                 "new_balance": 3400.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 123.0,
+                "date": "2026-04-02 21:04:16",
+                "direction": "in",
+                "old_Balance": 3400.0,
+                "new_balance": 3523.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 123.0,
+                "date": "2026-04-02 21:09:39",
+                "direction": "in",
+                "old_Balance": 3523.0,
+                "new_balance": 3646.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 123.0,
+                "date": "2026-04-02 21:10:33",
+                "direction": "in",
+                "old_Balance": 3646.0,
+                "new_balance": 3769.0
             }
         ]
     },
