@@ -145,17 +145,15 @@ class Client:
         return "account from where to transfer does not exist!"
             
     
-    def check_pin(pin_input, id_input): #*--> checks the pin that was given to it for the id that was given to it.
+    def check_pin(client_id, client_pin): #*--> checks the pin that was given to it for the id that was given to it.
         
-        all_clients_pin = storage.all_clients()
-        for client_id1, client_info1 in all_clients_pin.items():
-            if str(id_input) == client_id1:
-                if all_clients_pin[client_id1]["pin"] == str(pin_input):
-                    # print(f"the pin matchs! and its {all_clients_pin[client_id1]["pin"]}, for user - {all_clients_pin[client_id1]["username"]}")
-                    return True
-                else:
-                    return False
-        # print("pin doesnt match the user!")
+        all_clients = storage.all_clients()
+        
+        for client_ID , client_info in all_clients.items():
+            if client_ID == client_id and client_info["pin"] == client_pin:
+               return True
+        
+        return False   
                     
     
     def change_pin(client_id, old_pin, new_pin):
