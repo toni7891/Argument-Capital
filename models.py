@@ -249,10 +249,14 @@ class Admin(Client):
         return all_clients_formatted   
         
     
-    def block_client():
-        pass
+    def block_client(client_toblock):
+        all_clients = storage.all_clients()
         
-
+        for client_id, client_info in all_clients.items():
+            if client_id == client_toblock:
+                all_clients[client_id]["blocked_or_not"] = True
+                return True
+        return "error! client not found!"
 
 
 def main():
