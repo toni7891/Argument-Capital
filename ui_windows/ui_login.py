@@ -106,8 +106,8 @@ class LoginScreen(ctk.CTk):
             corner_radius=12,
             command= self.open_dashboard # TODO connect to authenticate function
         )
-        #self.login_btn.pack(fill="x", pady=10)
-        login_btn_window = self.login_btn.create_window
+        self.login_btn.pack(fill="x", pady=10)
+        #login_btn_window = self.login_btn.create_window()
 
 
         # OR text seperating login or admin login
