@@ -34,28 +34,28 @@ class LoginScreen(ctk.CTk):
         self.bg_label.lower()
 
         # logo
-        self.logo_label = ctk.CTkLabel(
-            self.main_frame, 
-            text="A", # TODO REPLACE "A" LOGO WITH ACTUAL LOGO
-            font=("Inter", 60, "bold"), 
-            text_color="#3B82F6")
-        self.logo_label.pack(pady=(60, 0))
+        # self.logo_label = ctk.CTkLabel(
+        #     self.main_frame, 
+        #     text="A", # TODO REPLACE "A" LOGO WITH ACTUAL LOGO
+        #     font=("Inter", 60, "bold"), 
+        #     text_color="#3B82F6")
+        # self.logo_label.pack(pady=(60, 0))
         
-        # bank name
-        self.bank_name = ctk.CTkLabel(
-            self.main_frame, 
-            text="ARGUMENT\nCAPITAL", 
-            font=("Inter", 24, "bold"), 
-            text_color="white")
-        self.bank_name.pack(pady=(0, 0))
+        # # bank name
+        # self.bank_name = ctk.CTkLabel(
+        #     self.main_frame, 
+        #     text="ARGUMENT\nCAPITAL", 
+        #     font=("Inter", 24, "bold"), 
+        #     text_color="white")
+        # self.bank_name.pack(pady=(0, 0))
         
-        # ATM APP as the assignment dictates
-        self.app_name = ctk.CTkLabel(
-            self.main_frame, 
-            text="----------------\nATM APP", 
-            font=("Inter", 24, "bold"), 
-            text_color="#3B82F6")
-        self.app_name.pack(pady=(0, 40))
+        # # ATM APP as the assignment dictates
+        # self.app_name = ctk.CTkLabel(
+        #     self.main_frame, 
+        #     text="----------------\nATM APP", 
+        #     font=("Inter", 24, "bold"), 
+        #     text_color="#3B82F6")
+        # self.app_name.pack(pady=(0, 40))
 
         # account ID input field
         self.username_entry = ctk.CTkEntry(
@@ -106,7 +106,9 @@ class LoginScreen(ctk.CTk):
             corner_radius=12,
             command= self.open_dashboard # TODO connect to authenticate function
         )
-        self.login_btn.pack(fill="x", pady=10)
+        #self.login_btn.pack(fill="x", pady=10)
+        login_btn_window = self.login_btn.create_window
+
 
         # OR text seperating login or admin login
         self.or_label = ctk.CTkLabel(

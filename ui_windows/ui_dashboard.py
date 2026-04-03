@@ -2,6 +2,7 @@ import customtkinter as ctk
 from tkinter import ttk
 import sys
 import os
+from PIL import Image
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
@@ -15,7 +16,7 @@ import json
 
 
 class Dashboard(ctk.CTk):
-    def __init__(self, current_client_id="100", parent_login=None):
+    def __init__(self, current_client_id, parent_login=None):
         super().__init__()
         self.current_client_id = current_client_id
         self.parent_login = parent_login
@@ -317,6 +318,30 @@ class Dashboard(ctk.CTk):
                 command=lambda: self.close_window(dep_win)
             )
             dep_win.cancel_btn.pack(pady=0)
+
+    def withdraw_logic(self, with_win):
+        amount = float(with_win.amount_entry.get())
+        
+        try:
+            if amount <= 0:
+                print("invalid amount")
+                return
+
+            success = models.Client.withdraw(amount, self.current_client_id)
+
+            if success == True:
+                client_info = models.Admin.find_account(self.current_client_id)
+                self.balance_label.configure(text=f"₪{client_info["balance"]:,}")
+                self.close_window(dep_win)
+                print(f"Successfully deposited ₪{amount}")
+            else:
+                print("deposit failed.")
+
+        except ValueError:
+            print("Please enter a valid number")
+
+        pass
+
     #open withdraw window
     def open_withdraw_window(self):
             with_win = ctk.CTkToplevel(self)
@@ -324,6 +349,7 @@ class Dashboard(ctk.CTk):
             with_win.geometry("400x400")
             with_win.configure(fg_color="#0A0E27")
             with_win.resizable(False, False)
+            #dep_win.attributes('-topmost', True)  # Keep on top
             
             #frame
             with_win.frame = ctk.CTkFrame(
@@ -365,7 +391,7 @@ class Dashboard(ctk.CTk):
                 fg_color="#3B82F6",
                 hover_color="#2563EB",
                 font=("Inter", 14, "bold"),
-                # TODO add logic
+                command=lambda: self.withdraw_logic(with_win)
             )
             with_win.confirm_btn.pack(pady=(30, 10))
             
@@ -383,6 +409,10 @@ class Dashboard(ctk.CTk):
             )
             with_win.cancel_btn.pack(pady=0)
             self.center_window(with_win)
+
+
+
+    
     #open transfer window
     def open_transfer_window(self):
         trans_win = ctk.CTkToplevel(self)
