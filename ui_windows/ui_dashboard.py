@@ -332,7 +332,7 @@ class Dashboard(ctk.CTk):
             if success == True:
                 client_info = models.Admin.find_account(self.current_client_id)
                 self.balance_label.configure(text=f"₪{client_info["balance"]:,}")
-                self.close_window(dep_win)
+                self.close_window(with_win)
                 print(f"Successfully deposited ₪{amount}")
             else:
                 print("deposit failed.")
@@ -349,7 +349,7 @@ class Dashboard(ctk.CTk):
             with_win.geometry("400x400")
             with_win.configure(fg_color="#0A0E27")
             with_win.resizable(False, False)
-            #dep_win.attributes('-topmost', True)  # Keep on top
+            with_win.attributes('-topmost', True)  # Keep on top
             
             #frame
             with_win.frame = ctk.CTkFrame(
