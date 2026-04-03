@@ -59,12 +59,24 @@ class Admin_user_table(ctk.CTk):
         self.refresh_button = ctk.CTkButton(
             self, 
             text="Refresh Table", 
-            command=self.update_table,  # Calls the function below
+            command=self.update_table, 
             fg_color="#3B82F6",
             hover_color="#2563EB"
         )
-        self.refresh_button.pack(pady=10)
+        self.refresh_button.pack(pady=10, side="top")
         
+        
+        self.search_var = ctk.StringVar()
+        self.search_entry = ctk.CTkEntry(
+            self, 
+            textvariable=self.search_var,
+            width=300,
+            text_color="#000000",
+        )
+        self.search_entry.pack(pady=10)
+        # This triggers the search function every time the user types
+        self.search_entry.bind("<KeyRelease>", lambda event: self.filter_table())
+                
 
         self.scroll_frame = ctk.CTkScrollableFrame(
             master=self,
@@ -127,7 +139,6 @@ class Admin_user_table(ctk.CTk):
             data = storage.all_clients()
             # print(data) # For debugging
             
-            
             table_data = [["ID", "Username", "Balance", "Blocked Or Active", "Admin Or Client", "ButtonForTransactions"]]
             
             # user_info is the inner dictionary with username, pin, etc.
@@ -156,6 +167,21 @@ class Admin_user_table(ctk.CTk):
         
         except Exception as e:
             return e
+        
+    def filter_table(self):
+        search_term = self.search_var.get().lower()
+        
+        full_data = self.load_json_data()
+        header = full_data[0]
+        
+        filtered_data = [header]
+        for row in full_data[1:]:
+            if search_term in str(row[0]).lower() or search_term in str(row[1]).lower():
+                filtered_data.append(row)
+                
+        self.table.configure(values=filtered_data)
+    
+                
 
     
 def main():
