@@ -1,0 +1,2 @@
+pip install CTkTable
+pip install customtkinter
