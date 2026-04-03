@@ -1,5 +1,6 @@
 # data.json
 __pycache__/
 *.pyc
-*.json
+data.json
+test_data.json
 .DS_Store

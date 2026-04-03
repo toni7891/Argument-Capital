@@ -1,6 +1,7 @@
 import customtkinter as ctk
-from ui_windows.ui_dashboard import *
-from ui_windows.ui_admin_login import *
+import ui_dashboard
+import ui_admin_login
+from PIL import Image
 
 class LoginScreen(ctk.CTk):
     def __init__(self):
@@ -15,34 +16,46 @@ class LoginScreen(ctk.CTk):
         self.center_window() # Center the window on the screen
 
         # Main frame
-        self.main_frame = ctk.CTkFrame(
-            self, 
-            fg_color="transparent")
-        self.main_frame.pack(expand=True, fill="both", padx=40) # Padding on the sides of the main frame, so the content doesn't touch the edges of the window
+
+        #image for background
+        bg_image_data = Image.open("ArguCapiLogo.jpg")
+        self.bg_image = ctk.CTkImage(
+            light_image=bg_image_data, 
+            dark_image=bg_image_data, 
+            size=(400, 700))
+        self.bg_label = ctk.CTkLabel(self, image=self.bg_image, text="")
+        self.bg_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+        #main frame on top of bg image
+        self.main_frame = ctk.CTkFrame(self, fg_color=None, corner_radius=0, border_width=0)
+        self.main_frame.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.8, relheight=0.7)
+        
+        # Send background image to back so it shows behind the frame
+        self.bg_label.lower()
 
         # logo
-        self.logo_label = ctk.CTkLabel(
-            self.main_frame, 
-            text="A", # TODO REPLACE "A" LOGO WITH ACTUAL LOGO
-            font=("Inter", 60, "bold"), 
-            text_color="#3B82F6")
-        self.logo_label.pack(pady=(60, 0))
+        # self.logo_label = ctk.CTkLabel(
+        #     self.main_frame, 
+        #     text="A", # TODO REPLACE "A" LOGO WITH ACTUAL LOGO
+        #     font=("Inter", 60, "bold"), 
+        #     text_color="#3B82F6")
+        # self.logo_label.pack(pady=(60, 0))
         
-        # bank name
-        self.bank_name = ctk.CTkLabel(
-            self.main_frame, 
-            text="ARGUMENT\nCAPITAL", 
-            font=("Inter", 24, "bold"), 
-            text_color="white")
-        self.bank_name.pack(pady=(0, 0))
+        # # bank name
+        # self.bank_name = ctk.CTkLabel(
+        #     self.main_frame, 
+        #     text="ARGUMENT\nCAPITAL", 
+        #     font=("Inter", 24, "bold"), 
+        #     text_color="white")
+        # self.bank_name.pack(pady=(0, 0))
         
-        # ATM APP as the assignment dictates
-        self.app_name = ctk.CTkLabel(
-            self.main_frame, 
-            text="----------------\nATM APP", 
-            font=("Inter", 24, "bold"), 
-            text_color="#3B82F6")
-        self.app_name.pack(pady=(0, 40))
+        # # ATM APP as the assignment dictates
+        # self.app_name = ctk.CTkLabel(
+        #     self.main_frame, 
+        #     text="----------------\nATM APP", 
+        #     font=("Inter", 24, "bold"), 
+        #     text_color="#3B82F6")
+        # self.app_name.pack(pady=(0, 40))
 
         # account ID input field
         self.username_entry = ctk.CTkEntry(
@@ -93,7 +106,9 @@ class LoginScreen(ctk.CTk):
             corner_radius=12,
             command= self.open_dashboard # TODO connect to authenticate function
         )
-        self.login_btn.pack(fill="x", pady=10)
+        #self.login_btn.pack(fill="x", pady=10)
+        login_btn_window = self.login_btn.create_window
+
 
         # OR text seperating login or admin login
         self.or_label = ctk.CTkLabel(
@@ -130,8 +145,12 @@ class LoginScreen(ctk.CTk):
     
     #open dashboard and close login screen
     def open_dashboard(self):
+        client_id = self.username_entry.get()
+        #add Client.check_pin 
+
+
         self.destroy()
-        dashboard = Dashboard()
+        dashboard = Dashboard(current_client_id=client_id)
         dashboard.mainloop()
     
     #open admin login screen and close current login screen

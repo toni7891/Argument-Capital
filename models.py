@@ -63,12 +63,12 @@ class Client:
 
             then changing and saving the transfer and the transaction hisrtory in the json file
         """
+        all_clients_trans = storage.all_clients()
         
-        if all_clients_trans[trans_from_id]["balance"] < amount: 
+        if all_clients_trans[from_id]["balance"] < amount: 
             return False
 
         #* store all clients
-        all_clients_trans = storage.all_clients()
         type_of_operation = "transfer"
 
         #* find client who wants to transfer and their data
@@ -145,7 +145,6 @@ class Client:
     def withdraw(amount, client_id_input):
         #* stores all data from json *VERY IMPORTANT*
         all_clients = storage.all_clients()
-        print(all_clients)
 
         for client_id, client_info in all_clients.items():
             if client_id == client_id_input:
@@ -176,8 +175,8 @@ class Admin(Client):
         super().__init__(client_ID=client_ID, username=username, pin=pin, balance=0.0, blocked_or_not=False, is_admin=True, transaction_list=[])
         
         
-        # TODO --> need to make this function!
-    # thats how the function is called -> Client.create_client_account(username="test", pin="1234", balance=999, blocked_or_not=False, is_admin=False)
+        
+    # thats how the function is called -> Admin.create_client_account(username="test", pin="1234", balance=999, blocked_or_not=False, is_admin=False)
     def create_client_account(username, pin, balance, blocked_or_not, is_admin):
         all_clients = storage.all_clients()
         is_unique = False
@@ -249,7 +248,7 @@ class Admin(Client):
         #search for nedded acc 
         for client_id, info in all_clients.items():
             if client_id == acc_id:
-                return client_id, info #* return tuple (id , info)
+                return info #* return tuple (id , info)
         return False
     
 def main():
