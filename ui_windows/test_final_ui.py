@@ -122,7 +122,6 @@ class LoginScreen(ctk.CTk):
         client_id = self.username_entry.get()
         pin = self.password_entry.get()
 
-        # TODO: Add Client.check_pin(client_id, pin) logic
         if models.Client.check_pin(client_id, pin):
             print(f"Attempting login for ID: {client_id}")
             self.destroy()
