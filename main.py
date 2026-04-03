@@ -1,7 +1,11 @@
+import sys
+import os
+
 import storage
 import models
-import ui_windows.ui_login
-import ui_windows.ui_admin_login 
+from ui_windows import test_final_ui
+from ui_windows import ui_dashboard
+from ui_windows import ui_admin_login
 import json
 
 
@@ -32,10 +36,8 @@ def load_clients(filename="data.json"):
 
 
 def main():
-    app_login_screen = ui_windows.ui_login.LoginScreen()
+    app_login_screen = test_final_ui.LoginScreen()
     app_login_screen.mainloop()
-
-
 
 if __name__ == "__main__":
     main()

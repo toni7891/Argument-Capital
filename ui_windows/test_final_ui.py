@@ -10,6 +10,8 @@ if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 
 import models
+from ui_windows import ui_dashboard
+from ui_windows import ui_admin_login
 import storage
 import json
 
@@ -18,8 +20,6 @@ import json
 #↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 import pywinstyles
 
-from ui_dashboard import Dashboard
-from ui_admin_login import AdminLoginScreen
 
 class LoginScreen(ctk.CTk):
     def __init__(self):
@@ -126,7 +126,7 @@ class LoginScreen(ctk.CTk):
             print(f"Attempting login for ID: {client_id}")
             self.destroy()
             
-            app_dashboard = Dashboard(current_client_id=client_id)
+            app_dashboard = ui_dashboard.Dashboard(current_client_id=client_id)
             app_dashboard.mainloop()
 
     def open_admin_login(self):

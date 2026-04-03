@@ -145,7 +145,6 @@ class Client:
     def withdraw(amount, client_id_input):
         #* stores all data from json *VERY IMPORTANT*
         all_clients = storage.all_clients()
-        print(all_clients)
 
         for client_id, client_info in all_clients.items():
             if client_id == client_id_input:
