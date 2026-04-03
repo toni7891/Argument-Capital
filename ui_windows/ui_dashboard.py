@@ -645,13 +645,14 @@ class Dashboard(ctk.CTk):
         statements_win.resizable(False, False)
         statements_win.attributes('-topmost', True)
         
-        
         #! ////////////////////////////////////////////////////////////
 
         # this is the main transactios table
         main_frame = ctk.CTkFrame(statements_win, fg_color="transparent")
         main_frame.pack(expand=True, fill="both", padx=20, pady=20)
+        print("TESTING THE TABLE DATA!")
         
+        # Title
         label = ctk.CTkLabel(
             main_frame,
             text="Transaction History",
@@ -696,7 +697,7 @@ class Dashboard(ctk.CTk):
         scroll_frame = ctk.CTkScrollableFrame(
             main_frame, 
             fg_color="#161C30", 
-            height=200
+            height=350
         )
         scroll_frame.pack(expand=True, fill="both", pady=10)
 
@@ -713,17 +714,17 @@ class Dashboard(ctk.CTk):
         )
         self.table.pack(expand=True, fill="both")
 
-        self.table = CTkTable(
-            master=scroll_frame,
-            row=len(table_values),
-            column=5,
-            values=table_values,
-            header_color="#3B82F6",
-            hover_color="#2563EB",
-            colors=["#1F1F1F", "#2A2D3E"],
-            text_color="white",
-            font=("Inter", 12)
-        )
+        # self.table = CTkTable(
+        #     master=scroll_frame,
+        #     row=len(table_values),
+        #     column=5,
+        #     values=table_values,
+        #     header_color="#3B82F6",
+        #     hover_color="#2563EB",
+        #     colors=["#1F1F1F", "#2A2D3E"],
+        #     text_color="white",
+        #     font=("Inter", 12)
+        # )
         # self.table.pack(expand=True, fill="both", padx=5, pady=5)
         
         self.center_window(statements_win)
@@ -794,15 +795,17 @@ class Dashboard(ctk.CTk):
         
         # Close button
         close_btn = ctk.CTkButton(
-            self.statements_win, 
-            text="✕ Close", 
-            width=80,
-            height=30,
+            statements_win.frame,
+            text="Close",
+            width=300,
+            height=40,
+            corner_radius=10,
             fg_color="#1F1F1F",
-            hover_color="#C0392B", # Reddish hover for "close"
-            command=self.statements_win.destroy
+            hover_color="#3B3B3B",
+            font=("Inter", 14, "bold"),
+            command=lambda: self.close_window(statements_win)
         )
-        close_btn.place(x=15, y=15)
+        close_btn.pack(pady=10)
   
     def close_window(self, window):
         window.destroy()
