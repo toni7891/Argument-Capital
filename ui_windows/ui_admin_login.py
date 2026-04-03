@@ -8,6 +8,7 @@ class AdminLoginScreen(ctk.CTk):
         #setup
         self.title("Admin secure login")
         self.geometry("400x700")
+        self.resizable(False, False)
         self.configure(fg_color = "#0A0E27")
         self.center_window()
         

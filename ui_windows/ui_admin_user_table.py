@@ -91,7 +91,6 @@ class Admin_user_table(ctk.CTk):
         self.search_var = ctk.StringVar()
         self.search_entry = ctk.CTkEntry(
             self,
-            placeholder_text="Enter amount to deposit",
             corner_radius=10,
             fg_color="#1F1F1F",
             text_color="white", 

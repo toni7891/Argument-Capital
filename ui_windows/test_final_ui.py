@@ -132,7 +132,7 @@ class LoginScreen(ctk.CTk):
     def open_admin_login(self):
         #*Transitions to Admin Login.
         self.destroy()
-        admin_login = AdminLoginScreen()
+        admin_login = ui_admin_login.AdminLoginScreen()
         admin_login.mainloop()
 
 if __name__ == "__main__":

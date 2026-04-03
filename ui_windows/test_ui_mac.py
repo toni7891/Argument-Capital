@@ -48,7 +48,7 @@ class LoginScreen(ctk.CTk):
             text_color="black",
             fg_color="transparent",
             bg_color="#3B82F6",
-            corner_radius=12,
+            corner_radius=10,
             font=("Arial", 18, "bold"),
             border_width=3,
             justify="center"
@@ -132,7 +132,7 @@ class LoginScreen(ctk.CTk):
     def open_admin_login(self):
         #*Transitions to Admin Login.
         self.destroy()
-        admin_login = AdminLoginScreen()
+        admin_login = ui_admin_login.AdminLoginScreen()
         admin_login.mainloop()
 
 if __name__ == "__main__":
