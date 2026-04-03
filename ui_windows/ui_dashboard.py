@@ -238,7 +238,7 @@ class Dashboard(ctk.CTk):
 
             if success == True:
                 client_info = models.Admin.find_account(self.current_client_id)
-                self.balance_label.configure(text=f"₪{client_info["balance"]:,}")
+                self.balance_label.configure(text=f"₪{client_info['balance']:,}")
                 self.close_window(dep_win)
                 print(f"Successfully deposited ₪{amount}")
             else:
@@ -330,7 +330,7 @@ class Dashboard(ctk.CTk):
 
             if success == True:
                 client_info = models.Admin.find_account(self.current_client_id)
-                self.balance_label.configure(text=f"₪{client_info["balance"]:,}")
+                self.balance_label.configure(text=f"₪{client_info['balance']:,}")
                 self.close_window(with_win)
                 print(f"Successfully deposited ₪{amount}")
             else:
@@ -423,7 +423,7 @@ class Dashboard(ctk.CTk):
 
             if success == True:
                 client_info = models.Admin.find_account(self.current_client_id)
-                self.balance_label.configure(text=f"₪{client_info["balance"]:,}")
+                self.balance_label.configure(text=f"₪{client_info['balance']:,}")
                 self.close_window(trans_win)
                 print(f"Successfully transferd ₪{amount} to {to_id}")
             else:
