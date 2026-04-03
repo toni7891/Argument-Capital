@@ -18,7 +18,7 @@ import json
 # FYI fitussi - hours for this
 # https://github.com/TomSchimansky/CustomTkinter/discussions/2214
 #↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-import pywinstyles
+#import pywinstyles
 
 
 class LoginScreen(ctk.CTk):
@@ -47,13 +47,13 @@ class LoginScreen(ctk.CTk):
             border_color="#121212",
             text_color="black",
             fg_color="transparent",
-            bg_color="#000001",
+            bg_color="#3B82F6",
             corner_radius=12,
             font=("Arial", 18, "bold"),
             border_width=3,
             justify="center"
         )
-        pywinstyles.set_opacity(self.username_entry, color="#000001")
+        #pywinstyles.set_opacity(self.username_entry, color="#000001")
         self.canvas.create_window(200, 350, window=self.username_entry, anchor="center")
 
         self.password_entry = ctk.CTkEntry(
@@ -62,8 +62,8 @@ class LoginScreen(ctk.CTk):
             show="*",
             placeholder_text_color="#000000",
             text_color="black",
-            fg_color="#000001", 
-            bg_color="#000001",
+            fg_color="transparent", 
+            bg_color="#3B82F6",
             font=("Arial", 18, "bold"), 
             border_color="#121212",
             height=55,
@@ -72,7 +72,7 @@ class LoginScreen(ctk.CTk):
             border_width=3,
             justify="center"
         )
-        pywinstyles.set_opacity(self.password_entry, color="#000001")
+        #pywinstyles.set_opacity(self.password_entry, color="#000001")
         self.canvas.create_window(200, 420, window=self.password_entry)
 
         self.login_btn = ctk.CTkButton(
@@ -82,12 +82,12 @@ class LoginScreen(ctk.CTk):
             width=300,
             fg_color="#3B82F6",
             hover_color="#2563EB",
-            bg_color="#000001",
+            bg_color="#3B82F6",
             font=("Inter", 16, "bold"),
             corner_radius=12,
             command=self.authenticate_and_open
         )
-        pywinstyles.set_opacity(self.login_btn, color="#000001")
+        #pywinstyles.set_opacity(self.login_btn, color="#000001")
         self.canvas.create_window(200, 520, window=self.login_btn)
 
         self.admin_btn = ctk.CTkButton(
@@ -95,7 +95,7 @@ class LoginScreen(ctk.CTk):
             text="🛡️ A d m i n  L o g i n",
             fg_color="transparent",
             text_color="#000000",
-            bg_color="#000001",
+            bg_color="#3B82F6",
             font=("Arial", 18, "bold"), 
             border_color="#121212",
             border_width=3,
@@ -104,7 +104,7 @@ class LoginScreen(ctk.CTk):
             corner_radius=12,
             command=self.open_admin_login
         )
-        pywinstyles.set_opacity(self.admin_btn, color="#000001")
+        #pywinstyles.set_opacity(self.admin_btn, color="#000001")
         self.canvas.create_window(200, 650, window=self.admin_btn)
         self.center_window()
 
