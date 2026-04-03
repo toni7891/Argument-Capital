@@ -71,6 +71,7 @@ class LoginScreen(ctk.CTk):
             justify="center"
         )
         pywinstyles.set_opacity(self.password_entry, color="#000001")
+        self.canvas.create_window(200, 420, window=self.password_entry)
 
         self.login_btn = ctk.CTkButton(
             self,
@@ -85,6 +86,7 @@ class LoginScreen(ctk.CTk):
             command=self.authenticate_and_open
         )
         pywinstyles.set_opacity(self.login_btn, color="#000001")
+        self.canvas.create_window(200, 520, window=self.login_btn)
 
         self.admin_btn = ctk.CTkButton(
             self,
@@ -101,13 +103,13 @@ class LoginScreen(ctk.CTk):
             command=self.open_admin_login
         )
         pywinstyles.set_opacity(self.admin_btn, color="#000001")
-
-
-        self.canvas.create_window(200, 420, window=self.password_entry)
-        self.canvas.create_window(200, 520, window=self.login_btn)
         self.canvas.create_window(200, 650, window=self.admin_btn)
-
         self.center_window()
+
+
+
+
+
 
     def center_window(self):
         self.update_idletasks()
