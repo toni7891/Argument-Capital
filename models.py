@@ -65,7 +65,7 @@ class Client:
         """
         all_clients_trans = storage.all_clients()
         
-        if all_clients_trans[trans_from_id]["balance"] < amount: 
+        if all_clients_trans[from_id]["balance"] < amount: 
             return False
 
         #* store all clients

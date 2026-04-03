@@ -300,7 +300,6 @@ class Dashboard(ctk.CTk):
                 fg_color="#3B82F6",
                 hover_color="#2563EB",
                 font=("Inter", 14, "bold"),
-                # TODO add logic
                 command=lambda: self.deposit_handling(dep_win)
             )
             dep_win.confirm_btn.pack(pady=(30, 10))
@@ -411,6 +410,29 @@ class Dashboard(ctk.CTk):
             self.center_window(with_win)
 
 
+    def transfer_logic(self, trans_win):
+        amount = float(trans_win.amount_entry.get())
+        to_id = trans_win.recipient_entry.get()
+        
+        try:
+            if amount <= 0:
+                print("invalid amount")
+                return
+
+            success = models.Client.transaction_fromto(amount, self.current_client_id, to_id)
+
+            if success == True:
+                client_info = models.Admin.find_account(self.current_client_id)
+                self.balance_label.configure(text=f"₪{client_info["balance"]:,}")
+                self.close_window(trans_win)
+                print(f"Successfully transferd ₪{amount} to {to_id}")
+            else:
+                print("transfer failed.")
+
+        except ValueError:
+            print("Please enter a valid number")
+
+        pass
 
     
     #open transfer window
@@ -420,6 +442,7 @@ class Dashboard(ctk.CTk):
         trans_win.geometry("400x400")
         trans_win.configure(fg_color="#0A0E27")
         trans_win.resizable(False, False)
+        trans_win.attributes('-topmost', True)
         
         #frame
         trans_win.frame = ctk.CTkFrame(
@@ -475,7 +498,7 @@ class Dashboard(ctk.CTk):
             fg_color="#3B82F6",
             hover_color="#2563EB",
             font=("Inter", 14, "bold"),
-            # TODO add logic
+            command=lambda: self.transfer_logic(trans_win)
         )
         trans_win.confirm_btn.pack(pady=(30, 10))
         
