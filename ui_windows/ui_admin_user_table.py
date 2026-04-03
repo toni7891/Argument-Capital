@@ -54,14 +54,29 @@ class Admin_user_table(ctk.CTk):
             font=("Verdana", 14),
             text_color="#FFFFFF" 
         )
-        self.subtitle.pack(side="top", padx=5, pady=(0, 0))
+        self.subtitle.pack(side="top")
+        
+        self.refresh_button = ctk.CTkButton(
+            self, 
+            text="Refresh Table", 
+            command=self.update_table, 
+            fg_color="#3B82F6",
+            hover_color="#2563EB"
+        )
+        self.refresh_button.pack(pady=10, side="top")
         
         
-        
-        # Defining the data (Rows and Columns)
-        value = self.load_json_data()
-        
-        # table.pack(expand=True, padx=20, pady=20)
+        self.search_var = ctk.StringVar()
+        self.search_entry = ctk.CTkEntry(
+            self, 
+            textvariable=self.search_var,
+            width=300,
+            text_color="#000000",
+        )
+        self.search_entry.pack(pady=10)
+        # This triggers the search function every time the user types
+        self.search_entry.bind("<KeyRelease>", lambda event: self.filter_table())
+                
 
         self.scroll_frame = ctk.CTkScrollableFrame(
             master=self,
@@ -72,6 +87,7 @@ class Admin_user_table(ctk.CTk):
         
         self.scroll_frame.pack(pady=20, padx=20)
         
+        value = self.load_json_data()
         
         self.table = CTkTable(
             master=self.scroll_frame,
@@ -93,18 +109,8 @@ class Admin_user_table(ctk.CTk):
         
         self.table.pack(expand=True, fill="both")
         
-        
-        # for row_idx, row_data in enumerate(self.load_json_data()):
-        #     if row_idx == 0: continue # Skip header
-            
-        #     # If the status is "Blocked", make the text Red
-        #     if "Blocked" in row_data[3]:
-        #         self.table.insert(row_idx, 3, text_color="#E74C3C")
-        #     else:
-        #         self.table.insert(row_idx, 3, text_color="#2ECC71") # Green for Active  
-                
-        # # self.table.pack(expand=True, fill="both")
-        
+
+    
     def center_window(self, window=None):
        
         win = window if window else self
@@ -129,12 +135,11 @@ class Admin_user_table(ctk.CTk):
 
     def load_json_data(self):
         try:
-            # Get the dictionary from your storage logic
+            
             data = storage.all_clients()
-            print(data) # For debugging
+            # print(data) # For debugging
             
-            
-            table_data = [["ID", "Username", "Pin", "Balance", "Blocked_Or_Not", "is_admin", "ButtonForTransactions"]]
+            table_data = [["ID", "Username", "Balance", "Blocked Or Active", "Admin Or Client", "ButtonForTransactions"]]
             
             # user_info is the inner dictionary with username, pin, etc.
             for client_id, user_info in data.items():
@@ -144,7 +149,7 @@ class Admin_user_table(ctk.CTk):
                         row = [
                             client_id,
                             user_info.get("username", "N/A"),
-                            f"${user_info.get('balance', 0):,.2f}",
+                            f"₪{user_info.get('balance', 0):,.2f}",
                             status,
                             acc_type
                         ]
@@ -152,31 +157,31 @@ class Admin_user_table(ctk.CTk):
             return table_data
         except Exception as e:
                 return [["Error"], [str(e)]]
-
-        #     for client_id, user_info in data.items():
-                
-        #         # Determine status string
-        #         status = "Blocked" if user_info.get("blocked_or_not") else "Active"
-                
-        #         # Determine account type string
-        #         acc_type = "Admin" if user_info.get("is_admin") else "Client"
-                
-        #         # Create the row
-        #         row = [
-        #             client_id,                                # The key from JSON
-        #             user_info.get("username", "N/A"),         # tony, guy, etc.
-        #             f"${user_info.get('balance', 0):,.2f}",    # Formatted balance
-        #             status,
-        #             acc_type
-        #         ]
-        #         table_data.append(row)
-                
-        #     return table_data
-
-        # except (FileNotFoundError, json.JSONDecodeError):
-        #     return [["Error"], ["Could not load data.json"]]
+            
+    def update_table(self):
+        try:
+            new_values = self.load_json_data()
+            self.table.configure(values=new_values) # Update the table widget with the new list of lists
         
-
+            # print("Table updated successfully!")
+        
+        except Exception as e:
+            return e
+        
+    def filter_table(self):
+        search_term = self.search_var.get().lower()
+        
+        full_data = self.load_json_data()
+        header = full_data[0]
+        
+        filtered_data = [header]
+        for row in full_data[1:]:
+            if search_term in str(row[0]).lower() or search_term in str(row[1]).lower():
+                filtered_data.append(row)
+                
+        self.table.configure(values=filtered_data)
+    
+                
 
     
 def main():
