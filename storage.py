@@ -41,11 +41,11 @@ def save_clients(all_clients_save, filename=DATA_FILE):
 
     # print(client_data)
 
-# def main():
-#     print(all_clients())
+def main():
+    print(all_clients())
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
 
 
 

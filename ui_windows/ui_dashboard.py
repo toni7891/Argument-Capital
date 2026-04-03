@@ -3,7 +3,6 @@ from tkinter import ttk
 import sys
 import os
 from PIL import Image
-from CTkTable import *
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
@@ -239,7 +238,7 @@ class Dashboard(ctk.CTk):
 
             if success == True:
                 client_info = models.Admin.find_account(self.current_client_id)
-                self.balance_label.configure(text=f"₪{client_info['balance']:,}")
+                self.balance_label.configure(text=f"₪{client_info["balance"]:,}")
                 self.close_window(dep_win)
                 print(f"Successfully deposited ₪{amount}")
             else:
@@ -331,7 +330,7 @@ class Dashboard(ctk.CTk):
 
             if success == True:
                 client_info = models.Admin.find_account(self.current_client_id)
-                self.balance_label.configure(text=f"₪{client_info['balance']:,}")
+                self.balance_label.configure(text=f"₪{client_info["balance"]:,}")
                 self.close_window(with_win)
                 print(f"Successfully deposited ₪{amount}")
             else:
@@ -424,7 +423,7 @@ class Dashboard(ctk.CTk):
 
             if success == True:
                 client_info = models.Admin.find_account(self.current_client_id)
-                self.balance_label.configure(text=f"₪{client_info['balance']:,}")
+                self.balance_label.configure(text=f"₪{client_info["balance"]:,}")
                 self.close_window(trans_win)
                 print(f"Successfully transferd ₪{amount} to {to_id}")
             else:
@@ -523,6 +522,10 @@ class Dashboard(ctk.CTk):
             self.parent_login.deiconify() # show login window again
         self.destroy() # close dashboard window
     #open change pin window
+
+
+
+    
     def change_pin_window(self):
         change_pin_win = ctk.CTkToplevel(self)
         change_pin_win.title("Change PIN")
@@ -637,161 +640,68 @@ class Dashboard(ctk.CTk):
         )
         statements_win.label.pack(pady=10)
         
-    def statements_window(self):
-        statements_win = ctk.CTkToplevel(self)
-        statements_win.title("Statements")
-        statements_win.geometry("700x550")
-        statements_win.configure(fg_color="#0A0E27")
-        statements_win.resizable(False, False)
-        statements_win.attributes('-topmost', True)
-        
-        #! ////////////////////////////////////////////////////////////
-
-        # this is the main transactios table
-        main_frame = ctk.CTkFrame(statements_win, fg_color="transparent")
-        main_frame.pack(expand=True, fill="both", padx=20, pady=20)
-        print("TESTING THE TABLE DATA!")
-        
-        # Title
-        label = ctk.CTkLabel(
-            main_frame,
-            text="Transaction History",
-            font=("Inter", 20, "bold"),
-            text_color="white"
+        # Configure style for treeview
+        style = ttk.Style()
+        style.theme_use('clam')
+        style.configure(
+            "Treeview",
+            background="#1F1F1F",
+            foreground="white",
+            fieldbackground="#1F1F1F",
+            borderwidth=0
         )
-        label.pack(pady=(0, 20))
-
-
-        try:
-            with open('data.json', 'r') as f:
-                data = json.load(f)
-            # Get user transactions
-            user_data = data.get(str(self.current_client_id), {})
-            transactions = user_data.get("transaction_list", [])
-            
-            # Define Table Headers
-            table_values = [["Date", "Type", "Amount", "From/To", "Direction"]]
-            
-            for tx in reversed(transactions):
-                date = tx.get("date", "N/A")
-                tx_type = tx.get("type", "N/A").capitalize()
-                amount = f"₪{abs(float(tx.get('amount', 0))):,.2f}"
-                
-                if tx.get("type") == "transfer":
-                    other_party = tx.get("to") if tx.get("direction") == "out" else tx.get("from")
-                    from_to = f"{other_party}"
-                else:
-                    from_to = "-"
-                
-                direction = tx.get("direction", "N/A").upper()
-                
-                table_values.append([date, tx_type, amount, from_to, direction])
-            
-            if len(table_values) == 1:
-                table_values.append(["-", "No transactions found", "-", "-", "-"])
-
-        except Exception as e:
-            table_values = [["Error loading data"]]
-            print(f"Error: {e}")
-
-        scroll_frame = ctk.CTkScrollableFrame(
-            main_frame, 
-            fg_color="#161C30", 
-            height=350
+        style.configure(
+            "Treeview.Heading",
+            background="#3B82F6",
+            foreground="white",
+            borderwidth=0
         )
-        scroll_frame.pack(expand=True, fill="both", pady=10)
-
-        # Initialize CTkTable with the retrieved data
-        self.table = CTkTable(
-            master=scroll_frame,
-            row=len(table_values),
-            column=5,
-            values=table_values,
-            header_color="#3B82F6",
-            hover_color="#2563EB",
-            colors=["#1F1F1F", "#2A2D3E"],
-            text_color="white"
+        style.map('Treeview', background=[('selected', '#3B82F6')])
+        
+        # Create treeview (table)
+        columns = ("Type", "Date", "Amount", "From", "To", "Status")
+        statements_win.tree = ttk.Treeview(
+            statements_win.frame,
+            columns=columns,
+            show="headings",
+            height=15
         )
-        self.table.pack(expand=True, fill="both")
-
-        # self.table = CTkTable(
-        #     master=scroll_frame,
-        #     row=len(table_values),
-        #     column=5,
-        #     values=table_values,
-        #     header_color="#3B82F6",
-        #     hover_color="#2563EB",
-        #     colors=["#1F1F1F", "#2A2D3E"],
-        #     text_color="white",
-        #     font=("Inter", 12)
-        # )
-        # self.table.pack(expand=True, fill="both", padx=5, pady=5)
         
-        self.center_window(statements_win)
-        #! ////////////////////////////////////////////////////////////
+        # Define column headings and widths
+        statements_win.tree.column("Type", width=80, anchor="w")
+        statements_win.tree.column("Date", width=150, anchor="w")
+        statements_win.tree.column("Amount", width=100, anchor="e")
+        statements_win.tree.column("From", width=100, anchor="w")
+        statements_win.tree.column("To", width=100, anchor="w")
+        statements_win.tree.column("Status", width=80, anchor="w")
         
-        # # Configure style for treeview
-        # style = ttk.Style()
-        # style.theme_use('clam')
-        # style.configure(
-        #     "Treeview",
-        #     background="#1F1F1F",
-        #     foreground="white",
-        #     fieldbackground="#1F1F1F",
-        #     borderwidth=0
-        # )
-        # style.configure(
-        #     "Treeview.Heading",
-        #     background="#3B82F6",
-        #     foreground="white",
-        #     borderwidth=0
-        # )
-        # style.map('Treeview', background=[('selected', '#3B82F6')])
+        # Set headings
+        for col in columns:
+            statements_win.tree.heading(col, text=col)
         
-        # # Create treeview (table)
-        # columns = ("Type", "Date", "Amount", "From", "To", "Status")
-        # statements_win.tree = ttk.Treeview(
-        #     statements_win.frame,
-        #     columns=columns,
-        #     show="headings",
-        #     height=15
-        # )
+        # TODO this is sample data, populate with actual transaction data from models
+        sample_data = [
+            ("Transfer", "2026-04-01 16:20:09", "-500.00", "tony", "guy", "Success"),
+            ("Transfer", "2026-04-01 16:19:08", "+500.00", "guy", "tony", "Success"),
+            ("Deposit", "2026-04-01 16:30:55", "+500.00", "System", "tony", "Success"),
+            ("Transfer", "2026-04-01 16:15:57", "-500.00", "tony", "guy", "Success"),
+        ]
         
-        # # Define column headings and widths
-        # statements_win.tree.column("Type", width=80, anchor="w")
-        # statements_win.tree.column("Date", width=150, anchor="w")
-        # statements_win.tree.column("Amount", width=100, anchor="e")
-        # statements_win.tree.column("From", width=100, anchor="w")
-        # statements_win.tree.column("To", width=100, anchor="w")
-        # statements_win.tree.column("Status", width=80, anchor="w")
+        # Insert sample data
+        for item in sample_data:
+            statements_win.tree.insert("", "end", values=item)
         
-        # # Set headings
-        # for col in columns:
-        #     statements_win.tree.heading(col, text=col)
+        # Add scrollbar
+        scrollbar = ttk.Scrollbar(
+            statements_win.frame,
+            orient="vertical",
+            command=statements_win.tree.yview
+        )
+        statements_win.tree.configure(yscroll=scrollbar.set)
         
-        # # TODO this is sample data, populate with actual transaction data from models
-        # sample_data = [
-        #     ("Transfer", "2026-04-01 16:20:09", "-500.00", "tony", "guy", "Success"),
-        #     ("Transfer", "2026-04-01 16:19:08", "+500.00", "guy", "tony", "Success"),
-        #     ("Deposit", "2026-04-01 16:30:55", "+500.00", "System", "tony", "Success"),
-        #     ("Transfer", "2026-04-01 16:15:57", "-500.00", "tony", "guy", "Success"),
-        # ]
-        
-        # # Insert sample data
-        # for item in sample_data:
-        #     statements_win.tree.insert("", "end", values=item)
-        
-        # # Add scrollbar
-        # scrollbar = ttk.Scrollbar(
-        #     statements_win.frame,
-        #     orient="vertical",
-        #     command=statements_win.tree.yview
-        # )
-        # statements_win.tree.configure(yscroll=scrollbar.set)
-        
-        # # Pack treeview and scrollbar
-        # statements_win.tree.pack(side="left", fill="both", expand=True, pady=10)
-        # scrollbar.pack(side="right", fill="y")
+        # Pack treeview and scrollbar
+        statements_win.tree.pack(side="left", fill="both", expand=True, pady=10)
+        scrollbar.pack(side="right", fill="y")
         
         # Close button
         close_btn = ctk.CTkButton(
