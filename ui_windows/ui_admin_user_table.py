@@ -63,17 +63,29 @@ class Admin_user_table(ctk.CTk):
             fg_color="#3B82F6",
             hover_color="#2563EB"
         )
-        self.refresh_button.pack(pady=10, side="top")
+        # self.refresh_button.pack(pady=10, side="top")
+        self.refresh_button.place(x=20, y=200)
+        
+        self.search_label = ctk.CTkLabel(
+                self,
+                text="Search By Name Or ID: ",
+                font=("Verdana", 14, "bold"),
+                text_color="white"
+            )
+        self.search_label.pack()
         
         
         self.search_var = ctk.StringVar()
         self.search_entry = ctk.CTkEntry(
-            self, 
+            self,
+            placeholder_text="Enter amount to deposit",
+            corner_radius=10,
+            fg_color="#1F1F1F",
+            text_color="white", 
             textvariable=self.search_var,
-            width=300,
-            text_color="#000000",
+            width=300
         )
-        self.search_entry.pack(pady=10)
+        self.search_entry.pack()
         # This triggers the search function every time the user types
         self.search_entry.bind("<KeyRelease>", lambda event: self.filter_table())
                 
