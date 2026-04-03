@@ -27,32 +27,35 @@ class LoginScreen(ctk.CTk):
         self.bg_label.place(x=0, y=0, relwidth=1, relheight=1)
 
         #main frame on top of bg image
-        self.main_frame = ctk.CTkFrame(self,width=400,height=400,corner_radius=15,fg_color="transparent") # fg_color="transparent"
-        self.main_frame.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.8, relheight=0.7) # Padding on the sides of the main frame, so the content doesn't touch the edges of the window
+        # self.main_frame = ctk.CTkFrame(self,width=400,height=400,corner_radius=15,fg_color="transparent") # fg_color="transparent"
+        # self.main_frame.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.8, relheight=0.7) # Padding on the sides of the main frame, so the content doesn't touch the edges of the window
+
+        self.canvas = ctk.CTkCanvas(self, width=400, height=700, highlightthickness=0)
+        self.canvas.pack(fill="both", expand=True)
 
         # logo
-        self.logo_label = ctk.CTkLabel(
-            self.main_frame, 
-            text="A", # TODO REPLACE "A" LOGO WITH ACTUAL LOGO
-            font=("Inter", 60, "bold"), 
-            text_color="#3B82F6")
-        self.logo_label.pack(pady=(60, 0))
+        # self.logo_label = ctk.CTkLabel(
+        #     self.main_frame, 
+        #     text="A", # TODO REPLACE "A" LOGO WITH ACTUAL LOGO
+        #     font=("Inter", 60, "bold"), 
+        #     text_color="#3B82F6")
+        # self.logo_label.pack(pady=(60, 0))
         
-        # bank name
-        self.bank_name = ctk.CTkLabel(
-            self.main_frame, 
-            text="ARGUMENT\nCAPITAL", 
-            font=("Inter", 24, "bold"), 
-            text_color="white")
-        self.bank_name.pack(pady=(0, 0))
+        # # bank name
+        # self.bank_name = ctk.CTkLabel(
+        #     self.main_frame, 
+        #     text="ARGUMENT\nCAPITAL", 
+        #     font=("Inter", 24, "bold"), 
+        #     text_color="white")
+        # self.bank_name.pack(pady=(0, 0))
         
-        # ATM APP as the assignment dictates
-        self.app_name = ctk.CTkLabel(
-            self.main_frame, 
-            text="----------------\nATM APP", 
-            font=("Inter", 24, "bold"), 
-            text_color="#3B82F6")
-        self.app_name.pack(pady=(0, 40))
+        # # ATM APP as the assignment dictates
+        # self.app_name = ctk.CTkLabel(
+        #     self.main_frame, 
+        #     text="----------------\nATM APP", 
+        #     font=("Inter", 24, "bold"), 
+        #     text_color="#3B82F6")
+        # self.app_name.pack(pady=(0, 40))
 
         # account ID input field
         self.username_entry = ctk.CTkEntry(
@@ -103,7 +106,9 @@ class LoginScreen(ctk.CTk):
             corner_radius=12,
             command= self.open_dashboard # TODO connect to authenticate function
         )
-        self.login_btn.pack(fill="x", pady=10)
+        #self.login_btn.pack(fill="x", pady=10)
+        login_btn_window = self.login_btn.create_window
+
 
         # OR text seperating login or admin login
         self.or_label = ctk.CTkLabel(

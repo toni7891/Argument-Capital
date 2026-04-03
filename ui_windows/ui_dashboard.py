@@ -2,6 +2,7 @@ import customtkinter as ctk
 from tkinter import ttk
 import sys
 import os
+from PIL import Image
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
@@ -15,7 +16,7 @@ import json
 
 
 class Dashboard(ctk.CTk):
-    def __init__(self, current_client_id="100", parent_login=None):
+    def __init__(self, current_client_id, parent_login=None):
         super().__init__()
         self.current_client_id = current_client_id
         self.parent_login = parent_login

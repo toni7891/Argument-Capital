@@ -1,6 +1,17 @@
 import customtkinter as ctk
 import os
+import sys
 from PIL import Image, ImageTk
+
+# no idea found fix in youtube video python simplified
+current_dir = os.path.dirname(os.path.abspath(__file__)) 
+parent_dir = os.path.abspath(os.path.join(current_dir, ".."))
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
+
+import models
+import storage
+import json
 
 # FYI fitussi - hours for this
 # https://github.com/TomSchimansky/CustomTkinter/discussions/2214
@@ -98,10 +109,6 @@ class LoginScreen(ctk.CTk):
         self.center_window()
 
 
-
-
-
-
     def center_window(self):
         self.update_idletasks()
         width, height = 400, 700
@@ -116,13 +123,12 @@ class LoginScreen(ctk.CTk):
         pin = self.password_entry.get()
 
         # TODO: Add Client.check_pin(client_id, pin) logic
-        # if Client.check_pin(client_id, pin):
-        
-        print(f"Attempting login for ID: {client_id}")
-        self.destroy()
-        
-        app_dashboard = Dashboard(current_client_id=client_id)
-        app_dashboard.mainloop()
+        if models.Client.check_pin(client_id, pin):
+            print(f"Attempting login for ID: {client_id}")
+            self.destroy()
+            
+            app_dashboard = Dashboard(current_client_id=client_id)
+            app_dashboard.mainloop()
 
     def open_admin_login(self):
         #*Transitions to Admin Login.
