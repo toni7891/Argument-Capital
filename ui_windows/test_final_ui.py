@@ -7,7 +7,6 @@ from PIL import Image, ImageTk
 #↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 import pywinstyles
 
-# Internal imports - ensure these files are in the same directory or adjust paths
 from ui_dashboard import Dashboard
 from ui_admin_login import AdminLoginScreen
 
@@ -18,16 +17,8 @@ class LoginScreen(ctk.CTk):
         self.geometry("400x700")
         self.resizable(False, False)
         self.configure(fg_color="#0A0E27")
-
-
-        # current_dir = os.path.dirname(os.path.abspath(__file__))
-        # parent_dir = os.path.dirname(current_dir) 
-        # img_path = os.path.join(parent_dir, "ArguCapiLogo.jpg")
-
         self.canvas = ctk.CTkCanvas(self, width=400, height=700, highlightthickness=0, bd=0)
         self.canvas.pack(fill="both", expand=True)
-
-
 
         bg_image_raw = Image.open("ArguCapiLogo.jpg")
         bg_image_resized = bg_image_raw.resize((400, 700))
