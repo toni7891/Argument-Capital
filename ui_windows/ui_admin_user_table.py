@@ -1,4 +1,5 @@
 
+from PIL import Image, ImageTk
 import customtkinter as ctk
 from CTkTable import *
 import sys
@@ -26,6 +27,18 @@ class Admin_user_table(ctk.CTk):
         self.configure(fg_color = "#0A0E27")
         self.resizable(False, False)
         self.center_window()
+        
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        icon_path = os.path.join(script_dir, "ArgumentLogo.ico") 
+
+        if os.path.exists(icon_path):
+            img = Image.open(icon_path)
+            self.photo_icon = ImageTk.PhotoImage(img)
+            self.wm_iconphoto(False, self.photo_icon)
+            print(f"Success! Loaded icon from: {icon_path}")
+        else:
+            print(f"STILL NOT FOUND! Python is looking here: {icon_path}")  
+        
         
         self.header_frame = ctk.CTkFrame(
             self, 
