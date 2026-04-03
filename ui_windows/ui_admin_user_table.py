@@ -54,13 +54,16 @@ class Admin_user_table(ctk.CTk):
             font=("Verdana", 14),
             text_color="#FFFFFF" 
         )
-        self.subtitle.pack(side="top", padx=5, pady=(0, 0))
+        self.subtitle.pack(side="top")
         
-        
-        
-        
-        
-        
+        self.refresh_button = ctk.CTkButton(
+            self, 
+            text="Refresh Table", 
+            command=self.update_table,  # Calls the function below
+            fg_color="#3B82F6",
+            hover_color="#2563EB"
+        )
+        self.refresh_button.pack(pady=10)
         
 
         self.scroll_frame = ctk.CTkScrollableFrame(
@@ -95,6 +98,7 @@ class Admin_user_table(ctk.CTk):
         self.table.pack(expand=True, fill="both")
         
 
+    
     def center_window(self, window=None):
        
         win = window if window else self
@@ -124,7 +128,7 @@ class Admin_user_table(ctk.CTk):
             # print(data) # For debugging
             
             
-            table_data = [["ID", "Username", "Balance", "Blocked Or Not", "is admin", "ButtonForTransactions"]]
+            table_data = [["ID", "Username", "Balance", "Blocked Or Active", "Admin Or Client", "ButtonForTransactions"]]
             
             # user_info is the inner dictionary with username, pin, etc.
             for client_id, user_info in data.items():
@@ -142,6 +146,16 @@ class Admin_user_table(ctk.CTk):
             return table_data
         except Exception as e:
                 return [["Error"], [str(e)]]
+            
+    def update_table(self):
+        try:
+            new_values = self.load_json_data()
+            self.table.configure(values=new_values) # Update the table widget with the new list of lists
+        
+            # print("Table updated successfully!")
+        
+        except Exception as e:
+            return e
 
     
 def main():
