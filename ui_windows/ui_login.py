@@ -27,8 +27,11 @@ class LoginScreen(ctk.CTk):
         self.bg_label.place(x=0, y=0, relwidth=1, relheight=1)
 
         #main frame on top of bg image
-        self.main_frame = ctk.CTkFrame(self,width=400,height=400,corner_radius=15,fg_color="transparent") # fg_color="transparent"
-        self.main_frame.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.8, relheight=0.7) # Padding on the sides of the main frame, so the content doesn't touch the edges of the window
+        self.main_frame = ctk.CTkFrame(self, fg_color=None, corner_radius=0, border_width=0)
+        self.main_frame.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.8, relheight=0.7)
+        
+        # Send background image to back so it shows behind the frame
+        self.bg_label.lower()
 
         # logo
         self.logo_label = ctk.CTkLabel(
