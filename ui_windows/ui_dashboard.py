@@ -663,8 +663,8 @@ class Dashboard(ctk.CTk):
 
 
         try:
-            with open('data.json', 'r') as f:
-                data = json.load(f)
+
+            data = storage.all_clients()
             # Get user transactions
             user_data = data.get(str(self.current_client_id), {})
             transactions = user_data.get("transaction_list", [])
