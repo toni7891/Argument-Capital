@@ -109,25 +109,62 @@ class LoginScreen(ctk.CTk):
         self.center_window()
 
 
-    def center_window(self):
-        self.update_idletasks()
-        width, height = 400, 700
-        screen_width = self.winfo_screenwidth()
-        screen_height = self.winfo_screenheight()
+    def center_window(self, window=None):
+        win = window if window else self
+    
+        win.update_idletasks()
+    
+        # get dimensions of the specific window
+        width = win.winfo_width()
+        height = win.winfo_height()
+    
+        # get screen dimensions
+        screen_width = win.winfo_screenwidth()
+        screen_height = win.winfo_screenheight()
+    
+        # calculate coordinates
         x = (screen_width // 2) - (width // 2)
         y = (screen_height // 2) - (height // 2)
-        self.geometry(f"{width}x{height}+{x}+{y}")
+    
+        # apply to the correct window
+        win.geometry(f"{width}x{height}+{x}+{y}")
+
+
+    def popup_win(self,title, message):
+            popup_win = ctk.CTkToplevel(self)
+            popup_win.title(title)
+            popup_win.geometry("300x150")
+            popup_win.configure(fg_color="#0A0E27")
+            popup_win.resizable(False, False)
+            popup_win.attributes("-topmost", True)
+            popup_win.grab_set() 
+
+
+            popup_label = ctk.CTkLabel(popup_win, text=message, font=("Inter", 13), wraplength=250)
+            popup_label.pack(pady=20)
+
+            ok_btn = ctk.CTkButton(
+                popup_win,
+                text="OK", 
+                width=100, 
+                command=popup_win.destroy,
+                fg_color="#3B82F6"
+            )
+            ok_btn.pack(pady=10)
+        
+            self.center_window(popup_win)
 
     def authenticate_and_open(self):
         client_id = self.username_entry.get()
         pin = self.password_entry.get()
 
         if models.Client.check_pin(client_id, pin):
-            print(f"Attempting login for ID: {client_id}")
             self.withdraw() 
         
             dashboard = ui_dashboard.Dashboard(current_client_id=client_id, parent_login=self)
             dashboard.mainloop()
+        else:
+            self.popup_win("Failed to authenticate", "one or more of the credentials is incorrect")
 
     def open_admin_login(self):
         #*Transitions to Admin Login.
