@@ -77,7 +77,36 @@ class AdminPanel(ctk.CTk):
         )
         self.logout_btn.pack(fill="x", pady=10)
 
+    def create_admin_button(self, text, command):
+            """Helper to create buttons matching your UI style"""
+            btn = ctk.CTkButton(
+                self.button_frame,
+                text=text,
+                height=60,
+                corner_radius=10,
+                fg_color="#3B82F6",
+                hover_color="#2563EB",
+                text_color="white",
+                font=("Inter", 14, "bold"),
+                command=command
+            )
+            btn.pack(fill="x", pady=10)
+            return btn
 
+
+    def open_create_account_window(self):
+        print("Opening Create Account Form...")
+
+    def open_accounts_list(self):
+        print("Opening Global Accounts Table...")
+
+    def open_block_window(self):
+        print("Opening Blocking Interface...")
+
+    def logout(self):
+        if self.parent_login:
+            self.parent_login.deiconify() 
+        self.destroy()
 
 
 
