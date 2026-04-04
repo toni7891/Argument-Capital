@@ -681,38 +681,22 @@ class Dashboard(ctk.CTk):
         statements_win.title("Statements")
         statements_win.geometry("800x500")
         statements_win.configure(fg_color="#0A0E27")
-        statements_win.resizable(True, True)
-        
-        #frame
-        statements_win.frame = ctk.CTkFrame(
-            statements_win, 
-            corner_radius=20, 
-            fg_color="#0A0E27")
-        statements_win.frame.pack(expand=True, fill="both", padx=20, pady=20)
-        
-        #label
-        statements_win.label = ctk.CTkLabel(
-            statements_win.frame,
-            text="Transaction Statements",
-            font=("Inter", 16, "bold"),
-            text_color="white"
-        )
-        statements_win.label.pack(pady=10)
-        
-    def statements_window(self):
-        statements_win = ctk.CTkToplevel(self)
-        statements_win.title("Statements")
-        statements_win.geometry("700x550")
-        statements_win.configure(fg_color="#0A0E27")
         statements_win.resizable(False, False)
         statements_win.attributes('-topmost', True)
+        
+        # #frame
+        # statements_win.frame = ctk.CTkFrame(
+        #     statements_win, 
+        #     corner_radius=20, 
+        #     fg_color="#0A0E27")
+        # statements_win.frame.pack(expand=True, fill="both", padx=20, pady=20)
+        
         
         #! ////////////////////////////////////////////////////////////
 
         # this is the main transactios table
         main_frame = ctk.CTkFrame(statements_win, fg_color="transparent")
-        main_frame.pack(expand=True, fill="both", padx=20, pady=20)
-        print("TESTING THE TABLE DATA!")
+        main_frame.pack(expand=True, fill="both", padx=20, pady=(10, 20)) # pady=(Top, Bottom)
         
         # Title
         label = ctk.CTkLabel(
@@ -721,8 +705,17 @@ class Dashboard(ctk.CTk):
             font=("Inter", 20, "bold"),
             text_color="white"
         )
-        label.pack(pady=(0, 20))
+        label.pack(pady=(0, 0))
 
+        self.refresh_button = ctk.CTkButton(
+            main_frame, 
+            text="Refresh Table", 
+            command=self.update_table, 
+            fg_color="#3B82F6",
+            hover_color="#2563EB"
+        )
+        # self.refresh_button.pack(pady=10, side="top")
+        self.refresh_button.pack(pady=10)
 
         try:
             data = storage.all_clients()
@@ -854,22 +847,56 @@ class Dashboard(ctk.CTk):
         # statements_win.tree.pack(side="left", fill="both", expand=True, pady=10)
         # scrollbar.pack(side="right", fill="y")
         
-        # Close button
-        close_btn = ctk.CTkButton(
-            statements_win.frame,
-            text="Close",
-            width=300,
-            height=40,
-            corner_radius=10,
-            fg_color="#1F1F1F",
-            hover_color="#3B3B3B",
-            font=("Inter", 14, "bold"),
-            command=lambda: self.close_window(statements_win)
-        )
-        close_btn.pack(pady=10)
+        #! Close button
+        # close_btn = ctk.CTkButton(
+        #     statements_win.frame,
+        #     text="Close",
+        #     width=300,
+        #     height=40,
+        #     corner_radius=10,
+        #     fg_color="#1F1F1F",
+        #     hover_color="#3B3B3B",
+        #     font=("Inter", 14, "bold"),
+        #     command=lambda: self.close_window(statements_win)
+        # )
+        # close_btn.pack(pady=10)
   
     def close_window(self, window):
         window.destroy()
+        
+    def update_table(self):
+        try:
+                data = storage.all_clients()
+                # Get user transactions
+                user_data = data.get(str(self.current_client_id), {})
+                transactions = user_data.get("transaction_list", [])
+                    
+                # Define Table Headers
+                table_values = [["Date", "Type", "Amount", "From/To", "Direction"]]
+                    
+                for tx in reversed(transactions):
+                    date = tx.get("date", "N/A")
+                    tx_type = tx.get("type", "N/A").capitalize()
+                    amount = f"₪{abs(float(tx.get('amount', 0))):,.2f}"
+                        
+                    if tx.get("type") == "transfer":
+                        other_party = tx.get("to") if tx.get("direction") == "out" else tx.get("from")
+                        from_to = f"{other_party}"
+                    else:
+                        from_to = "-"
+                        
+                    direction = tx.get("direction", "N/A").upper()
+                        
+                    table_values.append([date, tx_type, amount, from_to, direction])
+                    
+                if len(table_values) == 1:
+                    table_values.append(["-", "No transactions found", "-", "-", "-"])
+
+        except Exception as e:
+                table_values = [["Error loading data"]]
+                print(f"Error: {e}")
+        new_values = table_values
+        self.table.configure(values=new_values)
         
 if __name__ == "__main__":
     app = Dashboard()
