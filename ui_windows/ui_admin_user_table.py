@@ -20,6 +20,11 @@ DATA_FILE = os.path.join(MAIN_DIR, "data.json")
 class Admin_user_table(ctk.CTk):
     def __init__(self, parent_login=None):
         super().__init__()
+        
+    def go_back(self):
+        if self.parent_panel:
+            self.parent_panel.deiconify()
+        self.destroy()
  
         self.parent_login = parent_login
         self.title("Users Table For Admins")
@@ -215,7 +220,6 @@ class Admin_user_table(ctk.CTk):
 def main():
     user_table = Admin_user_table()
     user_table.mainloop()
-    # print(Admin_user_table.load_json_data())
     
       
     
