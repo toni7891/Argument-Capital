@@ -192,9 +192,6 @@ class Admin(Client):
         all_clients = storage.all_clients()
         pin1 = pin.replace(" ","")
         balance1 = float(balance)
-        #blocked_or_not1 = (blocked_or_not.replace(" ","").lower() == "true")
-        #is_admin1 = (is_admin.replace(" ","").lower() == "true")
-
 
         is_unique = False
         # Check if client ID already exists
