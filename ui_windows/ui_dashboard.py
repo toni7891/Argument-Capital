@@ -248,7 +248,7 @@ class Dashboard(ctk.CTk):
         popup_win.grab_set() 
 
 
-        popup_label = ctk.CTkLabel(popup_win, text=message, font=("Inter", 13), wraplength=250)
+        popup_label = ctk.CTkLabel(popup_win, text=message, font=("Inter", 13), wraplength=250, text_color="white")
         popup_label.pack(pady=20)
 
         ok_btn = ctk.CTkButton(
@@ -256,7 +256,8 @@ class Dashboard(ctk.CTk):
             text="OK", 
             width=100, 
             command=popup_win.destroy,
-            fg_color="#3B82F6"
+            fg_color="#3B82F6",
+            text_color="white"
         )
         ok_btn.pack(pady=10)
     

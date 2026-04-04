@@ -13,6 +13,7 @@ if parent_dir not in sys.path:
 
 import models
 import storage
+import ui_dashboard # TODO --> צריך פה את העזרה שלך טוני בלחבר את הפופ אפ שלך
 import json
 MAIN_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(MAIN_DIR, "data.json")
@@ -77,6 +78,33 @@ class AdminPanel(ctk.CTk):
             command=self.logout
         )
         self.logout_btn.pack(fill="x", pady=10)
+
+
+    def popup_win(self,title, message):
+        popup_win = ctk.CTkToplevel(self)
+        popup_win.title(title)
+        popup_win.geometry("300x150")
+        popup_win.configure(fg_color="#0A0E27")
+        popup_win.resizable(False, False)
+        popup_win.attributes("-topmost", True)
+        popup_win.grab_set()
+
+
+        popup_label = ctk.CTkLabel(popup_win, text=message, font=("Inter", 13), wraplength=250, text_color="white")
+        popup_label.pack(pady=20)
+
+        ok_btn = ctk.CTkButton(
+            popup_win,
+            text="OK", 
+            width=100, 
+            command=popup_win.destroy,
+            fg_color="#3B82F6",
+            text_color="white"
+        )
+        ok_btn.pack(pady=10)
+    
+        self.center_window(popup_win)
+    
 
     def on_closing(self):
             if self.parent_login:
