@@ -41,6 +41,41 @@ class AdminPanel(ctk.CTk):
         self.header_label.pack(pady=(40, 20))
 
 
+        self.button_frame = ctk.CTkFrame(self, fg_color="transparent")
+        self.button_frame.pack(expand=True, fill="both", padx=40)
+
+        # Create Account Button
+        self.create_btn = self.create_admin_button(
+            "Create New Account", 
+            self.open_create_account_window
+        )
+        
+        # Accounts Dashboard Button
+        self.dash_btn = self.create_admin_button(
+            "Accounts Dashboard", 
+            self.open_accounts_list
+        )
+        
+        # Block/Unblock Account Button
+        self.block_btn = self.create_admin_button(
+            "Block/Unblock User", 
+            self.open_block_window
+        )
+        
+        # Logout Button
+        self.logout_btn = ctk.CTkButton(
+            self.button_frame,
+            text="Logout",
+            height=50,
+            corner_radius=10,
+            fg_color="transparent",
+            border_width=2,
+            border_color="#EF4444",
+            text_color="#EF4444",
+            hover_color="#2D1B1B",
+            command=self.logout
+        )
+        self.logout_btn.pack(fill="x", pady=10)
 
 
 
