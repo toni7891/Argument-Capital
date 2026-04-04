@@ -19,3 +19,25 @@ import storage
 import json
 MAIN_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(MAIN_DIR, "data.json")
+
+
+class AdminPanel(ctk.CTk):
+    def __init__(self, admin_id, parent_login=None):
+        super().__init__()
+        self.admin_id = admin_id
+        self.parent_login = parent_login
+        
+        # Setup Window
+        self.title("Admin Control Center")
+        self.geometry("400x600")
+        self.configure(fg_color="#0A0E27") # Matching your theme
+        self.resizable(False, False)
+        
+        # Header Section
+        self.header_label = ctk.CTkLabel(
+            self, 
+            text="ADMIN CONTROL PANEL", 
+            font=("Inter", 20, "bold"),
+            text_color="white"
+        )
+        self.header_label.pack(pady=(40, 20))
