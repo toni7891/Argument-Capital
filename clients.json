@@ -1,0 +1,621 @@
+{
+    "100": {
+        "username": "tony",
+        "pin": "1234",
+        "balance": 8093.0,
+        "blocked_or_not": false,
+        "is_admin": true,
+        "transaction_list": [
+            {
+                "type": "transfer",
+                "from": "tony",
+                "to": "alice",
+                "amount": 200,
+                "date": "2026-03-31 14:22:10",
+                "direction": "out"
+            },
+            {
+                "type": "deposit",
+                "amount": 1000,
+                "date": "2026-03-30 10:15:00"
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 500,
+                "date": "2026-04-01 13:54:39",
+                "direction": "in"
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 500,
+                "date": "2026-04-01 13:57:14",
+                "direction": "in"
+            },
+            {
+                "type": "transfer",
+                "from": "tony",
+                "to": "guy",
+                "amount": -500,
+                "date": "2026-04-01 14:31:26",
+                "direction": "out",
+                "old_Balnce": 3000.0,
+                "new_balance": 2500.0
+            },
+            {
+                "type": "transfer",
+                "from": "tony",
+                "to": "guy",
+                "amount": -500,
+                "date": "2026-04-01 16:13:46",
+                "direction": "out",
+                "old_Balnce": 2500.0,
+                "new_balance": 2000.0
+            },
+            {
+                "type": "transfer",
+                "from": "tony",
+                "to": "guy",
+                "amount": -500,
+                "date": "2026-04-01 16:15:57",
+                "direction": "out",
+                "old_Balnce": 2000.0,
+                "new_balance": 1500.0
+            },
+            {
+                "type": "transfer",
+                "from": "guy",
+                "to": "tony",
+                "amount": 500,
+                "date": "2026-04-01 16:19:08",
+                "direction": "in",
+                "old_Balnce": 1500.0,
+                "new_balance": 2000.0
+            },
+            {
+                "type": "transfer",
+                "from": "guy",
+                "to": "tony",
+                "amount": 500,
+                "date": "2026-04-01 16:20:09",
+                "direction": "in",
+                "old_Balnce": 2000.0,
+                "new_balance": 2500.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 500,
+                "date": "2026-04-01 16:30:55",
+                "direction": "in",
+                "old_Balance": 2500.0,
+                "new_balance": 3000.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 500,
+                "date": "2026-04-01 16:48:34",
+                "direction": "in",
+                "old_Balance": 3000.0,
+                "new_balance": 3500.0
+            },
+            {
+                "type": "withdrawl",
+                "from": "tony",
+                "to": "tony",
+                "amount": 100,
+                "date": "2026-04-01 16:59:38",
+                "direction": "out",
+                "old_Balance": 3500.0,
+                "new_balance": 3400.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 123.0,
+                "date": "2026-04-02 21:04:16",
+                "direction": "in",
+                "old_Balance": 3400.0,
+                "new_balance": 3523.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 123.0,
+                "date": "2026-04-02 21:09:39",
+                "direction": "in",
+                "old_Balance": 3523.0,
+                "new_balance": 3646.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 123.0,
+                "date": "2026-04-02 21:10:33",
+                "direction": "in",
+                "old_Balance": 3646.0,
+                "new_balance": 3769.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 100.0,
+                "date": "2026-04-02 21:15:38",
+                "direction": "in",
+                "old_Balance": 3769.0,
+                "new_balance": 3869.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 100.0,
+                "date": "2026-04-02 21:17:10",
+                "direction": "in",
+                "old_Balance": 3869.0,
+                "new_balance": 3969.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 100.0,
+                "date": "2026-04-02 21:17:19",
+                "direction": "in",
+                "old_Balance": 3969.0,
+                "new_balance": 4069.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 100.0,
+                "date": "2026-04-03 12:55:13",
+                "direction": "in",
+                "old_Balance": 4069.0,
+                "new_balance": 4169.0
+            },
+            {
+                "type": "withdrawl",
+                "from": "tony",
+                "to": "tony",
+                "amount": 100.0,
+                "date": "2026-04-03 13:51:32",
+                "direction": "out",
+                "old_Balance": 4169.0,
+                "new_balance": 4069.0
+            },
+            {
+                "type": "withdrawl",
+                "from": "tony",
+                "to": "tony",
+                "amount": 69.0,
+                "date": "2026-04-03 13:53:04",
+                "direction": "out",
+                "old_Balance": 4069.0,
+                "new_balance": 4000.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 1000.0,
+                "date": "2026-04-03 14:07:02",
+                "direction": "in",
+                "old_Balance": 4000.0,
+                "new_balance": 5000.0
+            },
+            {
+                "type": "withdrawl",
+                "from": "tony",
+                "to": "tony",
+                "amount": 100.0,
+                "date": "2026-04-03 14:07:08",
+                "direction": "out",
+                "old_Balance": 5000.0,
+                "new_balance": 4900.0
+            },
+            {
+                "type": "transfer",
+                "from": "tony",
+                "to": "guy",
+                "amount": -100.0,
+                "date": "2026-04-03 14:22:59",
+                "direction": "out",
+                "old_Balance": 4900.0,
+                "new_balance": 4800.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 122.0,
+                "date": "2026-04-03 21:25:45",
+                "direction": "in",
+                "old_Balance": 4800.0,
+                "new_balance": 4922.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 69.0,
+                "date": "2026-04-03 21:34:05",
+                "direction": "in",
+                "old_Balance": 4922.0,
+                "new_balance": 4991.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 9.0,
+                "date": "2026-04-04 12:37:39",
+                "direction": "in",
+                "old_Balance": 4991.0,
+                "new_balance": 5000.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 1.0,
+                "date": "2026-04-04 12:52:22",
+                "direction": "in",
+                "old_Balance": 5000.0,
+                "new_balance": 5001.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 1.0,
+                "date": "2026-04-04 12:59:18",
+                "direction": "in",
+                "old_Balance": 5001.0,
+                "new_balance": 5002.0
+            },
+            {
+                "type": "transfer",
+                "from": "tony",
+                "to": "guy",
+                "amount": -2.0,
+                "date": "2026-04-04 13:37:44",
+                "direction": "out",
+                "old_Balance": 5002.0,
+                "new_balance": 5000.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 69.0,
+                "date": "2026-04-04 17:32:14",
+                "direction": "in",
+                "old_Balance": 5000.0,
+                "new_balance": 5069.0
+            },
+            {
+                "type": "transfer",
+                "from": "tony",
+                "to": "guy",
+                "amount": -69.0,
+                "date": "2026-04-04 17:32:34",
+                "direction": "out",
+                "old_Balance": 5069.0,
+                "new_balance": 5000.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 1.0,
+                "date": "2026-04-04 20:03:57",
+                "direction": "in",
+                "old_Balance": 5000.0,
+                "new_balance": 5001.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 1.0,
+                "date": "2026-04-04 20:04:22",
+                "direction": "in",
+                "old_Balance": 5001.0,
+                "new_balance": 5002.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 1.0,
+                "date": "2026-04-04 20:04:30",
+                "direction": "in",
+                "old_Balance": 5002.0,
+                "new_balance": 5003.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 2.0,
+                "date": "2026-04-04 20:05:37",
+                "direction": "in",
+                "old_Balance": 5003.0,
+                "new_balance": 5005.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 2.0,
+                "date": "2026-04-04 20:05:41",
+                "direction": "in",
+                "old_Balance": 5005.0,
+                "new_balance": 5007.0
+            },
+            {
+                "type": "deposit",
+                "from": "tony",
+                "to": "tony",
+                "amount": 3321.0,
+                "date": "2026-04-04 20:05:47",
+                "direction": "in",
+                "old_Balance": 5007.0,
+                "new_balance": 8328.0
+            },
+            {
+                "type": "withdrawl",
+                "from": "tony",
+                "to": "tony",
+                "amount": 12.0,
+                "date": "2026-04-04 20:06:00",
+                "direction": "out",
+                "old_Balance": 8328.0,
+                "new_balance": 8316.0
+            },
+            {
+                "type": "transfer",
+                "from": "tony",
+                "to": "guy",
+                "amount": -223.0,
+                "date": "2026-04-04 20:06:10",
+                "direction": "out",
+                "old_Balance": 8316.0,
+                "new_balance": 8093.0
+            }
+        ]
+    },
+    "102": {
+        "username": "guy",
+        "pin": "1122",
+        "balance": 1794.0,
+        "blocked_or_not": false,
+        "is_admin": false,
+        "transaction_list": [
+            {
+                "type": "transfer",
+                "from": "tony",
+                "to": "guy",
+                "amount": 200,
+                "date": "2026-03-31 14:22:10",
+                "direction": "in"
+            },
+            {
+                "type": "deposit",
+                "amount": 1000,
+                "date": "2026-03-30 10:15:00"
+            },
+            {
+                "type": "transfer",
+                "from": "tony",
+                "to": "guy",
+                "amount": 500,
+                "date": "2026-04-01 14:31:26",
+                "direction": "in",
+                "old_Balnce": 1000.0,
+                "new_balance": 1500.0
+            },
+            {
+                "type": "transfer",
+                "from": "tony",
+                "to": "guy",
+                "amount": 500,
+                "date": "2026-04-01 16:13:46",
+                "direction": "in",
+                "old_Balnce": 1500.0,
+                "new_balance": 2000.0
+            },
+            {
+                "type": "transfer",
+                "from": "tony",
+                "to": "guy",
+                "amount": 500,
+                "date": "2026-04-01 16:15:57",
+                "direction": "in",
+                "old_Balnce": 2000.0,
+                "new_balance": 2500.0
+            },
+            {
+                "type": "transfer",
+                "from": "guy",
+                "to": "tony",
+                "amount": -500,
+                "date": "2026-04-01 16:19:08",
+                "direction": "out",
+                "old_Balnce": 2500.0,
+                "new_balance": 2000.0
+            },
+            {
+                "type": "transfer",
+                "from": "guy",
+                "to": "tony",
+                "amount": -500,
+                "date": "2026-04-01 16:20:09",
+                "direction": "out",
+                "old_Balnce": 2000.0,
+                "new_balance": 1500.0
+            },
+            {
+                "type": "withdrawl",
+                "from": "guy",
+                "to": "guy",
+                "amount": 100.0,
+                "date": "2026-04-03 13:32:35",
+                "direction": "out",
+                "old_Balance": 1500.0,
+                "new_balance": 1400.0
+            },
+            {
+                "type": "transfer",
+                "from": "tony",
+                "to": "guy",
+                "amount": 100.0,
+                "date": "2026-04-03 14:22:59",
+                "direction": "in",
+                "old_Balance": 1400.0,
+                "new_balance": 1500.0
+            },
+            {
+                "type": "transfer",
+                "from": "tony",
+                "to": "guy",
+                "amount": 2.0,
+                "date": "2026-04-04 13:37:44",
+                "direction": "in",
+                "old_Balance": 1500.0,
+                "new_balance": 1502.0
+            },
+            {
+                "type": "transfer",
+                "from": "tony",
+                "to": "guy",
+                "amount": 69.0,
+                "date": "2026-04-04 17:32:34",
+                "direction": "in",
+                "old_Balance": 1502.0,
+                "new_balance": 1571.0
+            },
+            {
+                "type": "transfer",
+                "from": "tony",
+                "to": "guy",
+                "amount": 223.0,
+                "date": "2026-04-04 20:06:10",
+                "direction": "in",
+                "old_Balance": 1571.0,
+                "new_balance": 1794.0
+            }
+        ]
+    },
+    "119": {
+        "client_ID": 119,
+        "username": "test",
+        "pin": "1234",
+        "balance": 999,
+        "blocked_or_not": false,
+        "is_admin": false,
+        "transaction_list": []
+    },
+    "731": {
+        "client_ID": 731,
+        "username": "test",
+        "pin": "1234",
+        "balance": 999,
+        "blocked_or_not": false,
+        "is_admin": false,
+        "transaction_list": []
+    },
+    "471": {
+        "client_ID": 471,
+        "username": "test",
+        "pin": "1234",
+        "balance": 999,
+        "blocked_or_not": false,
+        "is_admin": false,
+        "transaction_list": []
+    },
+    "418": {
+        "client_ID": 418,
+        "username": "test",
+        "pin": "1234",
+        "balance": 999,
+        "blocked_or_not": false,
+        "is_admin": false,
+        "transaction_list": []
+    },
+    "676": {
+        "client_ID": 676,
+        "username": "test",
+        "pin": "4321",
+        "balance": 999,
+        "blocked_or_not": false,
+        "is_admin": false,
+        "transaction_list": []
+    },
+    "508": {
+        "client_ID": 508,
+        "username": "test123",
+        "pin": "1234",
+        "balance": 999,
+        "blocked_or_not": true,
+        "is_admin": true,
+        "transaction_list": []
+    },
+    "952": {
+        "client_ID": 952,
+        "username": "test_fixes",
+        "pin": "1234",
+        "balance": 123.0,
+        "blocked_or_not": true,
+        "is_admin": true,
+        "transaction_list": []
+    },
+    "728": {
+        "client_ID": 728,
+        "username": "test_fixes1",
+        "pin": "1234",
+        "balance": 0.0,
+        "blocked_or_not": true,
+        "is_admin": true,
+        "transaction_list": []
+    },
+    "333": {
+        "client_ID": 333,
+        "username": "test_fixes2",
+        "pin": "1234",
+        "balance": 0.0,
+        "blocked_or_not": true,
+        "is_admin": false,
+        "transaction_list": []
+    },
+    "277": {
+        "client_ID": 277,
+        "username": "test_fixes2",
+        "pin": "1234",
+        "balance": 0.0,
+        "blocked_or_not": true,
+        "is_admin": false,
+        "transaction_list": []
+    },
+    "531": {
+        "client_ID": 531,
+        "username": "test_fixes3",
+        "pin": "1234",
+        "balance": 0.0,
+        "blocked_or_not": true,
+        "is_admin": false,
+        "transaction_list": []
+    }
+}

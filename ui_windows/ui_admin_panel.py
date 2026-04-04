@@ -17,6 +17,7 @@ import json
 MAIN_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(MAIN_DIR, "data.json")
 
+from ui_windows import ui_admin_user_table
 
 class AdminPanel(ctk.CTk):
     def __init__(self, admin_id, parent_login=None):
@@ -63,6 +64,13 @@ class AdminPanel(ctk.CTk):
             self.open_block_window
         )
         
+        self.delete_btn = self.create_admin_button(
+            "Delete Account", 
+            self.open_delete_account_window
+        )
+
+
+
         # Logout Button
         self.logout_btn = ctk.CTkButton(
             self.button_frame,
@@ -77,6 +85,7 @@ class AdminPanel(ctk.CTk):
             command=self.logout
         )
         self.logout_btn.pack(fill="x", pady=10)
+
 
 
     def popup_win(self,title, message):
@@ -239,7 +248,79 @@ class AdminPanel(ctk.CTk):
 
 
 
-      
+
+
+
+
+    def delete_account_logic(self, delete_win, id_entry):
+        client_id = id_entry.get().strip()
+        
+        if not client_id:
+            self.popup_win("Error", "Please enter a Client ID.")
+            return
+
+        success = models.Admin.delete_account(client_id)
+
+        if success:
+            self.popup_win("Success", f"Account {client_id} has been deleted.")
+            delete_win.destroy()
+        else:
+            self.popup_win("Error", f"Account ID {client_id} not found.")
+
+    def open_delete_account_window(self):
+        delete_win = ctk.CTkToplevel(self)
+        delete_win.title("Delete Account")
+        delete_win.geometry("400x300")
+        delete_win.configure(fg_color="#0A0E27")
+        delete_win.attributes('-topmost', True)
+        delete_win.grab_set()
+        delete_win.resizable(False, False)
+
+        frame = ctk.CTkFrame(delete_win, fg_color="transparent")
+        frame.pack(expand=True, fill="both", padx=40, pady=20)
+
+        ctk.CTkLabel(
+            frame, 
+            text="Delete User Account", 
+            font=("Inter", 20, "bold"), 
+            text_color="#EF4444"
+        ).pack(pady=20)
+
+        id_entry = ctk.CTkEntry(
+            frame, 
+            placeholder_text="Enter Client ID to delete", 
+            height=45, 
+            corner_radius=10
+        )
+        id_entry.pack(fill="x", pady=10)
+
+        confirm_btn = ctk.CTkButton(
+            frame, 
+            text="Permanently Delete", 
+            height=50, 
+            fg_color="#EF4444", 
+            hover_color="#B91C1C",
+            font=("Inter", 14, "bold"),
+            command=lambda: self.delete_account_logic(delete_win, id_entry)
+        )
+        confirm_btn.pack(fill="x", pady=(20, 10))
+
+        ctk.CTkButton(
+            frame, 
+            text="Cancel", 
+            fg_color="#1F1F1F", 
+            command=delete_win.destroy
+        ).pack(fill="x")
+        
+        self.center_window(delete_win)
+
+
+
+
+
+
+
+
 if __name__ == "__main__":
     app = AdminPanel("ADMIN01")
     app.mainloop()
