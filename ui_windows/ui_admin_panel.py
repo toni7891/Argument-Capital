@@ -237,6 +237,11 @@ class AdminPanel(ctk.CTk):
 
     def open_accounts_list(self):
         print("Opening Global Accounts Table...")
+        self.withdraw() 
+        
+        user_table = ui_admin_user_table.Admin_user_table()
+        user_table.mainloop()
+
 
     def open_block_window(self):
         print("Opening Blocking Interface...")

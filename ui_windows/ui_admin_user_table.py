@@ -18,26 +18,27 @@ MAIN_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(MAIN_DIR, "data.json")
 
 class Admin_user_table(ctk.CTk):
-    def __init__(self):
+    def __init__(self, parent_login=None):
         super().__init__()
  
-        
+        self.parent_login = parent_login
         self.title("Users Table For Admins")
         self.geometry("1100x700")
         self.configure(fg_color = "#0A0E27")
         self.resizable(False, False)
         self.center_window()
+        self.protocol("WM_DELETE_WINDOW", self.on_closing)
         
         script_dir = os.path.dirname(os.path.abspath(__file__))
         icon_path = os.path.join(script_dir, "ArgumentLogo.ico") 
 
-        if os.path.exists(icon_path):
-            img = Image.open(icon_path)
-            self.photo_icon = ImageTk.PhotoImage(img)
-            self.wm_iconphoto(False, self.photo_icon)
-            print(f"Success! Loaded icon from: {icon_path}")
-        else:
-            print(f"STILL NOT FOUND! Python is looking here: {icon_path}")  
+        # if os.path.exists(icon_path):
+        #     img = Image.open(icon_path)
+        #     self.photo_icon = ImageTk.PhotoImage(img)
+        #     self.wm_iconphoto(False, self.photo_icon)
+        #     print(f"Success! Loaded icon from: {icon_path}")
+        # else:
+        #     print(f"STILL NOT FOUND! Python is looking here: {icon_path}")  
         
         
         self.header_frame = ctk.CTkFrame(
@@ -133,7 +134,10 @@ class Admin_user_table(ctk.CTk):
         
         self.table.pack(expand=True, fill="both")
         
-
+    def on_closing(self):
+        if self.parent_login:
+            self.parent_login.destroy() # Kills the hidden login window too
+        self.destroy()
     
     def center_window(self, window=None):
        
@@ -163,7 +167,7 @@ class Admin_user_table(ctk.CTk):
             data = storage.all_clients()
             # print(data) # For debugging
             
-            table_data = [["ID", "Username", "Balance", "Blocked Or Active", "Admin Or Client", "ButtonForTransactions"]]
+            table_data = [["ID", "Username", "Balance", "Blocked Or Active", "Admin Or Client"]]
             
             # user_info is the inner dictionary with username, pin, etc.
             for client_id, user_info in data.items():
