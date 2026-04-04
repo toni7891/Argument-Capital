@@ -25,6 +25,7 @@ class Admin_user_table(ctk.CTk):
         if self.parent_panel:
             self.parent_panel.deiconify()
         self.destroy()
+        #for peres
  
         self.parent_login = parent_login
         self.title("Users Table For Admins")
