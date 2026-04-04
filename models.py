@@ -226,14 +226,19 @@ class Admin(Client):
         return all_clients_formatted   
         
     
-    def block_client(client_toblock):
+    def block_client(client_toblock, BlockVar):
         all_clients = storage.all_clients()
         
         for client_id, client_info in all_clients.items():
-            if client_id == client_toblock:
-                all_clients[client_id]["blocked_or_not"] = True
-                storage.save_clients(all_clients)
-                return True
+            if BlockVar == True:
+                if client_id == client_toblock:
+                    all_clients[client_id]["blocked_or_not"] = True
+                    storage.save_clients(all_clients)
+                    return True
+                elif BlockVar == False:
+                    all_clients[client_id]["blocked_or_not"] = False
+                    storage.save_clients(all_clients)
+                    return True
         return False
 
     

@@ -13,7 +13,6 @@ if parent_dir not in sys.path:
 
 import models
 import storage
-#import ui_dashboard # TODO --> צריך פה את העזרה שלך טוני בלחבר את הפופ אפ שלך
 import json
 MAIN_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(MAIN_DIR, "data.json")
