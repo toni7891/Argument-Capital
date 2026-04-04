@@ -13,7 +13,7 @@ if parent_dir not in sys.path:
 
 import models
 import storage
-import ui_dashboard # TODO --> צריך פה את העזרה שלך טוני בלחבר את הפופ אפ שלך
+#import ui_dashboard # TODO --> צריך פה את העזרה שלך טוני בלחבר את הפופ אפ שלך
 import json
 MAIN_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(MAIN_DIR, "data.json")
@@ -150,14 +150,14 @@ class AdminPanel(ctk.CTk):
             try:
                 username = user_entry.get()
                 pin = pin_entry.get()
-                balance_str = bal_entry.get()
+                balance = bal_entry.get()
                 is_admin = is_admin_var.get()
 
-                if not username or not pin or not balance_str:
+                if not username or not pin or not balance:
                     self.popup_win("Error", "All fields are required!")
                     return
                 
-                balance = float(balance_str)
+                
 
                 models.Admin.create_client_account(
                     username=username, 

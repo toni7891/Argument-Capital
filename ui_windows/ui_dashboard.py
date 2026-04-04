@@ -581,7 +581,7 @@ class Dashboard(ctk.CTk):
             self.popup_win("Success", f"PIN changed for client {self.current_client_id} ") 
             self.close_window(change_pin_win)
         else:
-            self.popup_win("Error", "The password hasn't been changed, Please try again!")
+            self.popup_win("Error", "The PIN hasn't been changed, Please try again!")
     
     #open change pin window
     def change_pin_window(self):

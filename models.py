@@ -28,6 +28,7 @@ class Client:
 
 
     def deposit(amount, client_id_input):
+        amount = amount.replace(" ","")
         if amount < 0:
             return False
         
@@ -64,7 +65,10 @@ class Client:
             then changing and saving the transfer and the transaction hisrtory in the json file
         """
         all_clients_trans = storage.all_clients()
-        
+        amount = amount.replace(" ","")
+        from_id = from_id.replace(" ","")
+        to_id = to_id.replace(" ","")
+
         if all_clients_trans[from_id]["balance"] < amount: 
             return False
 
@@ -119,6 +123,8 @@ class Client:
     def check_pin(client_id, client_pin): #*--> checks the pin that was given to it for the id that was given to it.
         
         all_clients = storage.all_clients()
+        client_id = client_id.replace(" ","")
+        client_pin = client_pin.replace(" ","")
         
         for client_ID , client_info in all_clients.items():
             if client_ID == client_id and client_info["pin"] == client_pin:
@@ -129,6 +135,9 @@ class Client:
     
     def change_pin(client_id, old_pin, new_pin):
         all_clients = storage.all_clients()
+        client_id = client_id.replace(" ","")
+        old_pin = old_pin.replace(" ","")
+        new_pin = new_pin.replace(" ","")
         
         
         for client_num, client_info in all_clients.items():
@@ -145,6 +154,8 @@ class Client:
     def withdraw(amount, client_id_input):
         #* stores all data from json *VERY IMPORTANT*
         all_clients = storage.all_clients()
+        amount = amount.replace(" ","")
+        client_id_input = client_id_input.replace(" ","")
 
         for client_id, client_info in all_clients.items():
             if client_id == client_id_input:
@@ -179,6 +190,12 @@ class Admin(Client):
     # thats how the function is called -> Admin.create_client_account(username="test", pin="1234", balance=999, blocked_or_not=False, is_admin=False)
     def create_client_account(username, pin, balance, blocked_or_not, is_admin):
         all_clients = storage.all_clients()
+        pin1 = pin.replace(" ","")
+        balance1 = float(balance)
+        #blocked_or_not1 = (blocked_or_not.replace(" ","").lower() == "true")
+        #is_admin1 = (is_admin.replace(" ","").lower() == "true")
+
+
         is_unique = False
         # Check if client ID already exists
         while is_unique == False: 
@@ -186,9 +203,12 @@ class Admin(Client):
             if new_client_id not in all_clients:
                 is_unique = True
                 
-        trans_history = []
+        if balance1 < 0:
+            return False
 
-        new_client = Client(new_client_id, username, pin, balance, blocked_or_not, is_admin, trans_history)
+        trans_history = []
+        
+        new_client = Client(new_client_id, username, pin1, balance1, blocked_or_not, is_admin, trans_history)
         
         dict_client = Client.to_dict(new_client)
         
@@ -267,8 +287,8 @@ def main():
     # Client.change_pin("1234", "100", "5678")
     # Admin.add_to_admin("508")
     # print(Admin.show_all_client_data())
-    print(Admin.check_admin_login("508","1234"))
-
+    #print(Admin.check_admin_login("508","1234"))
+    Admin.create_client_account(username="test_fixes3", pin="1 23 4", balance="0  ", blocked_or_not="true   ", is_admin="false   ")
 
 if __name__ == "__main__":
     main()

@@ -8,6 +8,9 @@ if parent_dir not in sys.path:
     sys.path.append(parent_dir)
 
 import models
+from ui_windows import test_final_ui
+from ui_windows import ui_dashboard
+from ui_windows import ui_admin_panel
 
 
 class AdminLoginScreen(ctk.CTk):
@@ -102,9 +105,8 @@ class AdminLoginScreen(ctk.CTk):
         self.normal_btn.pack(pady=(10, 0))
 
     def login_screen(self):
-        from ui_windows.ui_login import LoginScreen
         self.destroy()
-        reg_login = LoginScreen()
+        reg_login = test_final_ui.LoginScreen()
         reg_login.mainloop()
 
     def center_window(self):
@@ -125,6 +127,31 @@ class AdminLoginScreen(ctk.CTk):
         # Set the geometry
         self.geometry(f"{width}x{height}+{x}+{y}")
 
+    def popup_win(self,title, message):
+        popup_win = ctk.CTkToplevel(self)
+        popup_win.title(title)
+        popup_win.geometry("300x150")
+        popup_win.configure(fg_color="#0A0E27")
+        popup_win.resizable(False, False)
+        popup_win.attributes("-topmost", True)
+        popup_win.grab_set() 
+
+
+        popup_label = ctk.CTkLabel(popup_win, text=message, font=("Inter", 13), wraplength=250, text_color="white")
+        popup_label.pack(pady=20)
+
+        ok_btn = ctk.CTkButton(
+            popup_win,
+            text="OK", 
+            width=100, 
+            command=popup_win.destroy,
+            fg_color="#3B82F6",
+            text_color="white"
+        )
+        ok_btn.pack(pady=10)
+    
+        self.center_window(popup_win)
+
 #! //////////////////////////////////////////////////////////////////////
     def authenticate(self):
         admin_id = self.admin_id_entry.get()
@@ -134,22 +161,14 @@ class AdminLoginScreen(ctk.CTk):
         if models.Admin.check_admin_login(admin_id, admin_pin):
             self.withdraw() # hides the window!
             
-            from ui_admin_panel import AdminPanel 
-            admin_dash = AdminPanel(admin_id, parent_login=self)
+            admin_dash = ui_admin_panel.AdminPanel(admin_id, parent_login=self)
             admin_dash.mainloop()
         else:
-            # maybe use popup window with tony's changes!
-            print("Invalid Admin Credentials")
+            # maybe use popup window with tony's changes! #* imorted my window to here, cant import this function...
+            self.popup_win("ERROR" , "incorrect Admin credential's")
 
 #! //////////////////////////////////////////////////////////////////////
 
-# if id and pin correct -> close window and open new dashboard window
-        # if authenticate:
-        
-
-            # self.destroy()  #close windwow
-            # admin_dashboard = admin_dashboard_screen() 
-            # admin_dashboard.mainloop()
             
 def main():
     app = AdminLoginScreen()
