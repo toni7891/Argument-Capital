@@ -675,6 +675,7 @@ class Dashboard(ctk.CTk):
         )
         change_pin_win.cancel_btn.pack(pady=0)
         self.center_window(change_pin_win)
+        
     #open statements window
     def statements_window(self):
         statements_win = ctk.CTkToplevel(self)
