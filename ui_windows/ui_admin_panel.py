@@ -24,12 +24,31 @@ class AdminPanel(ctk.CTk):
         super().__init__()
         self.admin_id = admin_id
         self.parent_login = parent_login
-        
+        self.center_window()
         
         self.title("Admin Control Center")
-        self.geometry("400x600")
+        self.geometry("400x700")
         self.configure(fg_color="#0A0E27") 
         self.resizable(False, False)
+        
+    def center_window(self, window=None):
+        win = window if window else self
+    
+        win.update_idletasks()
+    
+        width = win.winfo_width()
+        height = win.winfo_height()
+    
+        # get screen dimensions
+        screen_width = win.winfo_screenwidth()
+        screen_height = win.winfo_screenheight()
+    
+        # calculate coordinates
+        x = (screen_width // 2) - (width // 2)
+        y = (screen_height // 2) - (height // 2)
+    
+        win.geometry(f"{width}x{height}+{x}+{y}")
+
         
         # Header Section
         self.header_label = ctk.CTkLabel(
@@ -43,6 +62,7 @@ class AdminPanel(ctk.CTk):
 
         self.button_frame = ctk.CTkFrame(self, fg_color="transparent")
         self.button_frame.pack(expand=True, fill="both", padx=40)
+        
 
         # Create Account Button
         self.create_btn = self.create_admin_button(
