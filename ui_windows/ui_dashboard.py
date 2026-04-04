@@ -217,20 +217,20 @@ class Dashboard(ctk.CTk):
 
     #center window function that can be used for any window (main or toplevel)
     def center_window(self, window=None):
-        # If no window is provided, use 'self' (the main window)
+        # if no window is provided, use "self" (the main window)
         win = window if window else self
     
         win.update_idletasks()
     
-         # Get dimensions of the specific window
+         # get dimensions of the specific window
         width = win.winfo_width()
         height = win.winfo_height()
     
-        # Get screen dimensions
+        # get screen dimensions
         screen_width = win.winfo_screenwidth()
         screen_height = win.winfo_screenheight()
     
-        # Calculate coordinates
+        # calculate coordinates
         x = (screen_width // 2) - (width // 2)
         y = (screen_height // 2) - (height // 2)
     
@@ -447,12 +447,13 @@ class Dashboard(ctk.CTk):
 
 
     def transfer_logic(self, trans_win):
-        amount = float(trans_win.amount_entry.get())
-        to_id = trans_win.recipient_entry.get()
         
         try:
+            amount = float(trans_win.amount_entry.get())
+            to_id = trans_win.recipient_entry.get()
+            
             if amount <= 0:
-                print("invalid amount")
+                self.popup_win("invalid amount","Amount must be greater than zero!")
                 return
 
             success = models.Client.transaction_fromto(amount, self.current_client_id, to_id)
@@ -461,14 +462,13 @@ class Dashboard(ctk.CTk):
                 client_info = models.Admin.find_account(self.current_client_id)
                 self.balance_label.configure(text=f"₪{client_info['balance']:,}")
                 self.close_window(trans_win)
-                print(f"Successfully transferd ₪{amount} to {to_id}")
+                self.popup_win("Success", f"Successfully transferd ₪{amount} to {to_id}")
             else:
-                print("transfer failed.")
+                self.popup_win("ERROR", "You either broke or the account you specified does not exist")
 
         except ValueError:
-            print("Please enter a valid number")
+            self.popup_win("ERORR", "Please enter a number which is greater than zero")
 
-        pass
 
     
     #open transfer window
@@ -557,6 +557,32 @@ class Dashboard(ctk.CTk):
         if self.parent_login:
             self.parent_login.deiconify() # show login window again
         self.destroy() # close dashboard window
+    
+    def change_pin_logic(self,change_pin_win):
+        old_pin = change_pin_win.current_pin_entry.get()
+        new_pin = change_pin_win.new_pin_entry.get()
+        conf_pin = change_pin_win.confirm_new_pin_entry.get()
+
+        if not old_pin or not new_pin or not conf_pin:
+            self.popup_win("ERROR", "please fill in all pin fields.")
+            return
+
+        if new_pin != conf_pin:
+            self.popup_win("ERROR", "New pin and Confirmation doesnt match.")
+            return
+        
+        if new_pin == old_pin:
+            self.popup_win("Invalid PIN", "New PIN cannot be the same as the old one.")
+            return
+
+        success = models.Client.change_pin(self.current_client_id, old_pin, new_pin)
+
+        if success:
+            self.popup_win("Success", f"PIN changed for client {self.current_client_id} ") 
+            self.close_window(change_pin_win)
+        else:
+            self.popup_win("Error", message)
+    
     #open change pin window
     def change_pin_window(self):
         change_pin_win = ctk.CTkToplevel(self)
@@ -564,6 +590,7 @@ class Dashboard(ctk.CTk):
         change_pin_win.geometry("400x500")
         change_pin_win.configure(fg_color="#0A0E27")
         change_pin_win.resizable(False, False)
+        change_pin_win.attributes('-topmost', True)
         
         #frame
         change_pin_win.frame = ctk.CTkFrame(
@@ -630,7 +657,7 @@ class Dashboard(ctk.CTk):
             fg_color="#3B82F6",
             hover_color="#2563EB",
             font=("Inter", 14, "bold"),
-            # TODO add logic
+            command=lambda: self.change_pin_logic(change_pin_win)
         )
         change_pin_win.confirm_btn.pack(pady=(30, 10))
         
