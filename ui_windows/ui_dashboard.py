@@ -21,6 +21,8 @@ class Dashboard(ctk.CTk):
         super().__init__()
         self.current_client_id = current_client_id
         self.parent_login = parent_login
+        #to prevent the login window to stay alive in case of abrupt closing beacuse login page is withdraw() and not destory()
+        self.protocol("WM_DELETE_WINDOW", self.on_closing)
         
         #setup
         self.title("Dashboard")
@@ -205,6 +207,14 @@ class Dashboard(ctk.CTk):
         )
         self.logout_button.grid(row=2, column=1, padx=10, pady=10)
     
+
+    def on_closing(self):
+        """close login page in case of abrupt closing (The X in the window)"""
+        if self.parent_login:
+            self.parent_login.destroy()
+        self.destroy()
+
+
     #center window function that can be used for any window (main or toplevel)
     def center_window(self, window=None):
         # If no window is provided, use 'self' (the main window)
@@ -226,13 +236,39 @@ class Dashboard(ctk.CTk):
     
         # Apply to the correct window
         win.geometry(f"{width}x{height}+{x}+{y}")
+
+
+    def popup_win(self,title, message):
+        popup_win = ctk.CTkToplevel(self)
+        popup_win.title(title)
+        popup_win.geometry("300x150")
+        popup_win.configure(fg_color="#0A0E27")
+        popup_win.resizable(False, False)
+        popup_win.attributes("-topmost", True)
+        popup_win.grab_set() 
+
+
+        popup_label = ctk.CTkLabel(popup_win, text=message, font=("Inter", 13), wraplength=250)
+        popup_label.pack(pady=20)
+
+        ok_btn = ctk.CTkButton(
+            popup_win,
+            text="OK", 
+            width=100, 
+            command=popup_win.destroy,
+            fg_color="#3B82F6"
+        )
+        ok_btn.pack(pady=10)
+    
+        self.center_window(popup_win)
     
     def deposit_handling(self, dep_win):
-        amount = float(dep_win.amount_entry.get())
         
         try:
+            amount = float(dep_win.amount_entry.get())
+
             if amount <= 0:
-                print("invalid amount")
+                self.popup_win("Invalid Amount", "The amount must be greater than zero.")
                 return
 
             success = models.Client.deposit(amount, self.current_client_id)
@@ -241,14 +277,13 @@ class Dashboard(ctk.CTk):
                 client_info = models.Admin.find_account(self.current_client_id)
                 self.balance_label.configure(text=f"₪{client_info['balance']:,}")
                 self.close_window(dep_win)
-                print(f"Successfully deposited ₪{amount}")
+                self.popup_win("Deposit gone through!", f"Successfully deposited ₪{amount}")
             else:
-                print("deposit failed.")
+                self.popup_win("Some thing gone wrrong!", "Please try again")
 
         except ValueError:
-            print("Please enter a valid number")
+            self.popup_win("Invalid Amount", "The amount must be a number and greater than zero.")
 
-        pass
 
     #open deposit window
     def open_window(self):
@@ -320,11 +355,12 @@ class Dashboard(ctk.CTk):
             dep_win.cancel_btn.pack(pady=0)
 
     def withdraw_logic(self, with_win):
-        amount = float(with_win.amount_entry.get())
         
         try:
+            amount = float(with_win.amount_entry.get())
             if amount <= 0:
                 print("invalid amount")
+                self.popup_win("invalid amount", "amount must be greater than zero!")
                 return
 
             success = models.Client.withdraw(amount, self.current_client_id)
@@ -333,14 +369,13 @@ class Dashboard(ctk.CTk):
                 client_info = models.Admin.find_account(self.current_client_id)
                 self.balance_label.configure(text=f"₪{client_info['balance']:,}")
                 self.close_window(with_win)
-                print(f"Successfully deposited ₪{amount}")
+                self.popup_win("Success", f"Successfully withdraw ₪{amount}")
             else:
-                print("deposit failed.")
+                self.popup_win("deposit failed.", "Please try again")
 
         except ValueError:
             print("Please enter a valid number")
-
-        pass
+            self.popup_win("Error", "Amount must be a number and greater than zero")
 
     #open withdraw window
     def open_withdraw_window(self):
