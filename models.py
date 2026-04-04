@@ -268,12 +268,23 @@ class Admin(Client):
                 return info #* return tuple (id , info)
         return False
     
+    def delete_account(client_id):
+        all_clients = storage.all_clients() # Load your JSON
+
+        for client_ID , client_info in all_clients.items():
+            if client_ID == client_id:
+                del all_clients[client_id] # Remove the key
+                # Save the updated dictionary back to the JSON file
+                storage.save_clients(all_clients)
+                return True
+        return False
+
 def main():
     # Client.find_account("100")
     # # Client.deposit(amount=500, client_id_input="100") #?--> אמור להכניס 500 לאיידי 100
     # storage.save_clients()
     #Client.from_dict(storage.all_clients())
-    # x = 0
+    x = 0
     # Client.transaction_fromto(amount=500, from_id="100", to_id="102")
     #Client.check_pin(pin_input=1234, id_input=100)
     #Admin.create_client_account(username="test123", pin="1234", balance=999, blocked_or_not=False, is_admin=False)
@@ -285,7 +296,8 @@ def main():
     # Admin.add_to_admin("508")
     # print(Admin.show_all_client_data())
     #print(Admin.check_admin_login("508","1234"))
-    Admin.create_client_account(username="test_fixes3", pin="1 23 4", balance="0  ", blocked_or_not="true   ", is_admin="false   ")
+    #Admin.create_client_account(username="test_fixes3", pin="1 23 4", balance="0  ", blocked_or_not="true   ", is_admin="false   ")
+    #print(Admin.delete_account("531"))
 
 if __name__ == "__main__":
     main()
