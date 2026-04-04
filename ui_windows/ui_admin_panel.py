@@ -1,13 +1,11 @@
 
-from PIL import Image, ImageTk
 import customtkinter as ctk
+from PIL import Image, ImageTk
 from CTkTable import *
 import sys
 import os
 #?--> use the command if you dont have CTkTable > pip install CTkTable
 
-from ui_windows import ui_dashboard
-from ui_windows import ui_admin_login
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
@@ -27,10 +25,10 @@ class AdminPanel(ctk.CTk):
         self.admin_id = admin_id
         self.parent_login = parent_login
         
-        # Setup Window
+        
         self.title("Admin Control Center")
         self.geometry("400x600")
-        self.configure(fg_color="#0A0E27") # Matching your theme
+        self.configure(fg_color="#0A0E27") 
         self.resizable(False, False)
         
         # Header Section
@@ -41,3 +39,17 @@ class AdminPanel(ctk.CTk):
             text_color="white"
         )
         self.header_label.pack(pady=(40, 20))
+
+
+
+
+
+
+
+
+
+      
+if __name__ == "__main__":
+    # Test the panel
+    app = AdminPanel("ADMIN01")
+    app.mainloop()
