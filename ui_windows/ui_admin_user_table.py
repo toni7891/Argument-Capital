@@ -18,8 +18,14 @@ MAIN_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(MAIN_DIR, "data.json")
 
 class Admin_user_table(ctk.CTk):
-    def __init__(self):
+    def __init__(self, parent_panel=None):
+        self.parent_panel = parent_panel
         super().__init__()
+        
+    def go_back(self):
+        if self.parent_panel:
+            self.parent_panel.deiconify()
+        self.destroy()
  
         
         self.title("Users Table For Admins")
@@ -211,7 +217,6 @@ class Admin_user_table(ctk.CTk):
 def main():
     user_table = Admin_user_table()
     user_table.mainloop()
-    # print(Admin_user_table.load_json_data())
     
       
     
