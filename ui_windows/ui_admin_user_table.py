@@ -20,12 +20,6 @@ DATA_FILE = os.path.join(MAIN_DIR, "data.json")
 class Admin_user_table(ctk.CTk):
     def __init__(self, parent_login=None):
         super().__init__()
-        
-    def go_back(self):
-        if self.parent_panel:
-            self.parent_panel.deiconify()
-        self.destroy()
-        #for peres
  
         self.parent_login = parent_login
         self.title("Users Table For Admins")
@@ -144,6 +138,8 @@ class Admin_user_table(ctk.CTk):
         if self.parent_login:
             self.parent_login.destroy() # Kills the hidden login window too
         self.destroy()
+        
+        
     
     def center_window(self, window=None):
        
