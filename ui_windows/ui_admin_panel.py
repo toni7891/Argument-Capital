@@ -146,6 +146,10 @@ class AdminPanel(ctk.CTk):
                 self.popup_win("Error", "Balance must be a number.")
 
 
+
+
+
+
     def open_create_account_window(self):
             create_win = ctk.CTkToplevel(self)
             create_win.title("Create New Account")
