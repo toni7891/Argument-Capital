@@ -24,13 +24,20 @@ class AdminPanel(ctk.CTk):
         self.admin_id = admin_id
         self.parent_login = parent_login
         self.center_window()
+        self.protocol("WM_DELETE_WINDOW", self.on_closing)
         
         self.title("Admin Control Center")
         self.geometry("400x700")
         self.configure(fg_color="#0A0E27") 
         self.resizable(False, False)
-        
+
+    def on_closing(self):
+            if self.parent_login:
+                self.parent_login.destroy() # Kills the hidden login window too
+            self.destroy()
+
     def center_window(self, window=None):
+        
         win = window if window else self
     
         win.update_idletasks()
@@ -97,7 +104,6 @@ class AdminPanel(ctk.CTk):
         self.logout_btn.pack(fill="x", pady=10)
 
     def create_admin_button(self, text, command):
-            """Helper to create buttons matching your UI style"""
             btn = ctk.CTkButton(
                 self.button_frame,
                 text=text,
@@ -131,6 +137,5 @@ class AdminPanel(ctk.CTk):
 
       
 if __name__ == "__main__":
-    # Test the panel
     app = AdminPanel("ADMIN01")
     app.mainloop()
