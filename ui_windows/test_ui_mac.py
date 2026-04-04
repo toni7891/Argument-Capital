@@ -12,13 +12,8 @@ if parent_dir not in sys.path:
 import models
 from ui_windows import ui_dashboard
 from ui_windows import ui_admin_login
-import storage
-import json
 
-# FYI fitussi - hours for this
-# https://github.com/TomSchimansky/CustomTkinter/discussions/2214
-#↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-#import pywinstyles
+
 
 
 class LoginScreen(ctk.CTk):

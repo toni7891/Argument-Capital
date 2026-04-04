@@ -100,7 +100,7 @@ class Admin_user_table(ctk.CTk):
         )
         self.search_entry.pack()
         # This triggers the search function every time the user types
-        self.search_entry.bind("<KeyRelease>", lambda event: self.filter_table())
+        self.search_var.trace_add("write", lambda *args: self.filter_table())
                 
 
         self.scroll_frame = ctk.CTkScrollableFrame(
@@ -134,11 +134,36 @@ class Admin_user_table(ctk.CTk):
         
         self.table.pack(expand=True, fill="both")
         
+    def load_json_data(self):
+        try:
+            
+            data = storage.all_clients()
+            print(f"DEBUG: Loaded {len(data)} clients from JSON")
+            # print(data) # For debugging
+            
+            table_data = [["ID", "Username", "Balance", "Blocked Or Active", "Admin Or Client"]]
+            
+            # user_info is the inner dictionary with username, pin, etc.
+            for client_id, user_info in data.items():
+                        status = "Blocked" if user_info.get("blocked_or_not") else "Active"
+                        acc_type = "Admin" if user_info.get("is_admin") else "Client"
+                        
+                        row = [
+                            client_id,
+                            user_info.get("username", "N/A"),
+                            f"₪{user_info.get('balance', 0):,.2f}",
+                            status,
+                            acc_type
+                        ]
+                        table_data.append(row)
+            return table_data
+        except Exception as e:
+                return [["Error"], [str(e)]]
+    
     def on_closing(self):
         if self.parent_login:
-            self.parent_login.destroy() # Kills the hidden login window too
+            self.parent_login.deiconify()
         self.destroy()
-        
         
     
     def center_window(self, window=None):
@@ -163,30 +188,6 @@ class Admin_user_table(ctk.CTk):
         win.geometry(f"{width}x{height}+{x}+{y}")
 
 
-    def load_json_data(self):
-        try:
-            
-            data = storage.all_clients()
-            # print(data) # For debugging
-            
-            table_data = [["ID", "Username", "Balance", "Blocked Or Active", "Admin Or Client"]]
-            
-            # user_info is the inner dictionary with username, pin, etc.
-            for client_id, user_info in data.items():
-                        status = "Blocked" if user_info.get("blocked_or_not") else "Active"
-                        acc_type = "Admin" if user_info.get("is_admin") else "Client"
-                        
-                        row = [
-                            client_id,
-                            user_info.get("username", "N/A"),
-                            f"₪{user_info.get('balance', 0):,.2f}",
-                            status,
-                            acc_type
-                        ]
-                        table_data.append(row)
-            return table_data
-        except Exception as e:
-                return [["Error"], [str(e)]]
             
     def update_table(self):
         try:
@@ -209,8 +210,15 @@ class Admin_user_table(ctk.CTk):
             if search_term in str(row[0]).lower() or search_term in str(row[1]).lower():
                 filtered_data.append(row)
                 
-        self.table.configure(values=filtered_data)
-    
+        if len(filtered_data) == 1:
+            filtered_data.append(["-", "No results found", "-", "-", "-"])
+        
+        # force the table to update fix
+        self.table.configure(rows=len(filtered_data), values=filtered_data)
+        # self.table.pack(expand=True, fill="both")
+        # self.table.update()
+        self.scroll_frame._parent_canvas.yview_moveto(0) 
+        self.update_idletasks()
                 
 
     
