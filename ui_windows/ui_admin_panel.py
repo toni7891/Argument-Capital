@@ -31,31 +31,6 @@ class AdminPanel(ctk.CTk):
         self.configure(fg_color="#0A0E27") 
         self.resizable(False, False)
 
-    def on_closing(self):
-            if self.parent_login:
-                self.parent_login.destroy() # Kills the hidden login window too
-            self.destroy()
-
-    def center_window(self, window=None):
-        
-        win = window if window else self
-    
-        win.update_idletasks()
-    
-        width = win.winfo_width()
-        height = win.winfo_height()
-    
-        # get screen dimensions
-        screen_width = win.winfo_screenwidth()
-        screen_height = win.winfo_screenheight()
-    
-        # calculate coordinates
-        x = (screen_width // 2) - (width // 2)
-        y = (screen_height // 2) - (height // 2)
-    
-        win.geometry(f"{width}x{height}+{x}+{y}")
-
-        
         # Header Section
         self.header_label = ctk.CTkLabel(
             self, 
@@ -103,6 +78,31 @@ class AdminPanel(ctk.CTk):
         )
         self.logout_btn.pack(fill="x", pady=10)
 
+    def on_closing(self):
+            if self.parent_login:
+                self.parent_login.destroy() # Kills the hidden login window too
+            self.destroy()
+
+    def center_window(self, window=None):
+        
+        win = window if window else self
+    
+        win.update_idletasks()
+    
+        width = win.winfo_width()
+        height = win.winfo_height()
+    
+        # get screen dimensions
+        screen_width = win.winfo_screenwidth()
+        screen_height = win.winfo_screenheight()
+    
+        # calculate coordinates
+        x = (screen_width // 2) - (width // 2)
+        y = (screen_height // 2) - (height // 2)
+    
+        win.geometry(f"{width}x{height}+{x}+{y}")
+
+
     def create_admin_button(self, text, command):
             btn = ctk.CTkButton(
                 self.button_frame,
@@ -118,9 +118,82 @@ class AdminPanel(ctk.CTk):
             btn.pack(fill="x", pady=10)
             return btn
 
+    def create_account_logic(self, create_win, user_entry, pin_entry, bal_entry, is_admin_var):
+            try:
+                username = user_entry.get()
+                pin = pin_entry.get()
+                balance_str = bal_entry.get()
+                is_admin = is_admin_var.get()
+
+                if not username or not pin or not balance_str:
+                    self.popup_win("Error", "All fields are required!")
+                    return
+                
+                balance = float(balance_str)
+
+                models.Admin.create_client_account(
+                    username=username, 
+                    pin=pin, 
+                    balance=balance, 
+                    blocked_or_not=False, 
+                    is_admin=is_admin
+                )
+
+                self.popup_win("Success", f"{'Admin' if is_admin else 'User'} account created!")
+                create_win.destroy()
+
+            except ValueError:
+                self.popup_win("Error", "Balance must be a number.")
+
 
     def open_create_account_window(self):
-        print("Opening Create Account Form...")
+            create_win = ctk.CTkToplevel(self)
+            create_win.title("Create New Account")
+            create_win.geometry("400x550")
+            create_win.configure(fg_color="#0A0E27")
+            create_win.attributes('-topmost', True)
+            create_win.grab_set()
+            create_win.resizable(False, False)
+
+            frame = ctk.CTkFrame(create_win, fg_color="transparent")
+            frame.pack(expand=True, fill="both", padx=40, pady=20)
+
+            ctk.CTkLabel(frame, text="Create New User", font=("Inter", 20, "bold"), text_color="white").pack(pady=20)
+
+            user_entry = ctk.CTkEntry(frame, placeholder_text="Username", height=45, corner_radius=10)
+            user_entry.pack(fill="x", pady=10)
+
+            pin_entry = ctk.CTkEntry(frame, placeholder_text="PIN (4 digits)", height=45, corner_radius=10)
+            pin_entry.pack(fill="x", pady=10)
+
+            bal_entry = ctk.CTkEntry(frame, placeholder_text="Initial Balance", height=45, corner_radius=10)
+            bal_entry.pack(fill="x", pady=10)
+
+            is_admin_var = ctk.BooleanVar(value=False)
+            admin_switch = ctk.CTkSwitch(
+                frame, 
+                text="Give Admin Privileges", 
+                variable=is_admin_var,
+                progress_color="#EE2626",
+                font=("Inter", 13),
+                text_color="white"
+            )
+            admin_switch.pack(pady=20)
+
+            confirm_btn = ctk.CTkButton(
+                frame, 
+                text="Create Account", 
+                height=50, 
+                fg_color="#3B82F6",
+                command=lambda: self.create_account_logic(
+                    create_win, user_entry, pin_entry, bal_entry, is_admin_var
+                )
+            )
+            confirm_btn.pack(fill="x", pady=(10, 10))
+
+            ctk.CTkButton(frame, text="Cancel", fg_color="#1F1F1F", command=create_win.destroy).pack(fill="x")
+            
+            self.center_window(create_win)
 
     def open_accounts_list(self):
         print("Opening Global Accounts Table...")

@@ -126,10 +126,10 @@ class AdminLoginScreen(ctk.CTk):
         self.geometry(f"{width}x{height}+{x}+{y}")
 
 #! //////////////////////////////////////////////////////////////////////
-
     def authenticate(self):
         admin_id = self.admin_id_entry.get()
         admin_pin = self.admin_password_entry.get()
+
 
         if models.Admin.check_admin_login(admin_id, admin_pin):
             self.withdraw() # hides the window!
