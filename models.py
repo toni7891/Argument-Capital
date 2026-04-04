@@ -28,7 +28,6 @@ class Client:
 
 
     def deposit(amount, client_id_input):
-        amount = amount.replace(" ","")
         if amount < 0:
             return False
         
@@ -65,8 +64,6 @@ class Client:
             then changing and saving the transfer and the transaction hisrtory in the json file
         """
         all_clients_trans = storage.all_clients()
-        amount = amount.replace(" ","")
-        from_id = from_id.replace(" ","")
         to_id = to_id.replace(" ","")
 
         if all_clients_trans[from_id]["balance"] < amount: 
@@ -154,8 +151,6 @@ class Client:
     def withdraw(amount, client_id_input):
         #* stores all data from json *VERY IMPORTANT*
         all_clients = storage.all_clients()
-        amount = amount.replace(" ","")
-        client_id_input = client_id_input.replace(" ","")
 
         for client_id, client_info in all_clients.items():
             if client_id == client_id_input:
