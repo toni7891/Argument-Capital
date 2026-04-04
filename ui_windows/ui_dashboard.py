@@ -36,15 +36,16 @@ class Dashboard(ctk.CTk):
             self, 
             corner_radius=20, 
             height=20,
-            fg_color="transparent") # TODO add user variable and logic
+            fg_color="transparent")
         self.welcome_frame.pack_propagate(False)
         self.welcome_frame.pack(fill="x", padx=5, pady=20)  
         
         #welcome label
-        userid_name = self.welcom_get_username()
+        client_info = models.Admin.find_account(self.current_client_id)
+        userid_name = client_info["username"]
         self.welcome = ctk.CTkLabel(
             self.welcome_frame,
-            text= f"Welcome {userid_name}", # TODO add user variable and logic here
+            text= f"Welcome {userid_name}",
             font=("Inter", 14),
             text_color="white"
         )
@@ -74,7 +75,7 @@ class Dashboard(ctk.CTk):
         #balance itself
         self.balance_label = ctk.CTkLabel(
             self.top_frame,
-            text=(f"₪{balance_for_real}"), # TODO balance amount variable here <-
+            text=(f"₪{balance_for_real}"),
             font=("Inter", 40),
             text_color="white"
         )
@@ -212,14 +213,6 @@ class Dashboard(ctk.CTk):
         if self.parent_login:
             self.parent_login.destroy()
         self.destroy()
-
-    def welcom_get_username(self):
-        all_clients = storage.all_clients()
-        name = ""
-        for cid , cinfo in all_clients.items():
-            if cid == self.current_client_id:
-                name = cinfo["username"]
-                return name
 
     #center window function that can be used for any window (main or toplevel)
     def center_window(self, window=None):
