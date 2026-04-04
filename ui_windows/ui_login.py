@@ -150,7 +150,7 @@ class LoginScreen(ctk.CTk):
 
 
         self.destroy()
-        dashboard = Dashboard(current_client_id=client_id)
+        dashboard = ui_dashboard(current_client_id=client_id)
         dashboard.mainloop()
     
     #open admin login screen and close current login screen

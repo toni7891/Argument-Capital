@@ -6,7 +6,6 @@ import sys
 import os
 #?--> use the command if you dont have CTkTable > pip install CTkTable
 
-
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 if parent_dir not in sys.path:
@@ -125,10 +124,8 @@ class AdminPanel(ctk.CTk):
 
     def logout(self):
         if self.parent_login:
-            self.parent_login.deiconify() 
+            self.parent_login.deiconify() #--> this opens back the window we closed with withdraw() in ui_admin_panel.
         self.destroy()
-
-
 
 
 

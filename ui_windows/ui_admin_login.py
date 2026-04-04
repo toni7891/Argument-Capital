@@ -1,5 +1,14 @@
 import customtkinter as ctk
-# from models import * #! this doesnt work for some reason
+import sys
+import os
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+if parent_dir not in sys.path:
+    sys.path.append(parent_dir)
+
+import models
+
 
 class AdminLoginScreen(ctk.CTk):
     def __init__(self):
@@ -70,7 +79,7 @@ class AdminLoginScreen(ctk.CTk):
             hover_color="#CA1107",
             font=("Inter", 16, "bold"),
             corner_radius=12,
-            # command= TBA
+            command=self.authenticate
         )
         self.admin_login_btn.pack(fill="x", pady=10)
         
@@ -116,9 +125,23 @@ class AdminLoginScreen(ctk.CTk):
         # Set the geometry
         self.geometry(f"{width}x{height}+{x}+{y}")
 
-    # ! same as user but for admin
+#! //////////////////////////////////////////////////////////////////////
+
     def authenticate(self):
-        pass
+        admin_id = self.admin_id_entry.get()
+        admin_pin = self.admin_password_entry.get()
+
+        if models.Admin.check_admin_login(admin_id, admin_pin):
+            self.withdraw() # hides the window!
+            
+            from ui_admin_panel import AdminPanel 
+            admin_dash = AdminPanel(admin_id, parent_login=self)
+            admin_dash.mainloop()
+        else:
+            # maybe use popup window with tony's changes!
+            print("Invalid Admin Credentials")
+
+#! //////////////////////////////////////////////////////////////////////
 
 # if id and pin correct -> close window and open new dashboard window
         # if authenticate:
