@@ -99,7 +99,6 @@ class Admin_user_table(ctk.CTk):
             width=300
         )
         self.search_entry.pack()
-        # This triggers the search function every time the user types
         self.search_entry.bind("<KeyRelease>", lambda event: self.filter_table())
                 
 
