@@ -256,9 +256,11 @@ class AdminPanel(ctk.CTk):
             self.center_window(create_win)
 
     def open_accounts_list(self):
-        self.withdraw() 
+        # self.withdraw()
+        # from ui_admin_user_table import Admin_user_table
+        # self.user_table_win = Admin_user_table(parent_login=self) 
         
-        user_table = ui_admin_user_table.Admin_user_table()
+        user_table = ui_admin_user_table.Admin_user_table(parent_login=self)
         user_table.mainloop()
 
 
