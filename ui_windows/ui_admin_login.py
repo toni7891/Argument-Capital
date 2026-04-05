@@ -35,16 +35,10 @@ class AdminLoginScreen(ctk.CTk):
         self.main_frame = ctk.CTkFrame(self, fg_color="transparent")
         self.main_frame.pack(expand=True, fill="both", padx=40)
         
-         # logo
-        # TODO REPLACE "A" LOGO
-        self.logo_label = ctk.CTkLabel(
-            self.main_frame, text="A", font=("Inter", 60, "bold"), text_color="#3B82F6")
-        self.logo_label.pack(pady=(60, 0))
-        
         # bank name
         self.bank_name = ctk.CTkLabel(
             self.main_frame, text="ARGUMENT\nCAPITAL", font=("Inter", 24, "bold"), text_color="white")
-        self.bank_name.pack(pady=(0, 0))
+        self.bank_name.pack(pady=(60, 0))
         
         # admin login header
         self.main_header = ctk.CTkLabel(
@@ -80,7 +74,6 @@ class AdminLoginScreen(ctk.CTk):
         self.admin_password_entry.pack(fill="x", pady=10)
         
         # login button
-        # TODO logic
         self.admin_login_btn = ctk.CTkButton(
             self.main_frame,
             text="Log In",
