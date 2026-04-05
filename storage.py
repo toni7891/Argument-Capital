@@ -7,7 +7,14 @@ MAIN_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(MAIN_DIR, "data.json")
 
 def all_clients(filename=DATA_FILE):
-    
+    """_read the data.json and store client data in data var_
+
+    Args:
+        filename (_type_, optional): _description_. Defaults to DATA_FILE.
+
+    Returns:
+        _type_: _returns the raw data from the JSON file._
+    """
     #read the data.json and store client data in data var 
     with open(filename, "r") as file:
         data = json.load(file)
@@ -15,7 +22,11 @@ def all_clients(filename=DATA_FILE):
         
 
 def transaction_format(type_of_op, from_acc, to, amount, direction, old_balance,new_balance):
-    
+    """_makes a new transaction history dictionary with the data we gave it._
+
+    Returns:
+        _type_: _returns the data for the specific transaction in a dict format._
+    """
     new_format_transaction = {
         "type": type_of_op,
         "from": from_acc,

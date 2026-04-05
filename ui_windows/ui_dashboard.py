@@ -24,14 +24,12 @@ class Dashboard(ctk.CTk):
         #to prevent the login window to stay alive in case of abrupt closing beacuse login page is withdraw() and not destory()
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
         
-        #setup
         self.title("Dashboard")
         self.geometry("400x700")
         self.configure(fg_color = "#0A0E27")
         self.resizable(False, False)
         self.center_window()
         
-        #welcome frame
         self.welcome_frame = ctk.CTkFrame(
             self, 
             corner_radius=20, 
@@ -65,8 +63,8 @@ class Dashboard(ctk.CTk):
         self.balance_title = ctk.CTkLabel(
             self.top_frame,
             text="Current Balance",
-            font=("Inter", 12),      # Smaller font for the title
-            text_color="lightgray"   # Different color for hierarchy
+            font=("Inter", 12),      
+            text_color="lightgray"   
         )
         self.balance_title.pack(side="top", anchor="w", padx=20, pady=(10, 0))
         
@@ -82,7 +80,6 @@ class Dashboard(ctk.CTk):
         )
         self.balance_label.pack(side="bottom", anchor="w", padx=20, pady=(0, 20))  
               
-        #placeholder frame
         self.ph_frame = ctk.CTkFrame(
             self,
             fg_color="transparent",
@@ -94,7 +91,6 @@ class Dashboard(ctk.CTk):
             padx=20,
         )
               
-        #actions frame
         self.main_frame = ctk.CTkFrame(
             self, 
             fg_color="transparent"
@@ -270,7 +266,11 @@ class Dashboard(ctk.CTk):
         self.center_window(popup_win)
     
     def deposit_handling(self, dep_win):
-        
+        """_this is the deposit function._
+
+        Args:
+            dep_win (_type_): _this is the window we are working on that got sent to the function._
+        """
         try:
             amount = float(dep_win.amount_entry.get())
 
@@ -292,24 +292,21 @@ class Dashboard(ctk.CTk):
             self.popup_win("Invalid Amount", "The amount must be a number and greater than zero.")
 
 
-    #open deposit window
     def open_window(self):
             dep_win = ctk.CTkToplevel(self)
             dep_win.title("Deposit")
             dep_win.geometry("400x400")
             dep_win.configure(fg_color="#0A0E27")
             dep_win.resizable(False, False)
-            dep_win.grab_set() # prevents interaction with main dashboard until closed
-            dep_win.attributes('-topmost', True)  # Keep on top
+            dep_win.grab_set() 
+            dep_win.attributes('-topmost', True)  
             
-            #frame
             dep_win.frame = ctk.CTkFrame(
                 dep_win, 
                 corner_radius=20, 
                 fg_color="#0A0E27")
             dep_win.frame.pack(expand=True, fill="both", padx=20, pady=20)
             
-            #label
             dep_win.dep = ctk.CTkLabel(
                 dep_win.frame,
                 text="Deposit Funds",
@@ -318,7 +315,6 @@ class Dashboard(ctk.CTk):
             )
             dep_win.dep.pack(pady=20)
             
-            #entry
             dep_win.amount_entry = ctk.CTkEntry(
                 dep_win.frame,
                 placeholder_text="Enter amount to deposit",
@@ -333,7 +329,6 @@ class Dashboard(ctk.CTk):
             dep_win.amount_entry.pack(pady=10)
             self.center_window(dep_win)
             
-            #confirm button
             dep_win.confirm_btn = ctk.CTkButton(
                 dep_win.frame,
                 text="Confirm Deposit",
@@ -347,7 +342,6 @@ class Dashboard(ctk.CTk):
             )
             dep_win.confirm_btn.pack(pady=(30, 10))
             
-            #cancel button
             dep_win.cancel_btn = ctk.CTkButton(
                 dep_win.frame,
                 text="Cancel",
@@ -362,7 +356,11 @@ class Dashboard(ctk.CTk):
             dep_win.cancel_btn.pack(pady=0)
 
     def withdraw_logic(self, with_win):
-        
+        """_this is the function for the withdraw option._
+
+        Args:
+            with_win (_type_): _this is the window we are working on that got sent to the function._
+        """
         try:
             amount = float(with_win.amount_entry.get())
             if amount <= 0:
@@ -454,7 +452,11 @@ class Dashboard(ctk.CTk):
 
 
     def transfer_logic(self, trans_win):
-        
+        """_this is the function for the transfer option._
+
+        Args:
+            trans_win (_type_): _this is the window we are working on that got sent to the function._
+        """
         try:
             amount = float(trans_win.amount_entry.get())
             to_id = trans_win.recipient_entry.get()
@@ -478,7 +480,6 @@ class Dashboard(ctk.CTk):
 
 
     
-    #open transfer window
     def open_transfer_window(self):
         trans_win = ctk.CTkToplevel(self)
         trans_win.title("Transfer Funds")
@@ -487,14 +488,12 @@ class Dashboard(ctk.CTk):
         trans_win.resizable(False, False)
         trans_win.attributes('-topmost', True)
         
-        #frame
         trans_win.frame = ctk.CTkFrame(
             trans_win, 
             corner_radius=20, 
             fg_color="#0A0E27")
         trans_win.frame.pack(expand=True, fill="both", padx=20, pady=20)
         
-        #label
         trans_win.with_label = ctk.CTkLabel(
             trans_win.frame,
             text="Transfer Funds",
@@ -503,7 +502,6 @@ class Dashboard(ctk.CTk):
         )
         trans_win.with_label.pack(pady=20)
         
-        #recipient ID entry
         trans_win.recipient_entry = ctk.CTkEntry(
             trans_win.frame,
             placeholder_text="Recipient ID",
@@ -517,7 +515,6 @@ class Dashboard(ctk.CTk):
         )
         trans_win.recipient_entry.pack(pady=10)
         
-        #amount entry
         trans_win.amount_entry = ctk.CTkEntry(
             trans_win.frame,
             placeholder_text="Amount to transfer",
@@ -531,7 +528,6 @@ class Dashboard(ctk.CTk):
         )
         trans_win.amount_entry.pack(pady=10)
         
-        #confirm button
         trans_win.confirm_btn = ctk.CTkButton(
             trans_win.frame,
             text="Confirm Transfer",
@@ -545,7 +541,6 @@ class Dashboard(ctk.CTk):
         )
         trans_win.confirm_btn.pack(pady=(30, 10))
         
-        #cancel button
         trans_win.cancel_btn = ctk.CTkButton(
             trans_win.frame,
             text="Cancel",
@@ -559,13 +554,18 @@ class Dashboard(ctk.CTk):
         )
         trans_win.cancel_btn.pack(pady=0)
         self.center_window(trans_win)
-    #logsout
+
     def logout(self):
         if self.parent_login:
-            self.parent_login.deiconify() # show login window again
-        self.destroy() # close dashboard window
+            self.parent_login.deiconify() 
+        self.destroy() 
     
     def change_pin_logic(self,change_pin_win):
+        """_this the function we use to change the users pin._
+
+        Args:
+            change_pin_win (_type_): _this is the window we are working on that got sent to the function._
+        """
         old_pin = change_pin_win.current_pin_entry.get()
         new_pin = change_pin_win.new_pin_entry.get()
         conf_pin = change_pin_win.confirm_new_pin_entry.get()
@@ -590,7 +590,6 @@ class Dashboard(ctk.CTk):
         else:
             self.popup_win("Error", "The PIN hasn't been changed, Please try again!")
     
-    #open change pin window
     def change_pin_window(self):
         change_pin_win = ctk.CTkToplevel(self)
         change_pin_win.title("Change PIN")
@@ -599,14 +598,14 @@ class Dashboard(ctk.CTk):
         change_pin_win.resizable(False, False)
         change_pin_win.attributes('-topmost', True)
         
-        #frame
+
         change_pin_win.frame = ctk.CTkFrame(
             change_pin_win, 
             corner_radius=20, 
             fg_color="#0A0E27")
         change_pin_win.frame.pack(expand=True, fill="both", padx=20, pady=20)
         
-        #label
+
         change_pin_win.label = ctk.CTkLabel(
             change_pin_win.frame,
             text="Change PIN",
@@ -615,11 +614,11 @@ class Dashboard(ctk.CTk):
         )
         change_pin_win.label.pack(pady=20)
         
-        #current pin entry  
+
         change_pin_win.current_pin_entry = ctk.CTkEntry(
             change_pin_win.frame,
             placeholder_text="Current PIN",
-            show="*", # hides input
+            show="*", 
             height=55,
             fg_color="#161C30",
             border_color="#90d5ff",
@@ -628,11 +627,11 @@ class Dashboard(ctk.CTk):
         )
         change_pin_win.current_pin_entry.pack(fill="x", pady=10)
         
-        #new pin entry
+  
         change_pin_win.new_pin_entry = ctk.CTkEntry(
             change_pin_win.frame,
             placeholder_text="New PIN",
-            show="*", # hides input
+            show="*", 
             height=55,
             fg_color="#161C30",
             border_color="#90d5ff",
@@ -641,11 +640,11 @@ class Dashboard(ctk.CTk):
         )
         change_pin_win.new_pin_entry.pack(fill="x", pady=10)
         
-        #confirm new pin entry
+
         change_pin_win.confirm_new_pin_entry = ctk.CTkEntry(
             change_pin_win.frame,
             placeholder_text="Confirm New PIN",
-            show="*", # hides input
+            show="*", 
             height=55,
             fg_color="#161C30",
             border_color="#90d5ff",
@@ -654,7 +653,7 @@ class Dashboard(ctk.CTk):
         )
         change_pin_win.confirm_new_pin_entry.pack(fill="x", pady=10)
         
-        #confirm button
+
         change_pin_win.confirm_btn = ctk.CTkButton(
             change_pin_win.frame,
             text="Confirm PIN Change",
@@ -668,7 +667,7 @@ class Dashboard(ctk.CTk):
         )
         change_pin_win.confirm_btn.pack(pady=(30, 10))
         
-        #cancel button
+
         change_pin_win.cancel_btn = ctk.CTkButton(
             change_pin_win.frame,
             text="Cancel",
@@ -682,8 +681,8 @@ class Dashboard(ctk.CTk):
         )
         change_pin_win.cancel_btn.pack(pady=0)
         self.center_window(change_pin_win)
-        
-    #open statements window
+ 
+ 
     def statements_window(self):
         statements_win = ctk.CTkToplevel(self)
         statements_win.title("Statements")
@@ -698,7 +697,6 @@ class Dashboard(ctk.CTk):
         main_frame = ctk.CTkFrame(statements_win, fg_color="transparent")
         main_frame.pack(expand=True, fill="both", padx=20, pady=(10, 20)) # pady=(Top, Bottom)
         
-        # Title
         label = ctk.CTkLabel(
             main_frame,
             text="Transaction History",
@@ -718,11 +716,11 @@ class Dashboard(ctk.CTk):
 
         try:
             data = storage.all_clients()
-            # Get user transactions
+
             user_data = data.get(str(self.current_client_id), {})
             transactions = user_data.get("transaction_list", [])
             
-            # Define Table Headers
+
             table_values = [["Date", "Type", "Amount", "From/To", "Direction"]]
             
             for tx in reversed(transactions):
@@ -754,7 +752,7 @@ class Dashboard(ctk.CTk):
         )
         scroll_frame.pack(expand=True, fill="both", pady=10)
 
-        # Initialize CTkTable with the retrieved data
+
         self.table = CTkTable(
             master=scroll_frame,
             row=len(table_values),
@@ -773,11 +771,11 @@ class Dashboard(ctk.CTk):
     def update_table(self):
         try:
                 data = storage.all_clients()
-                # Get user transactions
+
                 user_data = data.get(str(self.current_client_id), {})
                 transactions = user_data.get("transaction_list", [])
                     
-                # Define Table Headers
+
                 table_values = [["Date", "Type", "Amount", "From/To", "Direction"]]
                     
                 for tx in reversed(transactions):

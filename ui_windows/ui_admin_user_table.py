@@ -134,7 +134,11 @@ class Admin_user_table(ctk.CTkToplevel):
         
     
     def center_window(self, window=None):
-       
+        """_this function puts the window we are launching in the middle of the screen, relative to the dimensions of it._
+
+        Args:
+            window (_type_, object): _description_. Defaults to None.
+        """
         win = window if window else self
     
         win.update_idletasks()
@@ -156,6 +160,11 @@ class Admin_user_table(ctk.CTkToplevel):
 
 
     def load_json_data(self):
+        """this function loads all the data for the admin user table 
+
+        Returns:
+            _type_: _the values for the table._
+        """
         try:
             
             data = storage.all_clients()
@@ -181,6 +190,9 @@ class Admin_user_table(ctk.CTkToplevel):
                 return [["Error"], [str(e)]]
             
     def update_table(self):
+        """_this function updates the table and is used in the refresh button._
+
+        """
         try:
             new_values = self.load_json_data()
             self.table.configure(values=new_values) # Update the table widget with the new list of lists
@@ -191,6 +203,8 @@ class Admin_user_table(ctk.CTkToplevel):
             return e
         
     def filter_table(self):
+        """_this function is used in the search bar._
+        """
         search_term = self.search_var.get().lower()
         
         full_data = self.load_json_data()

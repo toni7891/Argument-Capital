@@ -16,7 +16,12 @@ class Client:
         
     # writing data to json file in correct format
     def to_dict(self):
-         return {
+        """_this function takes the primitive class we built and made a dictionary out of it._
+
+        Returns:
+            _type_: _the user profile with the attribiutes it needs._
+        """
+        return {
             "client_ID": self.client_ID,
             "username": self.username,
             "pin": self.pin,
@@ -271,11 +276,11 @@ class Admin(Client):
         return False
     
     def delete_account(client_id):
-        all_clients = storage.all_clients() # Load your JSON
+        all_clients = storage.all_clients() 
 
         for client_ID , client_info in all_clients.items():
             if client_ID == client_id:
-                del all_clients[client_id] # Remove the key
+                del all_clients[client_id] 
                 # Save the updated dictionary back to the JSON file
                 storage.save_clients(all_clients)
                 return True
