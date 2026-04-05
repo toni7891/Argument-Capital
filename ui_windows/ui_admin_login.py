@@ -9,7 +9,7 @@ if parent_dir not in sys.path:
 
 import models
 from ui_windows import test_final_ui
-from ui_windows import ui_dashboard
+from ui_windows import test_ui_mac
 from ui_windows import ui_admin_panel
 
 try:
