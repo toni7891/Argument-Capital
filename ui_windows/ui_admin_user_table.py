@@ -27,7 +27,7 @@ class Admin_user_table(ctk.CTk):
         self.configure(fg_color = "#0A0E27")
         self.resizable(False, False)
         self.center_window()
-        self.protocol("WM_DELETE_WINDOW", self.on_closing)
+        # self.protocol("WM_DELETE_WINDOW", self.on_closing)
         
         script_dir = os.path.dirname(os.path.abspath(__file__))
         icon_path = os.path.join(script_dir, "ArgumentLogo.ico") 
@@ -136,7 +136,7 @@ class Admin_user_table(ctk.CTk):
         
     def on_closing(self):
         if self.parent_login:
-            self.parent_login.destroy() # Kills the hidden login window too
+            self.parent_login.destroy()
         self.destroy()
         
         
