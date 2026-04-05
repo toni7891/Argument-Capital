@@ -167,9 +167,9 @@ class Admin_user_table(ctk.CTk):
         try:
             
             data = storage.all_clients()
-            # print(data) # For debugging
+            print(data) # For debugging
             
-            table_data = [["ID", "Username", "Balance", "Blocked Or Active", "Admin Or Client"]]
+            table_data = ["ID", "Username", "Balance", "Blocked Or Active", "Admin Or Client"]
             
             # user_info is the inner dictionary with username, pin, etc.
             for client_id, user_info in data.items():
@@ -193,7 +193,7 @@ class Admin_user_table(ctk.CTk):
             new_values = self.load_json_data()
             self.table.configure(values=new_values) # Update the table widget with the new list of lists
         
-            # print("Table updated successfully!")
+            print("Table updated successfully!")
         
         except Exception as e:
             return e
