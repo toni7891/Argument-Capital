@@ -3,4 +3,7 @@ __pycache__/
 *.pyc
 data.json
 test_data.json
+test_models.py
+test_storage.py
+
 .DS_Store
