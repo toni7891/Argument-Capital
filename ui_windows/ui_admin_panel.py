@@ -215,7 +215,7 @@ class AdminPanel(ctk.CTk):
             if target_id in all_clients:
 
                 current_status = all_clients[target_id].get("blocked_or_not", False)
-                all_clients[target_id]["blocked_or_not"] = not current_status
+                all_clients[target_id]["blocked_or_not"] = not current_status #! here the "not" makes the "current_status" the opposite of what it was.
                 
                 storage.save_clients(all_clients)
                 
