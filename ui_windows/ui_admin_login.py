@@ -154,18 +154,25 @@ class AdminLoginScreen(ctk.CTk):
 
 #! //////////////////////////////////////////////////////////////////////
     def authenticate(self):
-        admin_id = self.admin_id_entry.get()
-        admin_pin = self.admin_password_entry.get()
+            admin_id = self.admin_id_entry.get()
+            admin_pin = self.admin_password_entry.get()
 
-
-        if models.Admin.check_admin_login(admin_id, admin_pin):
-            self.withdraw() # hides the window!
-            
-            admin_dash = ui_admin_panel.AdminPanel(admin_id, parent_login=self)
-            admin_dash.mainloop()
-        else:
-            # maybe use popup window with tony's changes! #* imorted my window to here, cant import this function...
-            self.popup_win("ERROR" , "incorrect Admin credential's")
+            if models.Admin.check_admin_login(admin_id, admin_pin):
+                # 1. Hide the login window
+                self.withdraw() 
+                
+                # 2. Create the window object
+                # We use self.dash to 'pin' it in memory so it doesn't vanish
+                self.dash = ui_admin_panel.AdminPanel(admin_id, parent_login=self)
+                
+                # 3. CRITICAL: DO NOT call .mainloop() here!
+                
+                # 4. Force the window to update and show
+                self.dash.deiconify()
+                self.dash.lift()
+                self.dash.focus_force()
+            else:
+                self.popup_win("ERROR" , "incorrect Admin credential's")
 
 #! //////////////////////////////////////////////////////////////////////
 

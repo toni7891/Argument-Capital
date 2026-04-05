@@ -11,7 +11,7 @@ if parent_dir not in sys.path:
 
 import storage # Assuming storage.all_clients() returns your JSON dict
 
-class Admin_user_table(ctk.CTk):
+class Admin_user_table(ctk.CTkToplevel):
     def __init__(self, parent_login=None):
         super().__init__()
  
@@ -114,8 +114,10 @@ class Admin_user_table(ctk.CTk):
         self.table.configure(values=filtered_data, rows=len(filtered_data))
 
 def main():
-    app = Admin_user_table()
-    app.mainloop()
+    root = ctk.CTk() # Create the hidden root engine
+    root.withdraw()
+    user_table = Admin_user_table(parent_login=root)
+    root.mainloop()
 
 if __name__ == "__main__":
     main()

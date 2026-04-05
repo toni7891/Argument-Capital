@@ -17,7 +17,7 @@ import json
 MAIN_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(MAIN_DIR, "data.json")
 
-class Admin_user_table(ctk.CTk):
+class Admin_user_table(ctk.CTkToplevel):
     def __init__(self, parent_login=None):
         super().__init__()
  
@@ -133,6 +133,11 @@ class Admin_user_table(ctk.CTk):
         )
         
         self.table.pack(expand=True, fill="both")
+        self.deiconify() 
+        self.update()
+        self.focus_force()
+
+        self.search_var.trace_add("write", self.filter_table)
         
     def on_closing(self):
         if self.parent_login:

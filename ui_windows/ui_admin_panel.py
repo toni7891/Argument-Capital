@@ -18,6 +18,7 @@ MAIN_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(MAIN_DIR, "data.json")
 
 from ui_windows import ui_admin_user_table
+from ui_windows import test_adm_dashboard
 
 class AdminPanel(ctk.CTk):
     def __init__(self, admin_id, parent_login=None):
@@ -254,12 +255,15 @@ class AdminPanel(ctk.CTk):
             ctk.CTkButton(frame, text="Cancel", fg_color="#1F1F1F", command=create_win.destroy).pack(fill="x")
             
             self.center_window(create_win)
+            self.after(100, self.deiconify)
+            self.update_idletasks()
 
     def open_accounts_list(self):
-        # self.withdraw()
-        
-        user_table = ui_admin_user_table.Admin_user_table(parent_login=self)
-        user_table.mainloop()
+            # 1. Create the window as a Toplevel
+            self.user_table_window = ui_admin_user_table.Admin_user_table(parent_login=self)
+
+            self.user_table_window.attributes("-topmost", True)
+            self.user_table_window.focus_force()
 
 
     def open_block_window(self):
