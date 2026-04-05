@@ -1,2 +1,15 @@
-pip install CTkTable
-pip install customtkinter
+certifi==2021.5.30
+chardet==4.0.0
+CTkTable==1.1
+customtkinter==5.2.2
+darkdetect==0.8.0
+idna==2.10
+Jinja2==3.0.1
+MarkupSafe==2.0.1
+packaging==26.0
+pillow==12.2.0
+requests==2.25.1
+setuptools==82.0.1
+urllib3==1.26.6
+wheel==0.46.3
+pywinstyles==1.8
