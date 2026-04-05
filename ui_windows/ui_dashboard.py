@@ -110,6 +110,7 @@ class Dashboard(ctk.CTk):
         self.main_frame.grid_columnconfigure(1, weight=1)
         
         #row 0
+        #transfer buttom
         self.transfer_button = ctk.CTkButton(
             self.main_frame, 
             text="Transfer Funds", 
@@ -126,6 +127,7 @@ class Dashboard(ctk.CTk):
         )
         self.transfer_button.grid(row=0, column=0, padx=10, pady=10)
         
+        #change pin button
         self.change_pin_button = ctk.CTkButton(
             self.main_frame, 
             text="Change pin", 
@@ -143,6 +145,7 @@ class Dashboard(ctk.CTk):
         self.change_pin_button.grid(row=0, column=1, padx=10, pady=10)
         
         #row 1
+        #deposit button
         self.deposit_button = ctk.CTkButton(
             self.main_frame, 
             text="Deposit", 
@@ -159,6 +162,7 @@ class Dashboard(ctk.CTk):
         )
         self.deposit_button.grid(row=1, column=0, padx=10, pady=10)
         
+        #withdraw button
         self.withdraw_button = ctk.CTkButton(
             self.main_frame, 
             text="withdraw", 
@@ -176,6 +180,7 @@ class Dashboard(ctk.CTk):
         self.withdraw_button.grid(row=1, column=1, padx=10, pady=10)
         
         # row 2
+        #statements button
         self.statements_button = ctk.CTkButton(
             self.main_frame, 
             text="View\nStatements", 
@@ -192,6 +197,7 @@ class Dashboard(ctk.CTk):
         )
         self.statements_button.grid(row=2, column=0, padx=10, pady=10)
         
+        #logout button
         self.logout_button = ctk.CTkButton(
             self.main_frame, 
             text="Logout", 
