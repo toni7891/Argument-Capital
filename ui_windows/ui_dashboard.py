@@ -43,9 +43,10 @@ class Dashboard(ctk.CTk):
         #welcome label
         client_info = models.Admin.find_account(self.current_client_id)
         userid_name = client_info["username"]
+        userid_id = self.current_client_id
         self.welcome = ctk.CTkLabel(
             self.welcome_frame,
-            text= f"Welcome {userid_name}",
+            text= f"Welcome {userid_name} , ID: {userid_id}",
             font=("Inter", 14),
             text_color="white"
         )
