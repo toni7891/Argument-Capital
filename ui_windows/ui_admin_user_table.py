@@ -172,7 +172,7 @@ class Admin_user_table(ctk.CTkToplevel):
         try:
             
             data = storage.all_clients()
-            print(data) # For debugging
+            # print(data) # For debugging
             
             table_data = [["ID", "Username", "Balance", "Blocked Or Active", "Admin Or Client"]]
             
