@@ -19,6 +19,10 @@ import json
 # https://github.com/TomSchimansky/CustomTkinter/discussions/2214
 #↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 #* added try except for using mac
+
+#! THIS IS THE WORKING VERSION FOR WINDOWS! 
+
+
 try:
     import pywinstyles
     USE_STYLES = True
@@ -120,6 +124,11 @@ class LoginScreen(ctk.CTk):
 
 
     def center_window(self, window=None):
+        """_this function puts the window we are launching in the middle of the screen, relative to the dimensions of it._
+
+        Args:
+            window (_type_, object): _description_. Defaults to None.
+        """
         win = window if window else self
     
         win.update_idletasks()
@@ -165,6 +174,8 @@ class LoginScreen(ctk.CTk):
             self.center_window(popup_win)
 
     def authenticate_and_open(self):
+        """_this function is the basic "authentication" logic we are using in the client (normal user) interface._
+        """
         client_id = self.username_entry.get()
         pin = self.password_entry.get()
 
@@ -183,7 +194,7 @@ class LoginScreen(ctk.CTk):
             self.popup_win("Failed to authenticate", "one or more of the credentials is incorrect")
 
     def open_admin_login(self):
-        #*Transitions to Admin Login.
+        #if we get here it's because the user chose the admin login screen.
         self.destroy()
         admin_login = ui_admin_login.AdminLoginScreen()
         admin_login.mainloop()

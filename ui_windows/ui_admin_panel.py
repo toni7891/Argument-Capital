@@ -4,7 +4,6 @@ from PIL import Image, ImageTk
 from CTkTable import *
 import sys
 import os
-#?--> use the command if you dont have CTkTable > pip install CTkTable
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
@@ -46,24 +45,25 @@ class AdminPanel(ctk.CTk):
         self.button_frame.pack(expand=True, fill="both", padx=40)
         
 
-        # Create Account Button
+        # account creation button
         self.create_btn = self.create_admin_button(
             "Create New Account", 
             self.open_create_account_window
         )
         
-        # Accounts Dashboard Button
+        # accounts table button
         self.dash_btn = self.create_admin_button(
             "Accounts Dashboard", 
             self.open_accounts_list
         )
         
-        # Block/Unblock Account Button
+        # block or unblock button
         self.block_btn = self.create_admin_button(
             "Block/Unblock User", 
-            self.open_block_window # Linked here
+            self.open_block_window 
         )
         
+        # delete a user button
         self.delete_btn = self.create_admin_button(
             "Delete Account", 
             self.open_delete_account_window
@@ -71,7 +71,7 @@ class AdminPanel(ctk.CTk):
 
 
 
-        # Logout Button
+        # logout of the panel button
         self.logout_btn = ctk.CTkButton(
             self.button_frame,
             text="Logout",
@@ -115,11 +115,18 @@ class AdminPanel(ctk.CTk):
     
 
     def on_closing(self):
+            """_this functions task is killing the hidden login window too_
+            """
             if self.parent_login:
-                self.parent_login.destroy() # Kills the hidden login window too
+                self.parent_login.destroy()
             self.destroy()
 
     def center_window(self, window=None):
+        """_this function puts the window we are launching in the middle of the screen, relative to the dimensions of it._
+
+        Args:
+            window (_type_, object): _description_. Defaults to None.
+        """
         
         win = window if window else self
     
@@ -155,6 +162,15 @@ class AdminPanel(ctk.CTk):
             return btn
 
     def create_account_logic(self, create_win, user_entry, pin_entry, bal_entry, is_admin_var):
+            """this function creates a new accounts and adds it to the JSON database file.
+
+            Args:
+                create_win (_object_): _this is the window we are working on that got sent to the function._
+                user_entry (_type_): _username we got as input._
+                pin_entry (_type_): _pin we got as input._
+                bal_entry (_type_): _starting balance we got as input._
+                is_admin_var (bool): _tells the function to give the user admin perms or not._
+            """
             try:
                 username = user_entry.get()
                 pin = pin_entry.get()
@@ -182,6 +198,12 @@ class AdminPanel(ctk.CTk):
                 self.popup_win("Error", "Balance must be a number.")
 
     def toggle_block_logic(self, block_win, id_entry):
+            """this function changes the block_or_not key in the specific user we are targting to block or unblock.
+
+            Args:
+                block_win (_type_): _this is the window we are working on that got sent to the function._
+                id_entry (_type_): the id of the user we are blocking._
+            """
             target_id = id_entry.get().strip()
             
             if not target_id:
@@ -258,7 +280,8 @@ class AdminPanel(ctk.CTk):
             self.update_idletasks()
 
     def open_accounts_list(self):
-  
+            """_this function calls the Admin_user_table function from the ui_admin_user_table.py file in order to show the users table in realtime._
+            """
             self.user_table_window = ui_admin_user_table.Admin_user_table(parent_login=self)
 
             self.user_table_window.attributes("-topmost", True)
@@ -315,6 +338,12 @@ class AdminPanel(ctk.CTk):
 
 
     def delete_account_logic(self, delete_win, id_entry):
+        """_summary_
+
+        Args:
+            delete_win (_type_): _this is the window we are working on that got sent to the function._
+            id_entry (_type_): _thi is the id of the user we want to delete._
+        """
         client_id = id_entry.get().strip()
         
         if not client_id:

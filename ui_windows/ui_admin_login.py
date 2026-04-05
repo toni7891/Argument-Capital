@@ -125,6 +125,11 @@ class AdminLoginScreen(ctk.CTk):
             #for push
 
     def center_window(self):
+        """_this function puts the window we are launching in the middle of the screen, relative to the dimensions of it._
+
+        Args:
+            window (_type_, object): _description_. Defaults to None.
+        """
         self.update_idletasks()
         
         # Get window dimensions
@@ -169,20 +174,16 @@ class AdminLoginScreen(ctk.CTk):
 
 #! //////////////////////////////////////////////////////////////////////
     def authenticate(self):
+            """_this function is the basic "authentication" logic we are using in the Admin (normal user) interface._"""
             admin_id = self.admin_id_entry.get()
             admin_pin = self.admin_password_entry.get()
 
             if models.Admin.check_admin_login(admin_id, admin_pin):
-                # 1. Hide the login window
                 self.withdraw() 
                 
-                # 2. Create the window object
-                # We use self.dash to 'pin' it in memory so it doesn't vanish
                 self.dash = ui_admin_panel.AdminPanel(admin_id, parent_login=self)
                 
-                # 3. CRITICAL: DO NOT call .mainloop() here!
                 
-                # 4. Force the window to update and show
                 self.dash.deiconify()
                 self.dash.lift()
                 self.dash.focus_force()

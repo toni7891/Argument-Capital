@@ -13,7 +13,7 @@ import models
 from ui_windows import ui_dashboard
 from ui_windows import ui_admin_login
 
-
+#! THIS IS THE WORKING VERSION FOR MAC! 
 
 
 class LoginScreen(ctk.CTk):
@@ -48,7 +48,7 @@ class LoginScreen(ctk.CTk):
             border_width=3,
             justify="center"
         )
-        #pywinstyles.set_opacity(self.username_entry, color="#000001")
+        #pywinstyles.set_opacity(self.username_entry, color="#000001") #! removed because its mac
         self.canvas.create_window(200, 350, window=self.username_entry, anchor="center")
 
         self.password_entry = ctk.CTkEntry(
@@ -67,7 +67,7 @@ class LoginScreen(ctk.CTk):
             border_width=3,
             justify="center"
         )
-        #pywinstyles.set_opacity(self.password_entry, color="#000001")
+        #pywinstyles.set_opacity(self.password_entry, color="#000001") #! removed because its mac
         self.canvas.create_window(200, 420, window=self.password_entry)
 
         self.login_btn = ctk.CTkButton(
@@ -82,7 +82,7 @@ class LoginScreen(ctk.CTk):
             #corner_radius=12,
             command=self.authenticate_and_open
         )
-        #pywinstyles.set_opacity(self.login_btn, color="#000001")
+        #pywinstyles.set_opacity(self.login_btn, color="#000001") #! removed because its mac
         self.canvas.create_window(200, 520, window=self.login_btn)
 
         self.admin_btn = ctk.CTkButton(
@@ -99,7 +99,7 @@ class LoginScreen(ctk.CTk):
             #corner_radius=12,
             command=self.open_admin_login
         )
-        #pywinstyles.set_opacity(self.admin_btn, color="#000001")
+        #pywinstyles.set_opacity(self.admin_btn, color="#000001") #! removed because its mac
         self.canvas.create_window(200, 650, window=self.admin_btn)
         self.center_window()
 
