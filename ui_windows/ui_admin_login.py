@@ -59,6 +59,7 @@ class AdminLoginScreen(ctk.CTk):
             corner_radius=12
         )
         self.admin_id_entry.pack(fill="x", pady=10)
+        self.admin_id_entry.bind("<Return>", self.authenticate) # enables pressing enter to login from admin id field
         
         # password input field
         self.admin_password_entry = ctk.CTkEntry(
@@ -72,6 +73,8 @@ class AdminLoginScreen(ctk.CTk):
             corner_radius=12
         )
         self.admin_password_entry.pack(fill="x", pady=10)
+        self.admin_id_entry.bind("<Return>", self.authenticate)
+        self.admin_password_entry.bind("<Return>", self.authenticate) # enables pressing enter to login from password field, also added to admin id field for better UX
         
         # login button
         self.admin_login_btn = ctk.CTkButton(
@@ -166,7 +169,7 @@ class AdminLoginScreen(ctk.CTk):
         self.center_window(popup_win)
 
 #! //////////////////////////////////////////////////////////////////////
-    def authenticate(self):
+    def authenticate(self, event=None):
             """_this function is the basic "authentication" logic we are using in the Admin (normal user) interface._"""
             admin_id = self.admin_id_entry.get()
             admin_pin = self.admin_password_entry.get()

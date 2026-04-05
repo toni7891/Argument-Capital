@@ -66,6 +66,7 @@ class LoginScreen(ctk.CTk):
         if USE_STYLES:
             pywinstyles.set_opacity(self.username_entry, color="#000001")
         self.canvas.create_window(200, 350, window=self.username_entry, anchor="center")
+        self.username_entry.bind("<Return>", self.authenticate_and_open) # enables pressing enter to login from username field
 
         self.password_entry = ctk.CTkEntry(
             self,
@@ -86,6 +87,7 @@ class LoginScreen(ctk.CTk):
         if USE_STYLES:
             pywinstyles.set_opacity(self.password_entry, color="#000001")
         self.canvas.create_window(200, 420, window=self.password_entry)
+        self.password_entry.bind("<Return>", self.authenticate_and_open) # enables pressing enter to login from password field, also added to username field for better UX
 
         self.login_btn = ctk.CTkButton(
             self,
@@ -173,7 +175,7 @@ class LoginScreen(ctk.CTk):
         
             self.center_window(popup_win)
 
-    def authenticate_and_open(self):
+    def authenticate_and_open(self, event=None):
         """_this function is the basic "authentication" logic we are using in the client (normal user) interface._
         """
         client_id = self.username_entry.get()

@@ -50,6 +50,7 @@ class LoginScreen(ctk.CTk):
         )
         #pywinstyles.set_opacity(self.username_entry, color="#000001") #! removed because its mac
         self.canvas.create_window(200, 350, window=self.username_entry, anchor="center")
+        self.username_entry.bind("<Return>", self.authenticate_and_open) # enables pressing enter to login from username field
 
         self.password_entry = ctk.CTkEntry(
             self,
@@ -69,6 +70,7 @@ class LoginScreen(ctk.CTk):
         )
         #pywinstyles.set_opacity(self.password_entry, color="#000001") #! removed because its mac
         self.canvas.create_window(200, 420, window=self.password_entry)
+        self.password_entry.bind("<Return>", self.authenticate_and_open) # enables pressing enter to login from password field, also added to username field for better UX
 
         self.login_btn = ctk.CTkButton(
             self,
@@ -113,7 +115,7 @@ class LoginScreen(ctk.CTk):
         y = (screen_height // 2) - (height // 2)
         self.geometry(f"{width}x{height}+{x}+{y}")
 
-    def authenticate_and_open(self):
+    def authenticate_and_open(self, event=None):
         client_id = self.username_entry.get()
         pin = self.password_entry.get()
 
