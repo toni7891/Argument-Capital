@@ -125,8 +125,9 @@ class Client:
         
         for client_ID , client_info in all_clients.items():
             if client_ID == client_id and client_info["pin"] == client_pin:
-               return True
-        
+                if client_info["blocked_or_not"] == True:
+                    return 2
+                return True
         return False   
                     
     
@@ -254,8 +255,9 @@ class Admin(Client):
         for client_id , client_info in all_clients.items():
             if client_info["is_admin"] == True:
                 if client_id == admin_id and client_info["pin"] == admin_pin:
+                    if client_info["blocked_or_not"] == True:
+                        return False
                     return True
-                
         return False   
     
     def find_account(acc_id):
