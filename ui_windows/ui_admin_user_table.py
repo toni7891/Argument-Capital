@@ -29,8 +29,8 @@ class Admin_user_table(ctk.CTkToplevel):
         self.center_window()
         # self.protocol("WM_DELETE_WINDOW", self.on_closing)
         
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        icon_path = os.path.join(script_dir, "ArgumentLogo.ico") 
+        # script_dir = os.path.dirname(os.path.abspath(__file__))
+        # icon_path = os.path.join(script_dir, "ArgumentLogo.ico") 
 
         # if os.path.exists(icon_path):
         #     img = Image.open(icon_path)
