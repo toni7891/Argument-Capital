@@ -287,24 +287,7 @@ class Admin(Client):
         return False
 
 def main():
-    # Client.find_account("100")
-    # # Client.deposit(amount=500, client_id_input="100") #?--> אמור להכניס 500 לאיידי 100
-    # storage.save_clients()
-    #Client.from_dict(storage.all_clients())
     x = 0
-    # Client.transaction_fromto(amount=500, from_id="100", to_id="102")
-    #Client.check_pin(pin_input=1234, id_input=100)
-    #Admin.create_client_account(username="test123", pin="1234", balance=999, blocked_or_not=False, is_admin=False)
-    #Client.change_pin("676", "1234", "4321")
-    #Admin.block_client("508")
-    #Client.withdraw(amount=100, client_id_input="100")
-    # Client.check_pin(pin_input=1234, id_input=100)
-    # Client.change_pin("1234", "100", "5678")
-    # Admin.add_to_admin("508")
-    # print(Admin.show_all_client_data())
-    #print(Admin.check_admin_login("508","1234"))
-    #Admin.create_client_account(username="test_fixes3", pin="1 23 4", balance="0  ", blocked_or_not="true   ", is_admin="false   ")
-    #print(Admin.delete_account("531"))
 
 if __name__ == "__main__":
     main()
