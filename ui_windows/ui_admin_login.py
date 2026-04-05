@@ -9,8 +9,15 @@ if parent_dir not in sys.path:
 
 import models
 from ui_windows import test_final_ui
-from ui_windows import ui_dashboard
+from ui_windows import test_ui_mac
 from ui_windows import ui_admin_panel
+
+try:
+    import pywinstyles
+    USE_STYLES = True
+except ImportError:
+    USE_STYLES = False
+    print("Running on non-Windows system: pywinstyles disabled")
 
 
 class AdminLoginScreen(ctk.CTk):
@@ -105,9 +112,17 @@ class AdminLoginScreen(ctk.CTk):
         self.normal_btn.pack(pady=(10, 0))
 
     def login_screen(self):
-        self.destroy()
-        reg_login = test_final_ui.LoginScreen()
-        reg_login.mainloop()
+        if USE_STYLES == True:
+            print("going to win login")
+            self.destroy()
+            reg_login = test_final_ui.LoginScreen()
+            reg_login.mainloop()
+        elif USE_STYLES == False:
+            print("going to mac login")
+            self.destroy()
+            reg_login = test_ui_mac.LoginScreen()
+            reg_login.mainloop()
+            #for push
 
     def center_window(self):
         self.update_idletasks()

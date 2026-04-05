@@ -87,11 +87,6 @@ For macOS or alternate launch flow:
 python main_mac.py
 ```
 
-### Run tests
-
-```bash
-python -m pytest
-```
 
 > Tip: Use a virtual environment to keep dependencies isolated:
 > `python -m venv .venv && .venv\Scripts\activate && python -m pip install -r requirements.txt`

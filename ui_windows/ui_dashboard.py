@@ -714,7 +714,6 @@ class Dashboard(ctk.CTk):
             fg_color="#3B82F6",
             hover_color="#2563EB"
         )
-        # self.refresh_button.pack(pady=10, side="top")
         self.refresh_button.pack(pady=10)
 
         try:
