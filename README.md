@@ -110,11 +110,3 @@ python -m pytest
 - **Harel Valfish**
 
 ---
-
-## 📌 Suggested Additional Sections
-
-1. **Architecture** — explain the UI, data, and storage layers.
-2. **Configuration** — document environment variables and runtime options.
-3. **Development Workflow** — describe how to contribute, branch, and run tests.
-4. **Screenshots** — show the application UI and workflow visually.
-5. **Roadmap** — list planned features and future improvements.
