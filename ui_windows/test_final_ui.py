@@ -168,11 +168,17 @@ class LoginScreen(ctk.CTk):
         client_id = self.username_entry.get()
         pin = self.password_entry.get()
 
-        if models.Client.check_pin(client_id, pin):
+        success = models.Client.check_pin(client_id, pin)
+        
+        if success == True:
+            
             self.withdraw() 
         
             dashboard = ui_dashboard.Dashboard(current_client_id=client_id, parent_login=self)
             dashboard.mainloop()
+
+        elif success == 2:
+            self.popup_win("Failed to authenticate", "Account is BLOCKED! contact an admin!")
         else:
             self.popup_win("Failed to authenticate", "one or more of the credentials is incorrect")
 
