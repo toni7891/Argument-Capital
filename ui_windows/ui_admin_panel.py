@@ -18,7 +18,6 @@ MAIN_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(MAIN_DIR, "data.json")
 
 from ui_windows import ui_admin_user_table
-from ui_windows import test_adm_dashboard
 
 class AdminPanel(ctk.CTk):
     def __init__(self, admin_id, parent_login=None):
@@ -313,12 +312,6 @@ class AdminPanel(ctk.CTk):
             ).pack(fill="x")
             
             self.center_window(block_win)
-
-
-
-
-
-
 
 
     def delete_account_logic(self, delete_win, id_entry):

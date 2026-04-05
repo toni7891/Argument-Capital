@@ -686,14 +686,6 @@ class Dashboard(ctk.CTk):
         statements_win.resizable(False, False)
         statements_win.attributes('-topmost', True)
         
-        # #frame
-        # statements_win.frame = ctk.CTkFrame(
-        #     statements_win, 
-        #     corner_radius=20, 
-        #     fg_color="#0A0E27")
-        # statements_win.frame.pack(expand=True, fill="both", padx=20, pady=20)
-        
-        
         #! ////////////////////////////////////////////////////////////
 
         # this is the main transactios table
@@ -769,99 +761,6 @@ class Dashboard(ctk.CTk):
             text_color="white"
         )
         self.table.pack(expand=True, fill="both")
-
-        # self.table = CTkTable(
-        #     master=scroll_frame,
-        #     row=len(table_values),
-        #     column=5,
-        #     values=table_values,
-        #     header_color="#3B82F6",
-        #     hover_color="#2563EB",
-        #     colors=["#1F1F1F", "#2A2D3E"],
-        #     text_color="white",
-        #     font=("Inter", 12)
-        # )
-        # self.table.pack(expand=True, fill="both", padx=5, pady=5)
-        
-        self.center_window(statements_win)
-        #! ////////////////////////////////////////////////////////////
-        
-        # # Configure style for treeview
-        # style = ttk.Style()
-        # style.theme_use('clam')
-        # style.configure(
-        #     "Treeview",
-        #     background="#1F1F1F",
-        #     foreground="white",
-        #     fieldbackground="#1F1F1F",
-        #     borderwidth=0
-        # )
-        # style.configure(
-        #     "Treeview.Heading",
-        #     background="#3B82F6",
-        #     foreground="white",
-        #     borderwidth=0
-        # )
-        # style.map('Treeview', background=[('selected', '#3B82F6')])
-        
-        # # Create treeview (table)
-        # columns = ("Type", "Date", "Amount", "From", "To", "Status")
-        # statements_win.tree = ttk.Treeview(
-        #     statements_win.frame,
-        #     columns=columns,
-        #     show="headings",
-        #     height=15
-        # )
-        
-        # # Define column headings and widths
-        # statements_win.tree.column("Type", width=80, anchor="w")
-        # statements_win.tree.column("Date", width=150, anchor="w")
-        # statements_win.tree.column("Amount", width=100, anchor="e")
-        # statements_win.tree.column("From", width=100, anchor="w")
-        # statements_win.tree.column("To", width=100, anchor="w")
-        # statements_win.tree.column("Status", width=80, anchor="w")
-        
-        # # Set headings
-        # for col in columns:
-        #     statements_win.tree.heading(col, text=col)
-        
-        # # TODO this is sample data, populate with actual transaction data from models
-        # sample_data = [
-        #     ("Transfer", "2026-04-01 16:20:09", "-500.00", "tony", "guy", "Success"),
-        #     ("Transfer", "2026-04-01 16:19:08", "+500.00", "guy", "tony", "Success"),
-        #     ("Deposit", "2026-04-01 16:30:55", "+500.00", "System", "tony", "Success"),
-        #     ("Transfer", "2026-04-01 16:15:57", "-500.00", "tony", "guy", "Success"),
-        # ]
-        
-        # # Insert sample data
-        # for item in sample_data:
-        #     statements_win.tree.insert("", "end", values=item)
-        
-        # # Add scrollbar
-        # scrollbar = ttk.Scrollbar(
-        #     statements_win.frame,
-        #     orient="vertical",
-        #     command=statements_win.tree.yview
-        # )
-        # statements_win.tree.configure(yscroll=scrollbar.set)
-        
-        # # Pack treeview and scrollbar
-        # statements_win.tree.pack(side="left", fill="both", expand=True, pady=10)
-        # scrollbar.pack(side="right", fill="y")
-        
-        #! Close button
-        # close_btn = ctk.CTkButton(
-        #     statements_win.frame,
-        #     text="Close",
-        #     width=300,
-        #     height=40,
-        #     corner_radius=10,
-        #     fg_color="#1F1F1F",
-        #     hover_color="#3B3B3B",
-        #     font=("Inter", 14, "bold"),
-        #     command=lambda: self.close_window(statements_win)
-        # )
-        # close_btn.pack(pady=10)
   
     def close_window(self, window):
         window.destroy()
