@@ -36,14 +36,14 @@ class LoginScreen(ctk.CTk):
         self.username_entry = ctk.CTkEntry(
             self,
             placeholder_text="A c c o u n t    I D",
-            placeholder_text_color="#000000",
+            placeholder_text_color="#000001",
             height=55,
             width=300,
             border_color="#121212",
             text_color="black",
             fg_color="transparent",
             bg_color="#3B82F6",
-            corner_radius=10,
+            #corner_radius=10,
             font=("Arial", 18, "bold"),
             border_width=3,
             justify="center"
@@ -63,7 +63,7 @@ class LoginScreen(ctk.CTk):
             border_color="#121212",
             height=55,
             width=300,
-            corner_radius=12,
+            #corner_radius=12,
             border_width=3,
             justify="center"
         )
@@ -79,7 +79,7 @@ class LoginScreen(ctk.CTk):
             hover_color="#2563EB",
             bg_color="#3B82F6",
             font=("Inter", 16, "bold"),
-            corner_radius=12,
+            #corner_radius=12,
             command=self.authenticate_and_open
         )
         #pywinstyles.set_opacity(self.login_btn, color="#000001")
@@ -96,7 +96,7 @@ class LoginScreen(ctk.CTk):
             border_width=3,
             height=55,
             width=300,
-            corner_radius=12,
+            #corner_radius=12,
             command=self.open_admin_login
         )
         #pywinstyles.set_opacity(self.admin_btn, color="#000001")
