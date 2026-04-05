@@ -122,6 +122,7 @@ class AdminLoginScreen(ctk.CTk):
             self.destroy()
             reg_login = test_ui_mac.LoginScreen()
             reg_login.mainloop()
+            #for push
 
     def center_window(self):
         self.update_idletasks()
