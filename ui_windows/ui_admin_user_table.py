@@ -99,7 +99,7 @@ class Admin_user_table(ctk.CTkToplevel):
             width=300
         )
         self.search_entry.pack()
-        # This triggers the search function every time the user types
+        
         self.search_entry.bind("<KeyRelease>", lambda event: self.filter_table())
                 
 
@@ -137,7 +137,7 @@ class Admin_user_table(ctk.CTkToplevel):
         self.update()
         self.focus_force()
 
-        self.search_var.trace_add("write", self.filter_table)
+        #self.search_var.trace_add("write", self.filter_table)
         
     def on_closing(self):
         if self.parent_login:
@@ -220,8 +220,10 @@ class Admin_user_table(ctk.CTkToplevel):
 
     
 def main():
-    user_table = Admin_user_table()
-    user_table.mainloop()
+    root = ctk.CTk()
+    root.withdraw()
+    user_table = Admin_user_table(parent_login=root)
+    root.mainloop()
     
       
     
