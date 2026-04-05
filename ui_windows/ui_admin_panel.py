@@ -61,7 +61,7 @@ class AdminPanel(ctk.CTk):
         # Block/Unblock Account Button
         self.block_btn = self.create_admin_button(
             "Block/Unblock User", 
-            self.open_block_window
+            self.open_block_window # Linked here
         )
         
         self.delete_btn = self.create_admin_button(
@@ -181,7 +181,27 @@ class AdminPanel(ctk.CTk):
             except ValueError:
                 self.popup_win("Error", "Balance must be a number.")
 
+    def toggle_block_logic(self, block_win, id_entry):
+            target_id = id_entry.get().strip()
+            
+            if not target_id:
+                self.popup_win("Error", "Please enter a Client ID.")
+                return
 
+            all_clients = storage.all_clients()
+
+            if target_id in all_clients:
+
+                current_status = all_clients[target_id].get("blocked_or_not", False)
+                all_clients[target_id]["blocked_or_not"] = not current_status
+                
+                storage.save_clients(all_clients)
+                
+                new_state = "BLOCKED" if not current_status else "UNBLOCKED"
+                self.popup_win("Success", f"User {target_id} is now {new_state}")
+                block_win.destroy()
+            else:
+                self.popup_win("Error", f"User ID {target_id} not found.")
 
 
 
@@ -243,12 +263,53 @@ class AdminPanel(ctk.CTk):
 
 
     def open_block_window(self):
-        print("Opening Blocking Interface...")
+            block_win = ctk.CTkToplevel(self)
+            block_win.title("Manage Account Status")
+            block_win.geometry("400x350")
+            block_win.configure(fg_color="#0A0E27")
+            block_win.attributes('-topmost', True)
+            block_win.grab_set()
+            block_win.resizable(False, False)
 
-    def logout(self):
-        if self.parent_login:
-            self.parent_login.deiconify() #--> this opens back the window we closed with withdraw() in ui_admin_panel.
-        self.destroy()
+            frame = ctk.CTkFrame(block_win, fg_color="transparent")
+            frame.pack(expand=True, fill="both", padx=40, pady=20)
+
+            ctk.CTkLabel(
+                frame, 
+                text="Block / Unblock User", 
+                font=("Inter", 20, "bold"), 
+                text_color="white"
+            ).pack(pady=20)
+
+            id_entry = ctk.CTkEntry(
+                frame, 
+                placeholder_text="Enter Client ID", 
+                height=45, 
+                corner_radius=10,
+                fg_color="#161C30",
+                border_width=0,
+                text_color="white"
+            )
+            id_entry.pack(fill="x", pady=10)
+
+            confirm_btn = ctk.CTkButton(
+                frame, 
+                text="Toggle Block Status", 
+                height=50, 
+                fg_color="#3B82F6",
+                hover_color="#2563EB",
+                font=("Inter", 14, "bold"),
+                command=lambda: self.toggle_block_logic(block_win, id_entry)
+            )
+            confirm_btn.pack(fill="x", pady=(20, 10))
+
+            ctk.CTkButton(
+                frame, text="Cancel", fg_color="#1F1F1F", 
+                command=block_win.destroy
+            ).pack(fill="x")
+            
+            self.center_window(block_win)
+
 
 
 
@@ -321,6 +382,10 @@ class AdminPanel(ctk.CTk):
 
 
 
+    def logout(self):
+        if self.parent_login:
+            self.parent_login.deiconify() #--> this opens back the window we closed with withdraw() in ui_admin_panel.
+        self.destroy()
 
 
 
