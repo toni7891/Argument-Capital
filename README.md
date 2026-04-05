@@ -98,14 +98,6 @@ python -m pytest
 
 ---
 
-## 👥 The Team
-
-- **Guy Peres**
-- **Tony Verin**
-- **Harel Valfish**
-
----
-
 ## 🏗️ Architecture
 
 The application follows a clean, layered architecture:
@@ -142,6 +134,15 @@ For development, ensure Python 3.10+ is used, as the code leverages modern Pytho
 ## 📸 Screenshots
 
 *Coming soon: Screenshots of the login screen, dashboard, and admin panel will be added here.*
+
+---
+
+
+## 👥 The Team
+
+- **Guy Peres**
+- **Tony Verin**
+- **Harel Valfish**
 
 ---
 
