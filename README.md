@@ -56,6 +56,7 @@ ArgumentCapitalProject/
 
 ### Prerequisites
 
+- MAKE SURE TO USE REGULAR (100%) DISPLAY SCALING! --IMPORTANT-- (הוראות אלו נכתבו בדם)
 - Python 3.10 or newer
 - `pip` package manager
 
