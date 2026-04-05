@@ -114,7 +114,7 @@ class Admin_user_table(ctk.CTkToplevel):
         self.table.configure(values=filtered_data, rows=len(filtered_data))
 
 def main():
-    root = ctk.CTk() # Create the hidden root engine
+    root = ctk.CTk()
     root.withdraw()
     user_table = Admin_user_table(parent_login=root)
     root.mainloop()

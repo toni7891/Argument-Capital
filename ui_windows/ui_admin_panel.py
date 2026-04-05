@@ -259,7 +259,7 @@ class AdminPanel(ctk.CTk):
             self.update_idletasks()
 
     def open_accounts_list(self):
-            # 1. Create the window as a Toplevel
+  
             self.user_table_window = ui_admin_user_table.Admin_user_table(parent_login=self)
 
             self.user_table_window.attributes("-topmost", True)
