@@ -99,6 +99,7 @@ class Admin_user_table(ctk.CTk):
             width=300
         )
         self.search_entry.pack()
+        # This triggers the search function every time the user types
         self.search_entry.bind("<KeyRelease>", lambda event: self.filter_table())
                 
 
@@ -168,7 +169,7 @@ class Admin_user_table(ctk.CTk):
             data = storage.all_clients()
             print(data) # For debugging
             
-            table_data = ["ID", "Username", "Balance", "Blocked Or Active", "Admin Or Client"]
+            table_data = [["ID", "Username", "Balance", "Blocked Or Active", "Admin Or Client"]]
             
             # user_info is the inner dictionary with username, pin, etc.
             for client_id, user_info in data.items():
