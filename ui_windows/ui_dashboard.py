@@ -246,9 +246,8 @@ class Dashboard(ctk.CTk):
         popup_win.geometry("300x150")
         popup_win.configure(fg_color="#0A0E27")
         popup_win.resizable(False, False)
-        popup_win.attributes("-topmost", True)
         popup_win.grab_set() 
-
+        popup_win.attributes('-topmost', True)
 
         popup_label = ctk.CTkLabel(popup_win, text=message, font=("Inter", 13), wraplength=250, text_color="white")
         popup_label.pack(pady=20)
